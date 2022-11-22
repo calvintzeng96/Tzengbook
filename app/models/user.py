@@ -3,6 +3,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 from datetime import datetime
 from sqlalchemy.orm import validates
+from .post import Post
 
 
 class User(db.Model, UserMixin):
@@ -12,14 +13,21 @@ class User(db.Model, UserMixin):
         __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(40), nullable=False, unique=True)
+    username = db.Column(db.String(50), nullable=False, unique=True)
     email = db.Column(db.String(255), nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
-    first_name = db.Column(db.String(200), nullable=False)
-    last_name = db.Column(db.String(200), nullable=False)
+    first_name = db.Column(db.String(50), nullable=False)
+    last_name = db.Column(db.String(50), nullable=False)
     profile_picture = db.Column(db.String)
-    bio = db.Column(db.String(5000))
+    bio = db.Column(db.String(1000))
     created_at = db.Column(db.DateTime, nullable=False, default=datetime.now())
+
+
+    #Relationships
+    posts_destination = db.relationship("Post", back_populates="user_destination", foreign_keys=[Post.wall_id])
+    posts_author = db.relationship("Post", back_populates="user_author", foreign_keys=[Post.user_id])
+    comments = db.relationship("Comment", back_populates="user")
+
 
     @property
     def password(self):
@@ -43,5 +51,7 @@ class User(db.Model, UserMixin):
             'id': self.id,
             "firstName": self.first_name,
             "lastName": self.last_name,
+            "bio": self.bio,
             "profilePicture": self.profile_picture,
+            "created": self.created_at
         }
