@@ -9,6 +9,7 @@ from .api.user_routes import user_routes
 from .api.auth_routes import auth_routes
 from .seeds import seed_commands
 from .config import Config
+from .errors import NotFoundError
 
 app = Flask(__name__, static_folder='../react-app/build', static_url_path='/')
 
@@ -61,12 +62,28 @@ def inject_csrf_token(response):
     return response
 
 
+@app.route("/api/docs")
+def api_help():
+    """
+    Returns all API routes and their doc strings
+    """
+    acceptable_methods = ['GET', 'POST', 'PUT', 'PATCH', 'DELETE']
+    route_list = {rule.rule: [[method for method in rule.methods if method in acceptable_methods],
+                              app.view_functions[rule.endpoint].__doc__]
+                  for rule in app.url_map.iter_rules() if rule.endpoint != 'static'}
+    return route_list
+
+@app.errorhandler(NotFoundError)
+def handle_error(e):
+    return {"error": e.title, "message": e.message}, 404
+
+
 @app.route('/', defaults={'path': ''})
 @app.route('/<path:path>')
 def react_root(path):
     """
-    This route will direct to the public directory in our  
-    react builds in the production environment for favicon 
+    This route will direct to the public directory in our
+    react builds in the production environment for favicon
     or index.html requests
     """
     if path == 'favicon.ico':
@@ -74,14 +91,6 @@ def react_root(path):
     return app.send_static_file('index.html')
 
 
-
-@app.route("/api/docs")
-def api_help():
-    """
-    Returns all API routes and their doc strings
-    """
-    acceptable_methods = ['GET', 'POST', 'PUT', 'PATCH', 'DELETE']
-    route_list = { rule.rule: [[ method for method in rule.methods if method in acceptable_methods ], 
-                    app.view_functions[rule.endpoint].__doc__ ] 
-                    for rule in app.url_map.iter_rules() if rule.endpoint != 'static' }
-    return route_list
+@app.errorhandler(404)
+def not_found(e):
+    return app.send_static_file('index.html')
