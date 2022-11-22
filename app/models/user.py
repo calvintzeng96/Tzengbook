@@ -4,6 +4,7 @@ from flask_login import UserMixin
 from datetime import datetime
 from sqlalchemy.orm import validates
 from .post import Post
+# from .request import requests
 
 
 class User(db.Model, UserMixin):
@@ -22,12 +23,28 @@ class User(db.Model, UserMixin):
     bio = db.Column(db.String(1000))
     created_at = db.Column(db.DateTime, nullable=False, default=datetime.now())
 
+    # friend_requests = db.relationship(
+    #     "User",
+    #     secondary=requests,
+    #     primaryjoin=(requests.c.invitee == id),
+    #     secondaryjoin=(requests.c.inviter == id),
+    #     backref=db.backref("outgoing_request", lazy="dynamic"),
+    #     lazy="dynamic"
+    # )
 
-    #Relationships
-    posts_destination = db.relationship("Post", back_populates="user_destination", foreign_keys=[Post.wall_id])
-    posts_author = db.relationship("Post", back_populates="user_author", foreign_keys=[Post.user_id])
+    # friends = db.relationship(
+    #     "User"
+    # )
+
+    # Relationships
+    posts_destination = db.relationship(
+        "Post", back_populates="user_destination", foreign_keys=[Post.wall_id])
+    posts_author = db.relationship(
+        "Post", back_populates="user_author", foreign_keys=[Post.user_id])
     comments = db.relationship("Comment", back_populates="user")
-
+    # likes = db.relationship("Like", back_populates="user")
+    # request_inviter = db.relationship("Request", back_populates="user_inviter", foreign_keys=[Request.inviter])
+    # request_invitee = db.relationship("Request", back_populates="user_invitee", foreign_keys=[Request.invitee])
 
     @property
     def password(self):
@@ -40,11 +57,25 @@ class User(db.Model, UserMixin):
     def check_password(self, password):
         return check_password_hash(self.password, password)
 
+    @validates("friend_requests")
+    def validates_friend_requests(self, key, value):
+        if value == self.id:
+            raise ValueError("You can not friend request yourself")
 
+    # #Check/Create/Delete friend requests
+    # def already_requested(self, userId):
+    #     return self.outgoing_request.filter(requests.c.invitee == userId).count() > 0
 
+    # def create_request(self, user):
+    #     if not self.already_requested(user.id):
+    #         self.outgoing_request.append(user)
+    #         return self
 
-
-
+    # def delete_request(self, user):
+    #     if self.already_requested(user.id):
+    #         self.outgoing_request.remove(user)
+    #         return self
+    # #------------------------------------
 
     def to_dict(self):
         return {

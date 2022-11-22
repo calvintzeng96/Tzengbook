@@ -15,12 +15,14 @@ class Post(db.Model):
         add_prefix_for_prod("users.id")), nullable=False)
     content = db.Column(db.Text, nullable=False)
     image = db.Column(db.String)
+    created_at = db.Column(db.DateTime, nullable=False, default=datetime.now())
+
 
     #Relationships
     user_destination = db.relationship("User", back_populates="posts_destination", foreign_keys=[wall_id])
     user_author = db.relationship("User", back_populates="posts_author", foreign_keys=[user_id])
     comments = db.relationship("Comment", back_populates="post", cascade="all, delete")
-
+    # likes = db.relationship("Like", back_populates="post")
 
     def to_dict(self):
         return {
@@ -28,5 +30,6 @@ class Post(db.Model):
             "wallId": self.wall_id,
             "userId": self.user_id,
             "content": self.content,
-            "image": self.image
+            "image": self.image,
+            "createdAt": self.created_at
         }
