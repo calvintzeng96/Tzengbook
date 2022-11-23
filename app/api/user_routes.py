@@ -20,6 +20,8 @@ def validation_errors_to_error_messages(validation_errors):
             errorMessages.append(f'{field}:{error}')
     return errorMessages
 
+# print("*******************")
+
 
 @user_routes.route('/')
 @login_required
@@ -70,6 +72,7 @@ def all_users_posts(userId):
 @user_routes.route("/<int:userId>/post", methods=["POST"])
 @login_required
 def create_post(userId):
+    print("--------------------------------")
     form = PostForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
