@@ -4,3 +4,6 @@ __pycache__/
 .venv
 .DS_Store
 .vscode/
+# *.db
+# /app/dev.db
+/home/whoami/mod-7-capstone/app/dev.db
