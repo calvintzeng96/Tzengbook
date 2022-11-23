@@ -1,10 +1,12 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_required, current_user
-from ..models import User, Post
+from ..models import User, Post, Comment
 from ..models.db import db
 from ..errors import NotFoundError, ForbiddenError
-from ..forms.post_form import PostForm
-from .helpers import child_belongs_to_parent
+from ..forms import PostForm
+from ..forms import CommentForm
+from .helpers import child_belongs_to_parent, get_user_model
+from datetime import datetime
 
 
 post_routes = Blueprint('posts', __name__)
@@ -86,3 +88,32 @@ def delete_post(post_id):
     db.session.delete(post)
     db.session.commit()
     return {"message": f"Post {post_id} successfully deleted.", "statusCode": 200}
+
+
+# Get all Comments by post id
+@post_routes.route('/<int:post_id>/comments')
+@login_required
+def get_comments(post_id):
+    comments = Comment.query.filter(Comment.post_id == post_id).all()
+    if not comments:
+        return {"Comments": []}
+        # raise NotFoundError('Comment not found.')
+    return {"Comments": [comment.to_dict_with_user() for comment in comments]}
+
+
+#Create a Comment
+@post_routes.route("/<int:post_id>/comments", methods=["POST"])
+@login_required
+def create_comment(post_id):
+    form = CommentForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if form.validate_on_submit():
+        new_comment = Comment(
+            user=get_user_model(current_user, User),
+            post_id=post_id,
+            content=form.data['content'],
+            created_at=datetime.now())
+        db.session.add(new_comment)
+        db.session.commit()
+        return new_comment.to_dict_with_user(), 201
+    return {"errors": validation_errors_to_error_messages(form.errors)}, 401

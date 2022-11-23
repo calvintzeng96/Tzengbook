@@ -86,3 +86,11 @@ class User(db.Model, UserMixin):
             "profilePicture": self.profile_picture,
             "created": self.created_at
         }
+
+    # def to_dict_basic_info(self):
+    #     return {
+    #         'id': self.id,
+    #         "firstName": self.first_name,
+    #         "lastName": self.last_name,
+    #         "profilePicture": self.profile_picture,
+    #     }

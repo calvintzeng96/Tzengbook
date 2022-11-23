@@ -14,6 +14,7 @@ class Comment(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey(
         add_prefix_for_prod("users.id")), nullable=False)
     content = db.Column(db.Text, nullable=False)
+    created_at = db.Column(db.DateTime, nullable=False, default=datetime.now())
 
     #Relationships
     user = db.relationship("User", back_populates="comments")
@@ -27,4 +28,15 @@ class Comment(db.Model):
             "postId": self.post_id,
             "userId": self.user_id,
             "content": self.content,
+            "created": self.created_at
+        }
+
+    def to_dict_with_user(self):
+        return {
+            'id': self.id,
+            'user_id': self.user_id,
+            'post_id': self.post_id,
+            'content': self.content,
+            "created_at": self.created_at,
+            "user": self.user.to_dict()
         }
