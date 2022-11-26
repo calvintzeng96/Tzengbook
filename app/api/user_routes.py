@@ -40,20 +40,22 @@ def get_current_user():
     curr_user = get_user_model(current_user, User)
 
     if current_user:
-        posts = Post.query.filter(Post.user_id == curr_user.id)
-        answer = curr_user.to_dict()
-        answer["Posts"] = [ele.to_dict() for ele in posts]
-        return answer
+        return curr_user.to_dict()
+    else:
+        return NotFoundError("There is no current user")
 
 # Get detail of User by id
 @user_routes.route('/<int:id>')
-@login_required
+# @login_required
 def user(id):
     """
     Query for a user by id and returns that user in a dictionary
     """
     user = User.query.get(id)
-    return user.to_dict()
+    if user:
+        return user.to_dict()
+    else:
+        raise NotFoundError("User not found")
 
 
 

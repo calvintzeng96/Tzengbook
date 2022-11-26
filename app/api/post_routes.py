@@ -94,6 +94,10 @@ def delete_post(post_id):
 @post_routes.route('/<int:post_id>/comments')
 @login_required
 def get_comments(post_id):
+    post = Post.query.get(post_id)
+    if not post:
+        raise NotFoundError("Post not found")
+    #if not post, return err
     comments = Comment.query.filter(Comment.post_id == post_id).all()
     if not comments:
         return {"Comments": []}
