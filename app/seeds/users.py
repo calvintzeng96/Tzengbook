@@ -1,6 +1,6 @@
 from app.models import db, User, environment, SCHEMA
 
-PROFILE_PIC ="profile-pic.png"
+# PROFILE_PIC ="profile-pic.png"
 # Adds a demo user, you can add other users here if you want
 
 def seed_users():
@@ -10,7 +10,7 @@ def seed_users():
         password='password1',
         first_name="John",
         last_name="Smith",
-        profile_picture=PROFILE_PIC,
+        # profile_picture=PROFILE_PIC,
         bio="Diversity&Inclusion educator. Author, Pin Ups (9/20). Columnist, The Writer mag."
     )
     instance2 = User(
@@ -19,7 +19,7 @@ def seed_users():
         password='password2',
         first_name="Li",
         last_name="Sam",
-        profile_picture=PROFILE_PIC,
+        # profile_picture=PROFILE_PIC,
         bio="Leica, GR3, Sony, Minolta & Film user, Street Photographer based in Hong Kon"
     )
     instance3 = User(
@@ -28,7 +28,7 @@ def seed_users():
         password='password3',
         first_name="Thomas",
         last_name="Christopher",
-        profile_picture=PROFILE_PIC,
+        # profile_picture=PROFILE_PIC,
         bio="Science, psychology, and history. Sometimes with a personal angle."
     )
     instance4 = User(
@@ -37,7 +37,7 @@ def seed_users():
         password='password4',
         first_name="Than",
         last_name="Siegel",
-        profile_picture=PROFILE_PIC,
+        # profile_picture=PROFILE_PIC,
         bio="The Universe is: Expanding, cooling, and dark. It starts with a bang! #Cosmology Science writer, astrophysicist, science communicator & NASA columnist."
     )
     instance5 = User(
@@ -46,7 +46,7 @@ def seed_users():
         password='password5',
         first_name="Cory",
         last_name="Doctrowrow",
-        profile_picture=PROFILE_PIC,
+        # profile_picture=PROFILE_PIC,
         bio="Writer, blogger, activist."
     )
 

@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
-import { Redirect } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
+import { ModalContext } from '../../context/Modal';
 import { signUp } from '../../store/session';
 
 const SignUpForm = () => {
@@ -13,14 +14,16 @@ const SignUpForm = () => {
   const [repeatPassword, setRepeatPassword] = useState('');
   const user = useSelector(state => state.session.user);
   const dispatch = useDispatch();
+  const history = useHistory()
+  const {setModalType} = useContext(ModalContext)
 
   const onSignUp = async (e) => {
     e.preventDefault();
     if (password === repeatPassword) {
-      const data = await dispatch(signUp(username, email, password, firstName, lastName));
-      if (data) {
-        setErrors(data)
-      }
+      dispatch(signUp(username, email, password, firstName, lastName))
+      .then(res => res)
+      .then(() => setModalType(null))
+      .catch(e => e.json().then((e) => setErrors(e.errors)))
     }
   };
 
@@ -46,12 +49,10 @@ const SignUpForm = () => {
     setRepeatPassword(e.target.value);
   };
 
-  if (user) {
-    return <Redirect to='/' />;
-  }
-
   return (
-    <form onSubmit={onSignUp}>
+    <form className="modal-content" onSubmit={onSignUp}>
+      <h3>Sign Up</h3>
+      <p>It's quick and easy</p>
       <div>
         {errors.map((error, ind) => (
           <div key={ind}>{error}</div>

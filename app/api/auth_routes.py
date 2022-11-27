@@ -25,7 +25,8 @@ def authenticate():
     """
     if current_user.is_authenticated:
         return current_user.to_dict()
-    return {'errors': ['Unauthorized']}
+    else:
+        return {'errors': ['Unauthorized'], "statusCode": 401}
 
 
 @auth_routes.route('/login', methods=['POST'])
@@ -66,8 +67,8 @@ def sign_up():
             username=form.data['username'],
             email=form.data['email'],
             password=form.data['password'],
-            first_name = form.data['first_name'],
-            last_name = form.data['last_name'],
+            first_name=form.data['first_name'],
+            last_name=form.data['last_name']
         )
         db.session.add(user)
         db.session.commit()

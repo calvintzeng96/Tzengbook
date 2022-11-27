@@ -1,0 +1,16 @@
+.profile-in-post {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    width: 100%
+}
+
+.profile-sub-icon {
+    width: 36px;
+    height: 36px;
+    margin-right: 8px;
+}
+
+.bold {
+    font-weight: 600;
+}
