@@ -2,6 +2,7 @@ import React, { useContext, useRef, useState, useEffect } from "react";
 import "./Modal.css";
 import SignUpForm from "../components/auth/SignUpForm";
 import CreatePost from "../components/CreatePost"
+import EditPost from "../components/EditPost"
 export const ModalContext = React.createContext();
 
 export function ModalProvider({ children }) {
@@ -40,6 +41,17 @@ export function SelectedModals() {
     return (
       <div className="modal">
         <CreatePost />
+        <div
+          onClick={() => setModalType(null)}
+          className="modal-background"
+        ></div>
+      </div>
+    );
+  }
+  if (modalType === "EditPost") {
+    return (
+      <div className="modal">
+        <EditPost />
         <div
           onClick={() => setModalType(null)}
           className="modal-background"

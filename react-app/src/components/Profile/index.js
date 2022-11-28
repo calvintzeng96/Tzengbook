@@ -17,7 +17,7 @@ import { useParams } from "react-router-dom"
 
 
 const Profile = () => {
-    const {userId} = useParams()
+    const { userId } = useParams()
     const currentUser = useSelector(state => state.session.user)
     const user = useSelector(state => state.user.singleUser)
     const { setModalType } = useContext(ModalContext)
@@ -60,7 +60,9 @@ const Profile = () => {
                                         <div key={ele.id} className="single-post">
                                             <div className="single-post-top">
                                                 <ProfileSub ele={ele.User} createdAt={ele.createdAt} />
-                                                <div>placeholder</div>
+                                                {currentUser?.id == ele.userId && (
+                                                    <div>Edit</div>
+                                                )}
                                             </div>
                                             <div className="single-post-content">POST CONTENT: {ele.content} Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. </div>
                                             {ele.image && <img src={ele.image} />}

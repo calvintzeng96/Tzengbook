@@ -26,9 +26,9 @@ const NavBar = () => {
 
   return (
     <div id="nav-bar">
-      <img onClick={goHome} id="tzengbook-icon-logged-in" src={tzengbookIcon} />
+      <img onClick={goHome} id="tzengbook-icon-logged-in" className="cursor" src={tzengbookIcon} />
       <div id="nav-bar-right">
-        <img onClick={goToProfile} id="profile-icon" src={image ? currentUser?.profilePicture : defaultProfileIcon} />
+        <img onClick={goToProfile} id="profile-icon" className="cursor" src={image ? currentUser?.profilePicture : defaultProfileIcon} />
         {/* <button id="profile-icon">profile button</button> */}
         <LogoutButton />
       </div>

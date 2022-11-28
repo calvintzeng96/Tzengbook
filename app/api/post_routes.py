@@ -29,8 +29,8 @@ def validation_errors_to_error_messages(validation_errors):
 def all_posts():
     posts = Post.query.all()
 
-    if not posts:
-        raise NotFoundError("No posts found.")
+    # if not posts:
+    #     raise NotFoundError("No posts found.")
     return {"Posts": [post.to_dict() for post in posts]}
 
 
