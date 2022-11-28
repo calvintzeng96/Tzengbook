@@ -39,7 +39,7 @@
     background-color: #F0F2F5;
 }
 
-#create-comment-div {
+.create-comment-div {
     width: 680px;
     height: 60px;
     background-color: white;
@@ -51,12 +51,12 @@
     align-items: center;
 }
 
-#create-comment-div>img {
+.create-comment-div>img {
     width: 36px;
     height: 36px
 }
 
-#create-comment-div>button {
+.create-comment-div>button {
     background-color: #F0F2F5;
     border: transparent;
     height: 40px;
@@ -64,6 +64,10 @@
     border-radius: 20px;
     color: grey;
     font-size: 18px;
+}
+
+.create-comment-div > button:hover {
+    background-color: lightgrey;
 }
 
 .single-post {

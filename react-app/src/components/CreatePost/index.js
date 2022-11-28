@@ -31,10 +31,6 @@ const CreatePost = () => {
         setErrors([]);
 
         const data = { image, content };
-        console.log("---------------", image)
-        console.log("---------------", content)
-        console.log("---------------", wallId)
-        console.log("---------------", wallId)
 
         dispatch(createPost(wallId, data))
             .then(() => {

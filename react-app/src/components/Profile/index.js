@@ -50,7 +50,7 @@ const Profile = () => {
 
                             <div id="all-post-middle">
                                 <div onClick={() => setModalType("CreatePost")}>
-                                    <div id="create-comment-div">
+                                    <div className="create-comment-div">
                                         <img src={icon} />
                                         <button className="cursor" onClick={() => setModalType("CreatePost")}>{`What's on your mind, ${currentUser?.firstName}?`}</button>
                                     </div>
