@@ -16,6 +16,7 @@ const CreatePost = () => {
     const [wallId, setWallId] = useState("")
     const [errors, setErrors] = useState([]);
     const { setModalType } = useContext(ModalContext)
+    const [imageLoading, setImageLoading] = useState(false)
 
 
     useEffect(() => {
@@ -26,25 +27,56 @@ const CreatePost = () => {
         }
     }, [wall])
 
-    const submit = (e) => {
+    useEffect(() => {
+        setErrors([])
+    }, [image])
+
+    const submit = async (e) => {
         e.preventDefault();
-        setErrors([]);
+        // setErrors([]);
 
-        const data = { image, content };
+        const formData = new FormData();
+        formData.append("image", image);
+        setImageLoading(true);
+        await fetch('/api/users', {
+            method: "POST",
+            body: formData
+        })
+            .then(async (res) => {
+                let imgurl = await res.text()
+                if (imgurl.includes("not permitted")) {
+                    setErrors(["Only png/jpg/jpeg/gif allowed"])
+                    return
+                }
 
-        dispatch(createPost(wallId, data))
-            .then(() => {
-                setModalType(false)
+                const data = { image: imgurl, content };
+
+                dispatch(createPost(wallId, data))
+                    .then(() => {
+                        setModalType(false)
+                        alert("success")
+                    })
+                    .catch(() => {
+                        alert("failed")
+                    })
             })
     };
+
+
+
+    const updateImage = (e) => {
+        const file = e.target.files[0];
+        setImage(file);
+    }
+
 
     return (
         <form className="form-container modal-content" onSubmit={submit}>
             <ProfileSub ele={currentUser} />
-            {/* <div className="errors">
+            <div className="errors">
                 {errors.length > 0 &&
-                    errors.map((error) => <li key={error}>{error}</li>)}
-            </div> */}
+                    errors.map((ele) => <div>{ele}</div>)}
+            </div>
 
             <textarea
                 type="text"
@@ -53,10 +85,9 @@ const CreatePost = () => {
                 placeholder={`What's on your mind, ${currentUser.firstName}?`}
             />
             <input
-                type="text"
-                value={image}
-                onChange={(e) => setImage(e.target.value)}
-                placeholder="Image url"
+                type="file"
+                accept="image/*"
+                onChange={updateImage}
             />
             <button type="submit">Post</button>
         </form>

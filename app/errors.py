@@ -12,3 +12,10 @@ class ForbiddenError(Exception):
 
     def __init__(self, message):
         self.message = message
+
+class TestError(Exception):
+    status_code = 400
+    title = "error---"
+
+    def __init__(self, message):
+        self.message = message
