@@ -70,7 +70,9 @@ def all_users_posts(userId):
     if not user:
         raise NotFoundError("User not found")
     posts = Post.query.filter(Post.user_id == userId).all()
-    return {"Posts": [post.to_dict() for post in posts]}
+    # print("-----------", [post.comments for post in posts])
+
+    return {"Posts": [post.to_dict_with_comments() for post in posts]}
 
 
 #--------------------------------------
@@ -79,7 +81,9 @@ def upload_image():
     # if "image" not in request.files:
     #     return {"errors": "image required"}, 400
     image = request.files["image"]
-
+    if not image:
+        text = "no image"
+        return text
     if not allowed_file(image.filename):
         # raise TestError("file type not supported")
         return jsonify("file type not permitted"), 400
@@ -96,7 +100,6 @@ def upload_image():
         return upload, 400
 
     url = upload["url"]
-    print("-----------", url)
     return url
 
 
@@ -113,11 +116,18 @@ def create_post(userId):
     form = PostForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
-        new_post = Post(wall_id=userId,
-                        user_id=current_user.id,
-                        content=form.data['content'],
-                        image=form.data['image'],
-                        created_at=datetime.now())
+        print("-----------------here1")
+        if form.data["image"]:
+            new_post = Post(wall_id=userId,
+                            user_id=current_user.id,
+                            content=form.data['content'],
+                            image=form.data['image'],
+                            created_at=datetime.now())
+        else:
+            new_post = Post(wall_id=userId,
+                            user_id=current_user.id,
+                            content=form.data['content'],
+                            created_at=datetime.now())
         db.session.add(new_post)
         db.session.commit()
         return new_post.to_dict(), 201

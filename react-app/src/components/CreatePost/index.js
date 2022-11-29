@@ -48,8 +48,12 @@ const CreatePost = () => {
                     setErrors(["Only png/jpg/jpeg/gif allowed"])
                     return
                 }
-
-                const data = { image: imgurl, content };
+                let data = { image: imgurl, content };
+                // console.log(imgurl)
+                if (imgurl.includes("!DOCTYPE")) {
+                    console.log("HERE")
+                    data = {content}
+                }
 
                 dispatch(createPost(wallId, data))
                     .then(() => {

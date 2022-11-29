@@ -7,6 +7,8 @@ const NEW_POST = "/posts/NEW_POST";
 const EDIT_POST = "/posts/EDIT_POST";
 const DESTROY_POST = "/posts/DESTROY_POST";
 
+const NEW_COMMENT = "/comments/NEW_COMMENT"
+
 // ACTIONS
 const allPosts = (posts) => {
     return {
@@ -48,18 +50,22 @@ const destroyPost = (postId) => {
     }
 }
 
+const newComment = (comment) => {
+    return {
+        type: NEW_COMMENT,
+        comment
+    }
+}
+
 
 // THUNKS
 
 // Get All Posts
 export const getAllPosts = () => async (dispatch) => {
 
-    console.log("HERERERE")
     const res = await csrfFetch("/api/posts/")
-    console.log("HERERERE2")
 
     if (res.ok) {
-        console.log("-----------------123", res)
         const posts = await res.json();
         dispatch(allPosts(posts));
         return posts
@@ -126,6 +132,22 @@ export const deletePost = (postId) => async (dispatch) => {
         dispatch(destroyPost(postId))
     }
 }
+
+
+export const createComment = (postId, data) => async (dispatch) => {
+    const res = await csrfFetch(`/api/posts/${postId}/comments`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+    });
+
+    if (res.ok) {
+        const comment = res.json();
+        // dispatch(newComment)
+        return comment
+    }
+}
+
 
 
 // REDUCER

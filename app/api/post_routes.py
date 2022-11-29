@@ -31,7 +31,7 @@ def all_posts():
 
     # if not posts:
     #     raise NotFoundError("No posts found.")
-    return {"Posts": [post.to_dict() for post in posts]}
+    return {"Posts": [post.to_dict_with_comments() for post in posts]}
 
 
 # Get details of a Post from an id
@@ -111,6 +111,7 @@ def get_comments(post_id):
 def create_comment(post_id):
     form = CommentForm()
     form['csrf_token'].data = request.cookies['csrf_token']
+    print("----------", form.data["content"])
     if form.validate_on_submit():
         new_comment = Comment(
             user=get_user_model(current_user, User),

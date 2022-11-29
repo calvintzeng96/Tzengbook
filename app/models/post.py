@@ -35,3 +35,16 @@ class Post(db.Model):
             "createdAt": self.created_at,
             "User": self.user_author.to_dict()
         }
+
+    def to_dict_with_comments(self):
+        test = [ele.to_dict_with_user() for ele in self.comments]
+        return {
+            "id": self.id,
+            "wallId": self.wall_id,
+            "userId": self.user_id,
+            "content": self.content,
+            "image": self.image,
+            "createdAt": self.created_at,
+            "User": self.user_author.to_dict(),
+            "Comments": test
+        }

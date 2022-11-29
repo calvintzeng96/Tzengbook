@@ -100,3 +100,16 @@
 .post-image {
     width: 100%
 }
+
+
+
+
+.create-comment-container {
+    display: flex;
+}
+
+
+.individual-comment {
+    display: flex;
+
+}
