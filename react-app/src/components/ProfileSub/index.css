@@ -14,3 +14,10 @@
 .bold {
     font-weight: 600;
 }
+
+#comment-content {
+    background-color: #F0F2F5;
+    /* height: 100%; */
+    border-radius: 8px;
+    padding: 2px
+}

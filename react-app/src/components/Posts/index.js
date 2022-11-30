@@ -21,24 +21,6 @@ const GetAllPosts = () => {
     const currentUser = useSelector(state => state.session.user)
     const user = useSelector(state => state.user.singleUser)
 
-    //comment stuff
-    // const [newComment, setNewComment] = useState("")
-
-    // const commentSubmit = (postId) => {
-    //     let data = {"content": newComment}
-
-    //     dispatch(createComment(postId, data))
-    //     .then(() => {
-    //         alert("success created comment")
-    //     })
-    //     .catch(() => {
-    //         alert("failed created comment")
-    //     })
-    //     return
-    // }
-
-    //-----------
-
 
     const posts = useSelector(state => state.post.allPosts)
     const post = useSelector(state => state.post.singlePost)
@@ -82,11 +64,11 @@ const GetAllPosts = () => {
             //     <h1>Posts</h1>
             <div id="all-post-container">
                 <div id="all-post-left">
-                    <div className="all-post-left-contents border cursor">
+                    <div className="all-post-left-contents cursor">
                         <img src={icon} />
                         <div onClick={() => history.push("/")}>Home</div>
                     </div>
-                    <div onClick={() => history.push(`/users/${user.id}`)} className="all-post-left-contents border cursor">
+                    <div onClick={() => history.push(`/users/${user.id}`)} className="all-post-left-contents cursor">
                         <img src={user.profilePicture ? user.profilePicture : icon} />
                         <div>{user.firstName} {user.lastName}</div>
                     </div>
@@ -104,7 +86,7 @@ const GetAllPosts = () => {
                                 <div className="single-post-top">
                                     <ProfileSub ele={ele.User} createdAt={ele.createdAt} />
                                     {currentUser.id == ele.userId && (
-                                        <div>
+                                        <div className="edit-delete">
                                             <button onClick={() => openEditModal(ele.id)}>Edit</button>
                                             <button onClick={() => deleteSinglePost(ele.id)}>Delete</button>
                                         </div>
@@ -114,31 +96,6 @@ const GetAllPosts = () => {
                                 {/* {console.log(ele.image)} */}
                                 {ele.image && <img className="post-image" src={ele.image} />}
                                 <PostComments ele={ele} />
-                                {/* <div className="create-comment-container">
-                                    <ProfileSub ele={currentUser} />
-                                    <form onSubmit={() => commentSubmit(ele.id)}>
-                                        <input
-                                            type="text"
-                                            value={newComment}
-                                            onChange={(e) => setNewComment(e.target.value)}
-                                            placeholder="Write a comment..."
-                                        />
-                                        <button type="submit">submit</button>
-                                    </form>
-                                </div>
-
-                                <div>
-                                    {
-                                        ele.Comments.map(comment => {
-                                            return (
-                                                <div className="individual-comment border">
-                                                    <ProfileSub ele={comment.user} />
-                                                    <div>{comment.content}</div>
-                                                </div>
-                                            )
-                                        })
-                                    }
-                                </div> */}
                             </div>
                         )
                     })}

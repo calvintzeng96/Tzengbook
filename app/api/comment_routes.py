@@ -47,6 +47,8 @@ def delete_comment(comment_id):
             return {"error": e.message}, e.status_code
         db.session.delete(deleted_comment)
         db.session.commit()
-        return {"message": "Comment successfully deleted.", "statusCode": 200}
+        return {"message": "Comment successfully deleted.",
+                "statusCode": 200,
+                "postId": deleted_comment.post_id}
     else:
         raise NotFoundError("Comment not found")

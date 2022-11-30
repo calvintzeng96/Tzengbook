@@ -22,3 +22,7 @@ body {
 .grey {
   color: grey
 }
+
+.small-text {
+  font-size: 14px;
+}

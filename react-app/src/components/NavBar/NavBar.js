@@ -7,6 +7,7 @@ import "./index.css"
 import defaultProfileIcon from "../../assets/default-profile-icon.png"
 import tzengbookIcon from "../../assets/tzengbook-logged-in.png"
 import {getUser} from "../../store/user"
+import { getUsersPosts } from '../../store/post';
 
 const NavBar = () => {
   const currentUser = useSelector(state => state.session.user)
@@ -21,15 +22,17 @@ const NavBar = () => {
 
   const goToProfile = () => {
     dispatch(getUser(currentUser.id))
+        .then(() => {
+            dispatch(getUsersPosts(currentUser.id))
+        })
     history.push(`/users/${currentUser.id}`)
-  }
+}
 
   return (
     <div id="nav-bar">
       <img onClick={goHome} id="tzengbook-icon-logged-in" className="cursor" src={tzengbookIcon} />
       <div id="nav-bar-right">
         <img onClick={goToProfile} id="profile-icon" className="cursor" src={image ? currentUser?.profilePicture : defaultProfileIcon} />
-        {/* <button id="profile-icon">profile button</button> */}
         <LogoutButton />
       </div>
     </div>

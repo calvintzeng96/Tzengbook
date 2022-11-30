@@ -4,11 +4,12 @@ import "./index.css"
 import { ModalContext } from "../../context/Modal"
 import { useContext, useEffect } from "react"
 import icon from "../../assets/default-profile-icon.png"
+import homeIcon from "../../assets/home-icon.png"
 import { getUsersPosts } from "../../store/post"
 import ProfileSub from "../ProfileSub"
 import GetAllPosts from "../Posts"
 import { getUser } from "../../store/user"
-import { useParams } from "react-router-dom"
+import { useHistory, useParams } from "react-router-dom"
 
 
 
@@ -24,6 +25,7 @@ const Profile = () => {
     const dispatch = useDispatch()
     const posts = useSelector(state => state.post.allPosts)
     const postsArray = Object.values(posts)
+    const history = useHistory()
 
 
     useEffect(() => {
@@ -34,18 +36,31 @@ const Profile = () => {
             })
     }, [])
 
+    const goToProfile = () => {
+        dispatch(getUser(currentUser.id))
+            .then(() => {
+                dispatch(getUsersPosts(currentUser.id))
+            })
+        history.push(`/users/${currentUser.id}`)
+    }
+
     return (
         <div>
             <NavBar />
             <div id="profile-container" className="">
-                <div id="profile-left" className="">left bar</div>
+                <div id="profile-left" className="">
+                    <img className="test cursor" onClick={() => history.push("/")} src={homeIcon} />
+                    <img className="test cursor" onClick={goToProfile} src={user.profilePicture ? user.profilePicture : icon} />
+                </div>
                 <div id="profile-right" className="">
-                    <div id="profile-header" className="">
-                        <div>PROFILE PIC</div>
-                        <div>{user.firstName} {user.lastName}</div>
+                    <div id="profile-header-container">
+                        <div id="profile-header" className="">
+                            <img id="profile-pic" src={icon} />
+                            <div id="profile-name">{user.firstName} {user.lastName}</div>
+                        </div>
                     </div>
                     <div id="profile-body" className="">
-                        <div id="profile-body-left" className="">info/friends-etc</div>
+                        {/* <div id="profile-body-left" className="">info/friends-etc</div> */}
                         <div id="profile-body-right" className="">
 
                             <div id="all-post-middle">
@@ -65,7 +80,7 @@ const Profile = () => {
                                                 )}
                                             </div>
                                             <div className="single-post-content">POST CONTENT: {ele.content} Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. </div>
-                                            {ele.image && <img className="post-image"src={ele.image} />}
+                                            {ele.image && <img className="post-image" src={ele.image} />}
                                             <div>comments for later</div>
                                         </div>
                                     )

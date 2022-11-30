@@ -8,6 +8,7 @@ const EDIT_POST = "/posts/EDIT_POST";
 const DESTROY_POST = "/posts/DESTROY_POST";
 
 const NEW_COMMENT = "/comments/NEW_COMMENT"
+const DESTROY_COMMENT = "/posts/DESTROY_COMMENT";
 
 // ACTIONS
 const allPosts = (posts) => {
@@ -54,6 +55,12 @@ const newComment = (comment) => {
     return {
         type: NEW_COMMENT,
         comment
+    }
+}
+const destroyComment = (commentId, postId) => {
+    return {
+        type: DESTROY_COMMENT,
+        payload: {"commentId": commentId, "postId": postId}
     }
 }
 
@@ -133,7 +140,7 @@ export const deletePost = (postId) => async (dispatch) => {
     }
 }
 
-
+//Create a Comment
 export const createComment = (postId, data) => async (dispatch) => {
     const res = await csrfFetch(`/api/posts/${postId}/comments`, {
         method: "POST",
@@ -142,12 +149,22 @@ export const createComment = (postId, data) => async (dispatch) => {
     });
 
     if (res.ok) {
-        const comment = res.json();
-        // dispatch(newComment)
+        const comment = await res.json();
+        dispatch(newComment(comment))
         return comment
     }
 }
-
+//Delete Comment
+export const deleteComment = (commentId) => async (dispatch) => {
+    const res = await csrfFetch(`/api/comments/${commentId}`, {
+        method: "DELETE",
+    });
+    if (res.ok) {
+        const comment = await res.json()
+        dispatch(destroyComment(commentId, comment.postId))
+        return comment
+    }
+}
 
 
 // REDUCER
@@ -188,6 +205,22 @@ export const postReducer = (state = initialState, action) => {
             };
             delete deletePost.allPosts[action.storyId]
             return { ...deletePost }
+        case NEW_COMMENT:
+            let test = action.comment
+            const createComment = {...state, allPosts: {...state.allPosts}}
+            createComment.allPosts[test.post_id].Comments[test.id] = test
+            return {...createComment}
+        case DESTROY_COMMENT:
+            let test2 = action.payload
+            const deleteComment = {...state, allPosts: {...state.allPosts}}
+            let newCommentsArray = []
+            for (let i = 0; i < deleteComment.allPosts[test2.postId].Comments.length; i++) {
+                if (deleteComment.allPosts[test2.postId].Comments[i].id !== test2.commentId) {
+                    newCommentsArray.push(deleteComment.allPosts[test2.postId].Comments[i])
+                }
+            }
+            deleteComment.allPosts[test2.postId].Comments = newCommentsArray
+            return {...deleteComment}
         default:
             return state;
     }
