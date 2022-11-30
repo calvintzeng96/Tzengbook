@@ -1,7 +1,7 @@
 import "./index.css"
 import icon from "../../assets/default-profile-icon.png"
 import { useHistory } from "react-router-dom"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { getUser } from "../../store/user"
 import { useState } from "react"
 import { getUsersPosts } from "../../store/post"
@@ -12,6 +12,7 @@ const ProfileSub = ({ ele, createdAt, comment }) => {
     let timeAgo = moment(createdAt).fromNow()
     const history = useHistory()
     const [iconOnly, setIconOnly] = useState(false)
+    // const currentUser = useSelector(state=> state.session.user)
     let test = ""
     if (comment) {
         test = comment
@@ -25,6 +26,7 @@ const ProfileSub = ({ ele, createdAt, comment }) => {
     //         })
     // }
     const goToProfile = () => {
+        // if (!currentUser) return
         dispatch(getUser(ele.id))
             .then(() => {
                 dispatch(getUsersPosts(ele.id))
