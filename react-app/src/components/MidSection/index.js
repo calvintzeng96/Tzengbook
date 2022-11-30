@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux"
-import { useHistory } from "react-router-dom";
-import { createComment, deletePost, getAllPosts, getSinglePost } from "../../store/post";
+import { useHistory, useParams } from "react-router-dom";
+import { createComment, deletePost, getAllPosts, getSinglePost, getUsersPosts } from "../../store/post";
 import ProfileSub from "../ProfileSub";
 import { ModalContext } from "../../context/Modal";
 import icon from "../../assets/default-profile-icon.png"
@@ -17,6 +17,7 @@ const MidSection = () => {
     const [isLoaded, setIsLoaded] = useState(false)
     const currentUser = useSelector(state => state.session.user)
     const user = useSelector(state => state.user.singleUser)
+    const { userId } = useParams()
 
 
     const posts = useSelector(state => state.post.allPosts)
@@ -25,11 +26,19 @@ const MidSection = () => {
     const postsArray = Object.values(posts)
 
     useEffect(() => {
-        dispatch(getAllPosts())
+        if (userId) {
+            dispatch(getUsersPosts(userId))
             .then(() => {
                 setIsLoaded(true)
-                dispatch(getUser(currentUser.id))
+                // dispatch(getUser(currentUser.id))
             })
+        } else {
+            dispatch(getAllPosts())
+                .then(() => {
+                    setIsLoaded(true)
+                    // dispatch(getUser(currentUser.id))
+                })
+        }
     }, [post])
 
 
@@ -79,6 +88,10 @@ const MidSection = () => {
                         </div>
                     )
                 })}
+                {/* {console.log("---------*****", Object.values(posts).length)} */}
+                {Object.values(posts).length == 0 && (
+                    <div>User Currently Has No Posts</div>
+                )}
             </div>
         )
     } else {

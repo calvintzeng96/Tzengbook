@@ -10,7 +10,7 @@ from datetime import datetime
 
 comment_routes = Blueprint('comments', __name__)
 
-
+# Edit a Comment
 @comment_routes.route("/<int:comment_id>", methods=["PUT"])
 @login_required
 def edit_comment(comment_id):

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { createComment, deleteComment, getAllPosts } from "../../store/post";
+import { createComment, deleteComment, getAllPosts, updateComment } from "../../store/post";
 import ProfileSub from "../ProfileSub";
 import { getUser } from "../../store/user";
 import { useHistory } from "react-router-dom";
@@ -12,25 +12,39 @@ const PostComments = ({ ele }) => {
     const dispatch = useDispatch()
     const history = useHistory()
     const currentUser = useSelector(state => state.session.user)
-    const posts = useSelector(state => state.post.allPosts)
     const [newComment, setNewComment] = useState("")
+    const [currentComment, setCurrentComment] = useState("")
+    const [editComment, setEditComment] = useState("")
 
-
-    useEffect(() => {
-
-    }, [posts])
 
     const commentSubmit = (e, postId) => {
         e.preventDefault()
         let data = { "content": newComment }
 
         dispatch(createComment(postId, data))
-        .then(() => {
-            dispatch(getAllPosts())
-        })
-        .then(() => {
-            setNewComment("")
-        })
+            .then(() => {
+                dispatch(getAllPosts())
+            })
+            .then(() => {
+                setNewComment("")
+            })
+        return
+    }
+    const editCommentSubmit = (e, commentId) => {
+        e.preventDefault()
+
+        const data = { "content": editComment }
+        dispatch(updateComment(commentId, data))
+            .then(() => {
+                alert("success")
+                setCurrentComment("")
+            })
+            .then(() => {
+                dispatch(getAllPosts())
+            })
+            .catch(() => {
+                alert("failed")
+            })
         return
     }
 
@@ -48,28 +62,48 @@ const PostComments = ({ ele }) => {
     }
 
 
+    const editCommentNumber = (comment) => {
+        setCurrentComment(comment.id)
+        setEditComment(comment.content)
+    }
+
+
     return (
         <div>
-
             <div className="comment-container">
                 <div id="post-comment-divider">future like/comment</div>
                 {
-                    ele.Comments.map(comment => {
-                        return (
-                            <div className="individual-comment">
-                                <ProfileSub ele={comment.user} comment={comment.content} />
-                                {/* <div>{comment.content}</div> */}
-                                {comment.user_id == currentUser.id && (
-                                    <div className="edit-delete">
-                                        <button>edit</button>
-                                        <button onClick={() => deleteCommentButton(comment.id)}>delete</button>
-                                    </div>
-                                )}
+                    ele.Comments.map((comment) => {
 
-
-
-                            </div>
-                        )
+                        if (currentComment !== comment.id) {
+                            return (
+                                <div className="individual-comment">
+                                    <ProfileSub ele={comment.user} comment={comment.content} />
+                                    {/* <div>{comment.content}</div> */}
+                                    {comment.user_id == currentUser.id && (
+                                        <div className="edit-delete">
+                                            <button onClick={() => editCommentNumber(comment)}>edit</button>
+                                            <button onClick={() => deleteCommentButton(comment.id)}>delete</button>
+                                        </div>
+                                    )}
+                                </div>
+                            )
+                        } else {
+                            let testing = 123
+                            console.log(testing)
+                            return (
+                                <div>
+                                    <form className="create-comment-form" onSubmit={(e) => editCommentSubmit(e, comment.id)}>
+                                        <input
+                                            type="text"
+                                            value={editComment}
+                                            onChange={(e) => setEditComment(e.target.value)}
+                                        />
+                                    </form>
+                                    <button onClick={() => setCurrentComment("")}>cancel</button>
+                                </div>
+                            )
+                        }
                     })
                 }
             </div>
@@ -82,7 +116,6 @@ const PostComments = ({ ele }) => {
                         onChange={(e) => setNewComment(e.target.value)}
                         placeholder="Write a comment..."
                     />
-                    {/* <button type="submit">submit</button> */}
                 </form>
             </div>
         </div>

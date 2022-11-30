@@ -19,14 +19,10 @@ const ProfileSub = ({ ele, createdAt, comment }) => {
         timeAgo = null
     }
 
-    // const goToProfile = () => {
-    //     dispatch(getUser(ele.id))
-    //         .then(() => {
-    //             history.push(`/users/${ele.id}`)
-    //         })
-    // }
+
     const goToProfile = () => {
         // if (!currentUser) return
+        console.log("-------------------1", ele.id)
         dispatch(getUser(ele.id))
             .then(() => {
                 dispatch(getUsersPosts(ele.id))

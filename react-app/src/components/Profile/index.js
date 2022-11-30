@@ -30,9 +30,10 @@ const Profile = () => {
 
 
     useEffect(() => {
-        console.log("-----------------", userId)
+        console.log("-----------------2", userId)
         dispatch(getUser(userId))
             .then(() => {
+                console.log(user)
                 dispatch(getUsersPosts(userId))
             })
     }, [])
@@ -64,8 +65,6 @@ const Profile = () => {
                         {/* <div id="profile-body-left" className="">info/friends-etc</div> */}
                         <div id="profile-body-right" className="">
                             <MidSection />
-
-
                         </div>
                     </div>
 
