@@ -8,6 +8,10 @@ from ..forms import CommentForm
 from .helpers import child_belongs_to_parent, get_user_model
 from datetime import datetime
 
+from app.aws import (
+    upload_file_to_s3, allowed_file, get_unique_filename)
+
+
 
 post_routes = Blueprint('posts', __name__)
 
@@ -44,6 +48,39 @@ def single_post(postId):
     else:
         return post.to_dict()
 
+#-----------------------------------
+@post_routes.route('/checkImage', methods=['POST'])
+def upload_image():
+    # if "image" not in request.files:
+    #     return {"errors": "image required"}, 400
+    print("--------------------321", request.data.decode('UTF-8'))
+    if request.data.decode('UTF-8') == "remove existing image":
+        print("herererererer---------------------------------")
+        url = "remove existing image"
+        return url
+    image = request.files["image"]
+    if image == "remove existing image":
+        print("-----------here")
+    if not image:
+        # text = "no image"
+        return None
+    if not allowed_file(image.filename):
+        # raise TestError("file type not supported")
+        return jsonify("file type not permitted"), 400
+
+    image.filename = get_unique_filename(image.filename)
+
+    upload = upload_file_to_s3(image)
+
+
+    if "url" not in upload:
+        # if the dictionary doesn't have a url key
+        # it means that there was an error when we tried to upload
+        # so we send back that error message
+        return upload, 400
+
+    url = upload["url"]
+    return url
 
 # Edit a Post
 @post_routes.route("/<int:post_id>", methods=["PUT"])
@@ -65,8 +102,16 @@ def edit_post(post_id):
         except ForbiddenError as e:
             return {"error": e.message}, e.status_code
 
-        for key, value in update_data.items():
-            setattr(post, key, update_data[key])
+        if update_data["image"]:
+            if update_data["image"] == "remove existing image":
+                post.content = update_data["content"]
+                post.image = None
+            else:
+                for key, value in update_data.items():
+                    setattr(post, key, update_data[key])
+        else:
+            post.content = update_data["content"]
+            post.image = post.image
         db.session.commit()
         return jsonify(post.to_dict())
     return {"errors": validation_errors_to_error_messages(form.errors)}, 401

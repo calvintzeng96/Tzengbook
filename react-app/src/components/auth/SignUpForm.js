@@ -15,16 +15,32 @@ const SignUpForm = () => {
   const user = useSelector(state => state.session.user);
   const dispatch = useDispatch();
   const history = useHistory()
-  const {setModalType} = useContext(ModalContext)
+  const { setModalType } = useContext(ModalContext)
 
   const onSignUp = async (e) => {
+
+    // let errArray = []
     e.preventDefault();
+    console.log("----------------")
+    // if (firstName.length > 3)
     if (password === repeatPassword) {
       dispatch(signUp(username, email, password, firstName, lastName))
-      .then(res => res)
-      .then(() => setModalType(null))
-      .catch(e => e.json().then((e) => setErrors(e.errors)))
+        // console.log("-------------", data)
+        .then(res => {
+          console.log("---",res)
+          if (res == null) {
+            setModalType(null)
+          } else {
+            setErrors(res)
+          }
+          return
+        })
+    } else {
+      setErrors(["Password and Confirm Password must match."]);
     }
+
+    // setErrors(["test: test bad"])
+    // console.log(errors)
   };
 
   const updateUsername = (e) => {
@@ -61,6 +77,7 @@ const SignUpForm = () => {
       <div>
         <label>User Name</label>
         <input
+          required
           type='text'
           name='username'
           onChange={updateUsername}
@@ -70,6 +87,7 @@ const SignUpForm = () => {
       <div>
         <label>Email</label>
         <input
+          required
           type='text'
           name='email'
           onChange={updateEmail}
@@ -79,6 +97,7 @@ const SignUpForm = () => {
       <div>
         <label>First Name</label>
         <input
+          required
           type='text'
           name='first_name'
           onChange={updateFirstName}
@@ -88,6 +107,7 @@ const SignUpForm = () => {
       <div>
         <label>Last Name</label>
         <input
+          required
           type='text'
           name='last_name'
           onChange={updateLastName}
@@ -97,6 +117,7 @@ const SignUpForm = () => {
       <div>
         <label>Password</label>
         <input
+          required
           type='password'
           name='password'
           onChange={updatePassword}
@@ -106,11 +127,11 @@ const SignUpForm = () => {
       <div>
         <label>Repeat Password</label>
         <input
+          required
           type='password'
           name='repeat_password'
           onChange={updateRepeatPassword}
           value={repeatPassword}
-          required={true}
         ></input>
       </div>
       <button type='submit'>Sign Up</button>

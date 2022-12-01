@@ -32,7 +32,7 @@ export const authenticate = () => async (dispatch) => {
 }
 
 export const login = (email, password) => async (dispatch) => {
-  const response = await csrfFetch('/api/auth/login', {
+  const response = await fetch('/api/auth/login', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -42,7 +42,6 @@ export const login = (email, password) => async (dispatch) => {
       password
     })
   });
-
 
   if (response.ok) {
     const data = await response.json();
@@ -54,6 +53,7 @@ export const login = (email, password) => async (dispatch) => {
       return data.errors;
     }
   } else {
+    console.log("0000000000000")
     return ['An error occurred. Please try again.']
   }
 
@@ -88,6 +88,7 @@ export const signUp = (username, email, password, first_name, last_name) => asyn
   });
 
   if (response.ok) {
+    // console.log("****************")
     const data = await response.json();
     dispatch(setUser(data))
     return null;
@@ -108,7 +109,7 @@ export function sessionReducer(state = initialState, action) {
   let newState;
   switch (action.type) {
     case SET_USER:
-      newState = {...state, user: {...state.user}}
+      newState = { ...state, user: { ...state.user } }
       newState.user = action.payload;
       return newState;
     case REMOVE_USER:

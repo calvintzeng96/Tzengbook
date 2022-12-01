@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { login } from '../../store/session';
 import { ModalContext } from '../../context/Modal';
-
+import "../Home/index.css"
 
 
 
@@ -19,10 +19,13 @@ const LoginForm = () => {
 
   const onLogin = async (e) => {
     e.preventDefault();
-    const data = await dispatch(login(email, password));
-    if (data) {
-      setErrors(data);
-    }
+    console.log("lllllllllllll")
+    await dispatch(login(email, password))
+      .then((res) => {
+        if (res !== null) {
+          setErrors(res)
+        }
+      })
   };
 
   const updateEmail = (e) => {
@@ -44,38 +47,40 @@ const LoginForm = () => {
   }
 
   return (
-    <div>
+    <div id="home-logged-out-upper-right">
 
-      <form className="border" onSubmit={onLogin}>
+      <form id="login-form" onSubmit={onLogin}>
         <div>
           {errors.map((error, ind) => (
             <div key={ind}>{error}</div>
           ))}
         </div>
-        <div>
-          <label htmlFor='email'>Email</label>
+        {/* <div className="login-form-input"> */}
           <input
             name='email'
             type='text'
             placeholder='Email'
             value={email}
             onChange={updateEmail}
-          />
-        </div>
-        <div>
-          <label htmlFor='password'>Password</label>
+            required
+            className="login-form-input"
+            />
+        {/* </div> */}
+        {/* <div className="login-form-input"> */}
           <input
             name='password'
             type='password'
             placeholder='Password'
             value={password}
             onChange={updatePassword}
+            required
+            className="login-form-input"
           />
-        </div>
-        <button type='submit'>Login</button>
-        <button onClick={() => demoLogin()}>Demo Login</button>
+        {/* </div> */}
+        <button className="cursor" type='submit'>Log In</button>
+        <button className="cursor" onClick={() => demoLogin()}>Demo Login</button>
       </form>
-      <button onClick={() => setModalType("Signup")}>Create new account</button>
+      <button id="create-account-button" className="cursor" onClick={() => setModalType("Signup")}>Create new account</button>
     </div>
   );
 };

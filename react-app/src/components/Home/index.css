@@ -1,0 +1,123 @@
+#home-logged-out {
+    height: 100vh;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+#home-logged-out-upper {
+    background-color: #F0F2F5;
+    height: 77vh;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    min-width: 980px
+}
+
+#home-logged-out-upper-left {
+    min-width: 500px;
+    width: 500px;
+    margin-right: 40px;
+}
+
+
+#home-logged-out-upper-left-1 {
+    /* margin-top: 180px; */
+    margin-top: 36%;
+    margin-bottom: 0;
+    height: 72px;
+    padding: 0;
+    color: #1877f2;
+    font-size: 40px;
+    -webkit-transform: scale(1, 1.5);
+    font-weight: 900;
+    font-family: Arial, sans-serif;
+}
+
+#home-logged-out-upper-left-2 {
+    margin: 0;
+    font-size: 28px;
+    word-break: break-word;
+    font-family: Arial, sans-serif;
+}
+
+#home-logged-out-upper-right {
+    margin-left: 40px;
+    margin-top: 13vh;
+    min-width: 372px;
+    width: 372px;
+    /* border: 1px solid yellow; */
+    background-color: white;
+    height: 326px;
+    padding: 12px;
+    border-radius: 12px;
+    border-radius: 8px;
+    box-shadow: 0 8px 16px rgb(0 0 0 / 10%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#login-form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    border-bottom: 1px solid lightgrey;
+}
+
+.login-form-input {
+    height: 22px;
+    border: 1px solid lightgrey;
+    margin-bottom: 12px;
+    border-radius: 6px;
+    font-size: 16px;
+    padding: 14px;
+}
+
+#login-form>button {
+    background-color: #1877f2;
+    height: 44px;
+    border: transparent;
+    color: white;
+    border-radius: 6px;
+    margin-top: 2px;
+    margin-bottom: 12px;
+    font-size: 18px;
+    font-weight: bold;
+
+    /* border-bottom: 1px solid red */
+}
+
+
+#create-account-button {
+    background-color: #42b72a;
+    height: 46px;
+    border: transparent;
+    color: white;
+    border-radius: 6px;
+    margin-top: 24px;
+    width: 192px;
+    font-size: 16px;
+    font-weight: bold;
+    /* border-top: 1px solid black */
+}
+
+
+
+
+
+
+
+#home-logged-out-lower {
+    height: 23vh;
+    width: 100vw;
+    min-width: 980px;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+}
+
+#home-logged-out-lower > img {
+    width: 980px
+}
