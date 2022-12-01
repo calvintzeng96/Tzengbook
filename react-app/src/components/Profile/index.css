@@ -15,6 +15,7 @@
     flex-direction: column;
     align-items: center;
 }
+
 .test {
     width: 40px;
     height: 40px;
@@ -22,7 +23,7 @@
     margin-top: 20px;
 }
 
-#profile-left > div {
+#profile-left>div {
     align-self: center;
 
 }
@@ -55,7 +56,8 @@
 
 #profile-pic {
     width: 160px;
-    height: 160px
+    height: 160px;
+    border-radius: 50%;
 }
 
 #profile-name {

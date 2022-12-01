@@ -93,7 +93,7 @@ const PostComments = ({ ele }) => {
                             console.log(testing)
                             return (
                                 <div id="edit-comment-container">
-                                    <img onClick={goToProfile} className="profile-sub-icon cursor" src={icon} />
+                                    <img onClick={goToProfile} className="profile-sub-icon cursor" src={currentUser.profilePicture ? currentUser.profilePicture : icon} />
                                     <form id="edit-comment-form" onSubmit={(e) => editCommentSubmit(e, comment.id)}>
                                         <input
                                             type="text"
@@ -110,7 +110,7 @@ const PostComments = ({ ele }) => {
                 }
             </div>
             <div className="create-comment-container">
-                <img onClick={goToProfile} className="profile-sub-icon cursor" src={icon} />
+                <img onClick={goToProfile} className="profile-sub-icon cursor" src={currentUser.profilePicture ? currentUser.profilePicture : icon} />
                 <form className="create-comment-form" onSubmit={(e) => commentSubmit(e, ele.id)}>
                     <input
                         type="text"
