@@ -30,9 +30,11 @@
     padding: 0;
     color: #1877f2;
     font-size: 40px;
-    -webkit-transform: scale(1, 1.5);
+    -webkit-transform: scale(1, 1.3);
     font-weight: 900;
     font-family: Arial, sans-serif;
+    text-shadow: 1px 0 #1877f2;
+    letter-spacing: 1px;
 }
 
 #home-logged-out-upper-left-2 {
@@ -49,7 +51,8 @@
     width: 372px;
     /* border: 1px solid yellow; */
     background-color: white;
-    height: 326px;
+    height: fit-content;
+    /* max-height: 400px; */
     padding: 12px;
     border-radius: 12px;
     border-radius: 8px;
@@ -118,6 +121,6 @@
     justify-content: center;
 }
 
-#home-logged-out-lower > img {
+#home-logged-out-lower>img {
     width: 980px
 }

@@ -10,6 +10,7 @@ def seed_users():
         password='password1',
         first_name="John",
         last_name="Smith",
+        profile_picture="https://tzengbook.s3.us-east-2.amazonaws.com/12b58e1a5aca44dd999dd588b9f6092d.png",
         # profile_picture=PROFILE_PIC,
         bio="Diversity&Inclusion educator. Author, Pin Ups (9/20). Columnist, The Writer mag."
     )

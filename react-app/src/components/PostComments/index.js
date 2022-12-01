@@ -82,8 +82,8 @@ const PostComments = ({ ele }) => {
                                     {/* <div>{comment.content}</div> */}
                                     {comment.user_id == currentUser.id && (
                                         <div className="edit-delete">
-                                            <button onClick={() => editCommentNumber(comment)}>edit</button>
-                                            <button onClick={() => deleteCommentButton(comment.id)}>delete</button>
+                                            <button className="cursor" onClick={() => editCommentNumber(comment)}>edit</button>
+                                            <button className="cursor" onClick={() => deleteCommentButton(comment.id)}>delete</button>
                                         </div>
                                     )}
                                 </div>

@@ -5,6 +5,7 @@ import { createComment, deletePost, getAllPosts, getSinglePost } from "../../sto
 import ProfileSub from "../ProfileSub";
 import { ModalContext } from "../../context/Modal";
 import icon from "../../assets/default-profile-icon.png"
+import homeIcon from "../../assets/home-icon.png"
 
 
 import "./index.css"
@@ -49,7 +50,7 @@ const GetAllPosts = () => {
             <div id="all-post-container">
                 <div id="all-post-left">
                     <div className="all-post-left-contents cursor">
-                        <img src={icon} />
+                        <img src={homeIcon} />
                         <div onClick={() => history.push("/")}>Home</div>
                     </div>
                     <div onClick={() => history.push(`/users/${user.id}`)} className="all-post-left-contents cursor">
@@ -59,7 +60,7 @@ const GetAllPosts = () => {
                 </div>
                 <MidSection />
 
-                <div id="all-post-right">right</div>
+                <div id="all-post-right"></div>
             </div >
         )
     } else {

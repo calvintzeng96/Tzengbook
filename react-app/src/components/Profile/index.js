@@ -57,7 +57,7 @@ const Profile = () => {
                 <div id="profile-right" className="">
                     <div id="profile-header-container">
                         <div id="profile-header" className="">
-                            <img id="profile-pic" src={icon} />
+                            <img id="profile-pic" src={user.profilePicture ? user.profilePicture : icon} />
                             <div id="profile-name">{user.firstName} {user.lastName}</div>
                         </div>
                     </div>

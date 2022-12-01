@@ -27,7 +27,7 @@ const SignUpForm = () => {
       dispatch(signUp(username, email, password, firstName, lastName))
         // console.log("-------------", data)
         .then(res => {
-          console.log("---",res)
+          console.log("---", res)
           if (res == null) {
             setModalType(null)
           } else {
@@ -66,75 +66,77 @@ const SignUpForm = () => {
   };
 
   return (
-    <form className="modal-content" onSubmit={onSignUp}>
-      <h3>Sign Up</h3>
-      <p>It's quick and easy</p>
+    <form id="signup-form" className="modal-content" onSubmit={onSignUp}>
+      <h3 id="signup-title">Sign Up</h3>
+      <div id="signup-text">It's quick and easy</div>
       <div>
         {errors.map((error, ind) => (
-          <div key={ind}>{error}</div>
+          <div className="error-handling" key={ind}>{error}</div>
         ))}
       </div>
-      <div>
-        <label>User Name</label>
-        <input
-          required
-          type='text'
-          name='username'
-          onChange={updateUsername}
-          value={username}
-        ></input>
-      </div>
-      <div>
-        <label>Email</label>
-        <input
-          required
-          type='text'
-          name='email'
-          onChange={updateEmail}
-          value={email}
-        ></input>
-      </div>
-      <div>
-        <label>First Name</label>
+      <div id="first-last-name-container">
         <input
           required
           type='text'
           name='first_name'
           onChange={updateFirstName}
           value={firstName}
+          placeholder="First name"
         ></input>
-      </div>
-      <div>
-        <label>Last Name</label>
+
         <input
           required
           type='text'
           name='last_name'
           onChange={updateLastName}
           value={lastName}
+          placeholder="Last name"
         ></input>
       </div>
-      <div>
-        <label>Password</label>
-        <input
-          required
-          type='password'
-          name='password'
-          onChange={updatePassword}
-          value={password}
-        ></input>
-      </div>
-      <div>
-        <label>Repeat Password</label>
-        <input
-          required
-          type='password'
-          name='repeat_password'
-          onChange={updateRepeatPassword}
-          value={repeatPassword}
-        ></input>
-      </div>
-      <button type='submit'>Sign Up</button>
+
+      <input
+        required
+        type='text'
+        name='username'
+        onChange={updateUsername}
+        value={username}
+        placeholder="Username"
+      ></input>
+
+      <input
+        required
+        type='text'
+        name='email'
+        onChange={updateEmail}
+        value={email}
+        placeholder="Email"
+      ></input>
+
+      <input
+        required
+        type='password'
+        name='password'
+        onChange={updatePassword}
+        value={password}
+        placeholder="New password"
+      ></input>
+
+      <input
+        required
+        type='password'
+        name='repeat_password'
+        onChange={updateRepeatPassword}
+        value={repeatPassword}
+        placeholder="Confirm password"
+      ></input>
+      <p>
+        People who use our service may have uploaded your contact information to Tzengbook.
+      </p>
+      <p>
+        By clicking Sign Up, you agree to our Terms, Privacy Policy and Cookies Policy. You may receive Email Notifications from us and can opt out any time.
+      </p>
+
+      <button className="cursor" type='submit'>Sign Up</button>
     </form>
   );
 };

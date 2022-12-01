@@ -59,13 +59,12 @@ const MidSection = () => {
                 alert("delete failed.......")
             })
     }
-
     if (isLoaded && currentUser) {
         return (
             <div id="all-post-middle">
                 <div>
                     <div className="create-comment-div">
-                        <img src={icon} onClick={() => history.push(`/users/${user.id}`)} />
+                        <img className="cursor" src={user.profilePicture ? user.profilePicture : icon} onClick={() => history.push(`/users/${user.id}`)} />
                         <button className="cursor" onClick={() => setModalType("CreatePost")}>{`What's on your mind, ${currentUser?.firstName}?`}</button>
                     </div>
                 </div>
@@ -76,8 +75,8 @@ const MidSection = () => {
                                 <ProfileSub ele={ele.User} createdAt={ele.createdAt} />
                                 {currentUser.id == ele.userId && (
                                     <div className="edit-delete">
-                                        <button onClick={() => openEditModal(ele.id)}>Edit</button>
-                                        <button onClick={() => deleteSinglePost(ele.id)}>Delete</button>
+                                        <button className="cursor" onClick={() => openEditModal(ele.id)}>Edit</button>
+                                        <button className="cursor" onClick={() => deleteSinglePost(ele.id)}>Delete</button>
                                     </div>
                                 )}
                             </div>
