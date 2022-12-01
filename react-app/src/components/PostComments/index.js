@@ -92,15 +92,17 @@ const PostComments = ({ ele }) => {
                             let testing = 123
                             console.log(testing)
                             return (
-                                <div>
-                                    <form className="create-comment-form" onSubmit={(e) => editCommentSubmit(e, comment.id)}>
+                                <div id="edit-comment-container">
+                                    <img onClick={goToProfile} className="profile-sub-icon cursor" src={icon} />
+                                    <form id="edit-comment-form" onSubmit={(e) => editCommentSubmit(e, comment.id)}>
                                         <input
                                             type="text"
                                             value={editComment}
                                             onChange={(e) => setEditComment(e.target.value)}
+                                            placeholder="Edit your comment..."
                                         />
                                     </form>
-                                    <button onClick={() => setCurrentComment("")}>cancel</button>
+                                    <button id="edit-cancel-button" onClick={() => setCurrentComment("")}>cancel</button>
                                 </div>
                             )
                         }

@@ -5,6 +5,8 @@ import { useContext, useState } from "react";
 import { ModalContext } from "../../context/Modal"
 import { useEffect } from "react";
 // import { useParams } from "react-router-dom";
+import "./index.css"
+
 
 import { getSinglePost, updatePost } from "../../store/post";
 
@@ -100,9 +102,11 @@ const EditPost = () => {
     }
 
     return (
-        <form className="form-container modal-content" onSubmit={submit}>
-            <div>Edit Post</div>
-            <ProfileSub ele={currentUser} />
+        <form id="edit-post-form" className="form-container modal-content" onSubmit={submit}>
+            <div id="edit-post-title">Edit Post</div>
+            <div className="edit-post-content">
+                <ProfileSub ele={currentUser} />
+            </div>
             {/* <div className="errors">
                 {errors.length > 0 &&
                     errors.map((error) => <li key={error}>{error}</li>)}
@@ -113,14 +117,31 @@ const EditPost = () => {
                 value={content}
                 onChange={(e) => setContent(e.target.value)}
                 placeholder={`What's on your mind, ${currentUser.firstName}?`}
+                className="edit-post-content"
+                id="edit-post-textarea"
+
             />
             <input
                 type="file"
                 accept="image/*"
                 onChange={updateImage}
+                className="edit-post-content"
+                id="edit-post-image-input"
+                hidden
             />
-            <div className="cursor" onClick={() => removeImage()}>{imageRemoval}</div>
-            <button type="submit">Post</button>
+            {console.log("---------", post.image)}
+            {image && (
+                <div id="remove-image-button" className="edit-post-content cursor" onClick={() => removeImage()}>{imageRemoval}</div>
+            )}
+            <label id="test11" for="edit-post-image-input" className="edit-post-content cursor">Click Here To Add Image</label>
+
+            <button
+                id={!content ? "edit-post-submit-false" : "edit-post-submit"}
+                className={!content ? "edit-post-content not-allowed" : "edit-post-content cursor"}
+                disabled={!content}
+                type="submit">
+                Post
+            </button>
         </form>
     )
 
