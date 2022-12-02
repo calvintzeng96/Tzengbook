@@ -19,7 +19,7 @@ const Home = () => {
                 <div id="home-logged-out-upper">
                     <div id="home-logged-out-upper-left">
                         <h1 id="home-logged-out-upper-left-1">tzengbook</h1>
-                        <p id="home-logged-out-upper-left-2">Connect with friends and the world around you on Facebook.</p>
+                        <p id="home-logged-out-upper-left-2">Connect with friends and the world around you on Tzengbook.</p>
                     </div>
                     <LoginForm />
                 </div>

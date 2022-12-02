@@ -69,7 +69,7 @@ const SignUpForm = () => {
     <form id="signup-form" className="modal-content" onSubmit={onSignUp}>
       <h3 id="signup-title">Sign Up</h3>
       <div id="signup-text">It's quick and easy</div>
-      <div>
+      <div className="shift-right-12px">
         {errors.map((error, ind) => (
           <div className="error-handling" key={ind}>{error}</div>
         ))}

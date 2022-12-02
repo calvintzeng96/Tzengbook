@@ -107,10 +107,10 @@ const EditPost = () => {
             <div className="edit-post-content">
                 <ProfileSub ele={currentUser} />
             </div>
-            {/* <div className="errors">
+            <div className="error-handling">
                 {errors.length > 0 &&
                     errors.map((error) => <li key={error}>{error}</li>)}
-            </div> */}
+            </div>
 
             <textarea
                 type="text"
@@ -134,6 +134,9 @@ const EditPost = () => {
                 <div id="remove-image-button" className="edit-post-content cursor" onClick={() => removeImage()}>{imageRemoval}</div>
             )}
             <label id="test11" for="edit-post-image-input" className="edit-post-content cursor">Click Here To Add Image</label>
+            {image && (
+                <div id="create-post-image-name">{image.name}</div>
+            )}
 
             <button
                 id={!content ? "edit-post-submit-false" : "edit-post-submit"}

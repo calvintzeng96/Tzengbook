@@ -36,15 +36,15 @@ const PostComments = ({ ele }) => {
         const data = { "content": editComment }
         dispatch(updateComment(commentId, data))
             .then(() => {
-                alert("success")
+                // alert("edit comment success")
                 setCurrentComment("")
             })
             .then(() => {
                 dispatch(getAllPosts())
             })
-            .catch(() => {
-                alert("failed")
-            })
+        // .catch(() => {
+        //     alert("failed")
+        // })
         return
     }
 
@@ -71,7 +71,7 @@ const PostComments = ({ ele }) => {
     return (
         <div>
             <div className="comment-container">
-                <div id="post-comment-divider">future like/comment</div>
+                <div id="post-comment-divider">Space saved for "Likes" feature</div>
                 {
                     ele.Comments.map((comment) => {
 
@@ -92,17 +92,23 @@ const PostComments = ({ ele }) => {
                             let testing = 123
                             console.log(testing)
                             return (
-                                <div id="edit-comment-container">
-                                    <img onClick={goToProfile} className="profile-sub-icon cursor" src={currentUser.profilePicture ? currentUser.profilePicture : icon} />
-                                    <form id="edit-comment-form" onSubmit={(e) => editCommentSubmit(e, comment.id)}>
-                                        <input
-                                            type="text"
-                                            value={editComment}
-                                            onChange={(e) => setEditComment(e.target.value)}
-                                            placeholder="Edit your comment..."
-                                        />
-                                    </form>
-                                    <button id="edit-cancel-button" onClick={() => setCurrentComment("")}>cancel</button>
+                                <div>
+
+                                    {editComment.length > 2000 && <div id="edit-comment-error" className="error-handling">Characters Exceeded- Current Characters: {editComment.length}/2000</div>}
+                                    <div id="edit-comment-container">
+                                        <img onClick={goToProfile} className="profile-sub-icon cursor" src={currentUser.profilePicture ? currentUser.profilePicture : icon} />
+                                        <form id="edit-comment-form" onSubmit={(e) => editCommentSubmit(e, comment.id)}>
+                                            <input
+                                                type="text"
+                                                value={editComment}
+                                                onChange={(e) => setEditComment(e.target.value)}
+                                                placeholder="Edit your comment..."
+                                                required
+                                            />
+                                        </form>
+
+                                        <button id="edit-cancel-button" onClick={() => setCurrentComment("")}>cancel</button>
+                                    </div>
                                 </div>
                             )
                         }
@@ -117,7 +123,9 @@ const PostComments = ({ ele }) => {
                         value={newComment}
                         onChange={(e) => setNewComment(e.target.value)}
                         placeholder="Write a comment..."
+                        required
                     />
+                    {newComment.length > 2000 && <div className="error-handling">Characters Exceeded- Current Characters: {newComment.length}/2000</div>}
                 </form>
             </div>
         </div>

@@ -46,7 +46,7 @@ const ProfileSub = ({ ele, createdAt, comment }) => {
             <div id={test ? "comment-content" : "comment-content-not"}>
                     <div onClick={() => goToProfile()} className={test ? "small-text bold cursor" : "bold cursor" }>{ele.firstName} {ele.lastName}</div>
                 {test && (
-                    <div>{comment}</div>
+                    <div id="comment-content-1">{comment}</div>
                 )}
                 {timeAgo && !modalType && (
                     <div className="grey">{timeAgo}</div>

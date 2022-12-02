@@ -80,7 +80,7 @@ const CreatePost = () => {
             <div className="create-post-content">
                 <ProfileSub ele={currentUser} />
             </div>
-            <div className="errors">
+            <div className="error-handling">
                 {errors.length > 0 &&
                     errors.map((ele) => <div>{ele}</div>)}
             </div>

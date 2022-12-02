@@ -1,8 +1,7 @@
 .profile-in-post {
     display: flex;
     justify-content: left;
-    align-items: center;
-    width: 100%
+    width: calc(100% - 8px)
 }
 
 .profile-sub-icon {
@@ -10,6 +9,7 @@
     height: 36px;
     margin-right: 8px;
     border-radius: 50%;
+    /* align-items: top */
 }
 
 .bold {
@@ -20,5 +20,10 @@
     background-color: #F0F2F5;
     /* height: 100%; */
     border-radius: 8px;
-    padding: 2px
+    padding: 4px;
+    width: 100%
 }
+
+/* #comment-content-1 {
+    font-size: 14px;;
+} */

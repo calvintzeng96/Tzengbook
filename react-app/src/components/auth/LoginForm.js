@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { login } from '../../store/session';
@@ -27,6 +27,9 @@ const LoginForm = () => {
         }
       })
   };
+  useEffect(() => {
+    setErrors([])
+  }, [email, password])
 
   const updateEmail = (e) => {
     setEmail(e.target.value);

@@ -52,7 +52,7 @@ const Profile = () => {
             <div id="profile-container" className="">
                 <div id="profile-left" className="">
                     <img className="test cursor" onClick={() => history.push("/")} src={homeIcon} />
-                    <img className="test cursor" onClick={goToProfile} src={user.profilePicture ? user.profilePicture : icon} />
+                    <img className="test cursor" onClick={goToProfile} src={currentUser?.profilePicture ? currentUser?.profilePicture : icon} />
                 </div>
                 <div id="profile-right" className="">
                     <div id="profile-header-container">

@@ -3,6 +3,10 @@
     width: calc(100% - 44px);
 }
 
+.create-comment-form>input:focus {
+    outline-width: 0;
+}
+
 .create-comment-container {
     display: flex;
     padding: 10px
@@ -44,8 +48,8 @@
 }
 
 .edit-delete>button {
-    height: 100%;
-    font-size: 8px;
+    /* height: 100%; */
+    font-size: 9px;
     font-weight: bold;
     border-radius: 8px;
     border: transparent;
@@ -56,6 +60,7 @@
 #edit-comment-form {
     /* background-color: red; */
     width: calc(100% - 44px);
+    height: 38px;
 }
 
 #edit-comment-container {
@@ -73,8 +78,27 @@
     padding-left: 8px;
 }
 
+#edit-comment-form>input:focus {
+    outline-width: 0;
+}
+
 #edit-cancel-button {
-    border: transparent;
+    height: 36px;
+    border: none;
     background-color: lightgrey;
     border-radius: 8px;
+    padding: 0;
+    width: 60px
+}
+
+#edit-comment-error {
+    padding-left: 54px
+}
+
+
+
+
+
+#post-comment-divider {
+    color: white;
 }
