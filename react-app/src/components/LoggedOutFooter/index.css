@@ -1,0 +1,44 @@
+#logged-out-footer-container {
+    height: 100%;
+    width: 980px;
+    /* background-color: pink; */
+    z-index: 1;
+    color: grey;
+}
+
+#logged-out-footer-1 {
+    display: flex;
+    margin: 30px 0;
+    padding-bottom: 10px;
+    border-bottom: 1px solid lightgrey;
+    font-size: 15px;
+    /* background-color: purple; */
+}
+
+#logged-out-footer-1 > * {
+    margin-right: 18px
+}
+
+#logged-out-footer-2 {
+    font-size: 14px;
+    /* margin: 5px 0; */
+    display: flex;
+    justify-content: space-between;
+}
+
+#logged-out-footer-3 {
+    display: flex;
+    font-size: 13px;
+    margin: 10px 0;
+    position: relative;
+}
+
+#logged-out-footer-3 > *{
+    margin-right: 20px;
+}
+
+
+#logged-out-footer-4 {
+    font-size: 12px;
+    margin: 30px 0
+}

@@ -21,6 +21,18 @@ body {
 .cursor {
   cursor: pointer;
 }
+
+.links {
+  /* border-radius: 50%; */
+  /* background-color: pink; */
+}
+
+.links:hover {
+  text-decoration: underline #1877f2;
+  box-shadow: 0 8px 16px rgb(0 0 0 / 10%);
+  color: #1877f2
+}
+
 .not-allowed {
   cursor: not-allowed;
 }
@@ -35,11 +47,15 @@ body {
 
 .error-handling {
   color: red;
-  font-size: 11px;
+  font-size: 11.5px;
   list-style-type: none;
   padding-left: 12px;
 }
 
 .shift-right-12px {
   padding-left: 12px
+}
+
+.larger-font {
+  font-size: 32px;
 }

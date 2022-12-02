@@ -114,6 +114,7 @@
 
 #home-logged-out-lower {
     height: 23vh;
+    max-height: 23vh;
     width: 100vw;
     min-width: 980px;
     display: flex;
@@ -121,6 +122,6 @@
     justify-content: center;
 }
 
-#home-logged-out-lower>img {
+/* #home-logged-out-lower>img {
     width: 980px
-}
+} */

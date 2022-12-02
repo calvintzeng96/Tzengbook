@@ -28,10 +28,10 @@ const MidSection = () => {
     useEffect(() => {
         if (userId) {
             dispatch(getUsersPosts(userId))
-            .then(() => {
-                setIsLoaded(true)
-                // dispatch(getUser(currentUser.id))
-            })
+                .then(() => {
+                    setIsLoaded(true)
+                    // dispatch(getUser(currentUser.id))
+                })
         } else {
             dispatch(getAllPosts())
                 .then(() => {
@@ -62,12 +62,17 @@ const MidSection = () => {
     if (isLoaded && currentUser) {
         return (
             <div id="all-post-middle">
-                <div>
-                    <div className="create-comment-div">
-                        <img className="cursor" src={user.profilePicture ? user.profilePicture : icon} onClick={() => history.push(`/users/${user.id}`)} />
-                        <button className="cursor" onClick={() => setModalType("CreatePost")}>{`What's on your mind, ${currentUser?.firstName}?`}</button>
+                {console.log(currentUser.id)}
+                {console.log(user.id)}
+                {window.location.pathname == "/" || currentUser.id == user.id && (
+
+                    <div>
+                        <div className="create-comment-div">
+                            <img className="cursor" src={user.profilePicture ? user.profilePicture : icon} onClick={() => history.push(`/users/${user.id}`)} />
+                            <button className="cursor" onClick={() => setModalType("CreatePost")}>{`What's on your mind, ${currentUser?.firstName}?`}</button>
+                        </div>
                     </div>
-                </div>
+                )}
                 {posts && postsArray.map(ele => {
                     return (
                         <div key={ele.id} className="single-post">
@@ -89,7 +94,7 @@ const MidSection = () => {
                 })}
                 {/* {console.log("---------*****", Object.values(posts).length)} */}
                 {Object.values(posts).length == 0 && (
-                    <div>User Currently Has No Posts</div>
+                    <div className="larger-font grey">{user.firstName} currently has no posts</div>
                 )}
             </div>
         )

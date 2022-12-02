@@ -7,3 +7,4 @@ __pycache__/
 # *.db
 # /app/dev.db
 /home/whoami/mod-7-capstone/app/dev.db
+/home/whoami/mod-7-capstone/test.js
