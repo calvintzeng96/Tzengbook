@@ -8,10 +8,8 @@ const EDIT_POST = "/posts/EDIT_POST";
 const DESTROY_POST = "/posts/DESTROY_POST";
 
 const NEW_COMMENT = "/comments/NEW_COMMENT"
-const EDIT_COMMENT = "/comments/EDIT_COMMENT"
 const DESTROY_COMMENT = "/posts/DESTROY_COMMENT";
 
-// ACTIONS
 const allPosts = (posts) => {
     return {
         type: LOAD_ALL_POSTS,
@@ -58,21 +56,13 @@ const newComment = (comment) => {
         comment
     }
 }
-// const editComment = (comment) => {
-//     return {
-//         type: EDIT_COMMENT,
-//         comment
-//     }
-// }
+
 const destroyComment = (commentId, postId) => {
     return {
         type: DESTROY_COMMENT,
         payload: { "commentId": commentId, "postId": postId }
     }
 }
-
-
-// THUNKS
 
 // Get All Posts
 export const getAllPosts = () => async (dispatch) => {
@@ -171,7 +161,6 @@ export const updateComment = (commentId, data) => async (dispatch) => {
 
     if (res.ok) {
         const comment = await res.json();
-        // dispatch(editComment(comment))
         return comment
     }
 }
@@ -189,8 +178,6 @@ export const deleteComment = (commentId) => async (dispatch) => {
 
 
 // REDUCER
-//don't think will ever use load all posts......
-
 let initialState = {
     allPosts: {},
     singlePost: {}
@@ -231,19 +218,6 @@ export const postReducer = (state = initialState, action) => {
             const createComment = { ...state, allPosts: { ...state.allPosts } }
             createComment.allPosts[test.post_id].Comments[test.id] = test
             return { ...createComment }
-        // case EDIT_COMMENT:
-        //     // let test3 =
-        //     const editedComment = { ...state, allPosts: { ...state.allPosts } }
-        //     let newEditedCommentArray = []
-        //     for (let i = 0; i < editedComment.allPosts[action.comment.postId].Comments.length; i++) {
-        //         if (editedComment.allPosts[action.comment.postId].Comments[i].id !== action.comment.commentId) {
-        //             newEditedCommentArray.push(editedComment.allPosts[action.comment.postId].Comments[i])
-        //         } else {
-        //             editedComment.allPosts[action.comment.postId].Comments[i] = action.comment
-        //         }
-        //     }
-        //     editedComment.allPosts[action.comment.postId].Comments = newEditedCommentArray
-        //     return {...editedComment}
         case DESTROY_COMMENT:
             let test2 = action.payload
             const deleteComment = { ...state, allPosts: { ...state.allPosts } }

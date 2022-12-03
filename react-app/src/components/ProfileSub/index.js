@@ -1,9 +1,9 @@
 import "./index.css"
 import icon from "../../assets/default-profile-icon.png"
 import { useHistory } from "react-router-dom"
-import { useDispatch, useSelector } from "react-redux"
+import { useDispatch } from "react-redux"
 import { getUser } from "../../store/user"
-import { useContext, useEffect, useState } from "react"
+import { useContext } from "react"
 import { getUsersPosts } from "../../store/post"
 import { ModalContext } from "../../context/Modal"
 
@@ -12,9 +12,7 @@ const ProfileSub = ({ ele, createdAt, comment }) => {
     const moment = require("moment")
     let timeAgo = moment(createdAt).fromNow()
     const history = useHistory()
-    const [iconOnly, setIconOnly] = useState(false)
     const { modalType, setModalType } = useContext(ModalContext)
-    // const currentUser = useSelector(state=> state.session.user)
 
     let test = ""
     if (comment) {

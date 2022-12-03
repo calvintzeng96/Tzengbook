@@ -1,5 +1,3 @@
-/* TODO Add site wide styles */
-
 .border {
     border: 1px solid black
 }
@@ -14,17 +12,9 @@ body {
   font-family: Arial, sans-serif;
 
 }
-/* #root {
-} */
-
 
 .cursor {
   cursor: pointer;
-}
-
-.links {
-  /* border-radius: 50%; */
-  /* background-color: pink; */
 }
 
 .links:hover {

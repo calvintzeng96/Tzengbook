@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createComment, deleteComment, getAllPosts, updateComment } from "../../store/post";
 import ProfileSub from "../ProfileSub";
@@ -36,15 +36,11 @@ const PostComments = ({ ele }) => {
         const data = { "content": editComment }
         dispatch(updateComment(commentId, data))
             .then(() => {
-                // alert("edit comment success")
                 setCurrentComment("")
             })
             .then(() => {
                 dispatch(getAllPosts())
             })
-        // .catch(() => {
-        //     alert("failed")
-        // })
         return
     }
 
@@ -90,7 +86,6 @@ const PostComments = ({ ele }) => {
                             )
                         } else {
                             let testing = 123
-                            console.log(testing)
                             return (
                                 <div>
 

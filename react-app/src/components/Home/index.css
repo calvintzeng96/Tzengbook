@@ -23,7 +23,6 @@
 
 
 #home-logged-out-upper-left-1 {
-    /* margin-top: 180px; */
     margin-top: 36%;
     margin-bottom: 0;
     height: 72px;
@@ -49,10 +48,8 @@
     margin-top: 13vh;
     min-width: 372px;
     width: 372px;
-    /* border: 1px solid yellow; */
     background-color: white;
     height: fit-content;
-    /* max-height: 400px; */
     padding: 12px;
     border-radius: 12px;
     border-radius: 8px;
@@ -88,8 +85,6 @@
     margin-bottom: 12px;
     font-size: 18px;
     font-weight: bold;
-
-    /* border-bottom: 1px solid red */
 }
 
 
@@ -103,14 +98,7 @@
     width: 192px;
     font-size: 16px;
     font-weight: bold;
-    /* border-top: 1px solid black */
 }
-
-
-
-
-
-
 
 #home-logged-out-lower {
     height: 23vh;
@@ -121,7 +109,3 @@
     align-content: center;
     justify-content: center;
 }
-
-/* #home-logged-out-lower>img {
-    width: 980px
-} */

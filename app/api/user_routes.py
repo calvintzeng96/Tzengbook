@@ -6,6 +6,7 @@ from .helpers import get_user_model
 from app.errors import NotFoundError, ForbiddenError, TestError
 from ..forms.post_form import PostForm
 from datetime import datetime
+from sqlalchemy import desc, asc
 
 from app.aws import (
     upload_file_to_s3, allowed_file, get_unique_filename)
@@ -22,8 +23,6 @@ def validation_errors_to_error_messages(validation_errors):
         for error in validation_errors[field]:
             errorMessages.append(f'{field}:{error}')
     return errorMessages
-
-# print("*******************")
 
 
 @user_routes.route('/')
@@ -69,8 +68,7 @@ def all_users_posts(userId):
     user = User.query.get(userId)
     if not user:
         raise NotFoundError("User not found")
-    posts = Post.query.filter(Post.user_id == userId).all()
-    # print("-----------", [post.comments for post in posts])
+    posts =Post.query.filter(Post.user_id == userId).order_by(Post.created_at.desc()).all()
 
     return {"Posts": [post.to_dict_with_comments() for post in posts]}
 
@@ -112,11 +110,9 @@ def upload_image():
 @user_routes.route("/<int:userId>/post", methods=["POST"])
 @login_required
 def create_post(userId):
-    print("--------------------------------")
     form = PostForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
-        print("-----------------here1")
         if form.data["image"]:
             new_post = Post(wall_id=userId,
                             user_id=current_user.id,

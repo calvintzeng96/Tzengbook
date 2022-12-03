@@ -22,7 +22,6 @@
   }
 
   .modal-content {
-    /* border: 5px solid blue; */
     background-color: white;
     position: absolute;
     z-index: 100;

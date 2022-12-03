@@ -1,13 +1,12 @@
 import { useContext, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux"
 import { useHistory, useParams } from "react-router-dom";
-import { createComment, deletePost, getAllPosts, getSinglePost, getUsersPosts } from "../../store/post";
+import { deletePost, getAllPosts, getSinglePost, getUsersPosts } from "../../store/post";
 import ProfileSub from "../ProfileSub";
 import { ModalContext } from "../../context/Modal";
 import icon from "../../assets/default-profile-icon.png"
 
 import PostComments from "../PostComments";
-import { getUser } from "../../store/user";
 
 
 const MidSection = () => {
@@ -30,13 +29,11 @@ const MidSection = () => {
             dispatch(getUsersPosts(userId))
                 .then(() => {
                     setIsLoaded(true)
-                    // dispatch(getUser(currentUser.id))
                 })
         } else {
             dispatch(getAllPosts())
                 .then(() => {
                     setIsLoaded(true)
-                    // dispatch(getUser(currentUser.id))
                 })
         }
     }, [post])
@@ -46,7 +43,6 @@ const MidSection = () => {
         dispatch(getSinglePost(postId))
             .then(() => {
                 setModalType("EditPost")
-                // setModalType(null)
             })
     }
 
@@ -62,9 +58,7 @@ const MidSection = () => {
     if (isLoaded && currentUser) {
         return (
             <div id="all-post-middle">
-                {console.log(currentUser.id)}
-                {console.log(user.id)}
-                {window.location.pathname == "/" || currentUser.id == user.id && (
+                {window.location.pathname == "" || currentUser.id == user.id && (
 
                     <div>
                         <div className="create-comment-div">
@@ -73,7 +67,7 @@ const MidSection = () => {
                         </div>
                     </div>
                 )}
-                {posts && postsArray.map(ele => {
+                {posts && postsArray.reverse().map(ele => {
                     return (
                         <div key={ele.id} className="single-post">
                             <div className="single-post-top">
@@ -86,13 +80,11 @@ const MidSection = () => {
                                 )}
                             </div>
                             <div className="single-post-content">{ele.content}</div>
-                            {/* {console.log(ele.image)} */}
                             {ele.image && <img className="post-image" src={ele.image} />}
                             <PostComments ele={ele} />
                         </div>
                     )
                 })}
-                {/* {console.log("---------*****", Object.values(posts).length)} */}
                 {Object.values(posts).length == 0 && (
                     <div className="larger-font grey">{user.firstName} currently has no posts</div>
                 )}

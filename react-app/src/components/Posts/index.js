@@ -40,9 +40,6 @@ const GetAllPosts = () => {
                 setIsLoaded(true)
                 dispatch(getUser(currentUser.id))
             })
-        // .catch(() => {
-        //     alert("err")
-        // })
     }, [post])
 
 
@@ -50,8 +47,6 @@ const GetAllPosts = () => {
 
     if (isLoaded) {
         return (
-            // <div>
-            //     <h1>Posts</h1>
             <div id="all-post-container">
                 <div id="all-post-left">
                     <div className="all-post-left-contents cursor">
@@ -62,6 +57,7 @@ const GetAllPosts = () => {
                         <img src={user.profilePicture ? user.profilePicture : icon} />
                         <div>{user.firstName} {user.lastName}</div>
                     </div>
+                    <div className="spacer"></div>
                     <div onClick={linkedInLink} className="all-post-left-contents cursor">
                         <img src={linkedInIcon} />
                         <div>LinkedIn</div>

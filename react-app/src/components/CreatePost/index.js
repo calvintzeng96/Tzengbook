@@ -11,13 +11,11 @@ const CreatePost = () => {
     const dispatch = useDispatch();
     const currentUser = useSelector(state => state.session.user)
     const wall = useSelector(state => state.user.singleUser)
-    // const post = useSelector(state => state.post.singlePost)
     const [image, setImage] = useState("");
     const [content, setContent] = useState("");
     const [wallId, setWallId] = useState("")
     const [errors, setErrors] = useState([]);
     const { setModalType } = useContext(ModalContext)
-    const [imageLoading, setImageLoading] = useState(false)
 
 
     useEffect(() => {
@@ -34,10 +32,8 @@ const CreatePost = () => {
 
     const submit = async (e) => {
         e.preventDefault();
-        // setErrors([]);
         const formData = new FormData();
         formData.append("image", image);
-        setImageLoading(true);
         await fetch('/api/users', {
             method: "POST",
             body: formData
@@ -49,9 +45,7 @@ const CreatePost = () => {
                     return
                 }
                 let data = { image: imgurl, content };
-                // console.log(imgurl)
                 if (imgurl.includes("!DOCTYPE")) {
-                    console.log("HERE")
                     data = { content }
                 }
 

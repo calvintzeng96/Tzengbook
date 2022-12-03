@@ -4,7 +4,6 @@ const LOAD_USER = "/users/LOAD_USER";
 const LOAD_CURRENT_USER = "/users/LOAD_CURRENT_USER";
 
 
-// ACTION
 const loadUser = (user) => {
   return {
     type: LOAD_USER,
@@ -19,7 +18,6 @@ const loadCurrentUser = (user) => {
   };
 };
 
-// THUNK
 export const getUser = (userId) => async (dispatch) => {
   const res = await csrfFetch(`/api/users/${userId}`);
   if (res.ok) {

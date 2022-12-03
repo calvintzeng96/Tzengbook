@@ -5,12 +5,10 @@
     border-radius: 8px;
     box-shadow: 0 8px 16px rgb(0 0 0 / 20%);
     height: fit-content;
-    /* height: 500px; */
 }
 
 #edit-post-title {
     text-align: center;
-    /* margin: 20px 0; */
     padding: 16px 0;
     font-size: 20px;
     font-weight: bold;
@@ -24,14 +22,12 @@
 }
 
 #edit-post-textarea {
-    /* background-color: pink; */
     border: none;
     outline: none;
     resize: none;
     font-size: 22px;
     margin: 24px 12px 20px 12px;
     min-height: 100px;
-    /* overflow: hidden */
 }
 
 #edit-post-textarea::-webkit-scrollbar {

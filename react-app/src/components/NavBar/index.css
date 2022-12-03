@@ -5,11 +5,10 @@
     justify-content: space-between;
     align-items: center;
     position: sticky;
-    /* border-bottom: 1px solid #E4E6EB; */
+    top: 0px;
+    background-color: white;
     box-shadow: 0px 1px 2px lightgrey;
     z-index: 10000;
-    /* margin-bottom: 3px; */
-    /* background-color: white; */
 }
 
 #nav-bar-right {

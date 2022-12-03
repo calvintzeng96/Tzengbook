@@ -1,5 +1,4 @@
 .create-comment-form {
-    /* background-color: red; */
     width: calc(100% - 44px);
 }
 
@@ -57,7 +56,6 @@
 
 
 #edit-comment-form {
-    /* background-color: red; */
     width: calc(100% - 44px);
     height: 38px;
 }

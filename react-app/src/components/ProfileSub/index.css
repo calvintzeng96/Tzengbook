@@ -9,7 +9,6 @@
     height: 36px;
     margin-right: 8px;
     border-radius: 50%;
-    /* align-items: top */
 }
 
 .bold {
@@ -18,12 +17,7 @@
 
 #comment-content {
     background-color: #F0F2F5;
-    /* height: 100%; */
     border-radius: 8px;
     padding: 4px;
     width: 100%
 }
-
-/* #comment-content-1 {
-    font-size: 14px;;
-} */

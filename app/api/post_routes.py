@@ -12,7 +12,6 @@ from app.aws import (
     upload_file_to_s3, allowed_file, get_unique_filename)
 
 
-
 post_routes = Blueprint('posts', __name__)
 
 
@@ -32,9 +31,8 @@ def validation_errors_to_error_messages(validation_errors):
 @login_required
 def all_posts():
     posts = Post.query.all()
-
-    # if not posts:
-    #     raise NotFoundError("No posts found.")
+    if not posts:
+        raise NotFoundError("No posts found.")
     return {"Posts": [post.to_dict_with_comments() for post in posts]}
 
 
@@ -48,30 +46,21 @@ def single_post(postId):
     else:
         return post.to_dict()
 
-#-----------------------------------
+# -----------------------------------
 @post_routes.route('/checkImage', methods=['POST'])
 def upload_image():
-    # if "image" not in request.files:
-    #     return {"errors": "image required"}, 400
-    print("--------------------321", request.data.decode('UTF-8'))
     if request.data.decode('UTF-8') == "remove existing image":
-        print("herererererer---------------------------------")
         url = "remove existing image"
         return url
     image = request.files["image"]
-    if image == "remove existing image":
-        print("-----------here")
     if not image:
-        # text = "no image"
         return None
     if not allowed_file(image.filename):
-        # raise TestError("file type not supported")
         return jsonify("file type not permitted"), 400
 
     image.filename = get_unique_filename(image.filename)
 
     upload = upload_file_to_s3(image)
-
 
     if "url" not in upload:
         # if the dictionary doesn't have a url key
@@ -83,6 +72,8 @@ def upload_image():
     return url
 
 # Edit a Post
+
+
 @post_routes.route("/<int:post_id>", methods=["PUT"])
 @login_required
 def edit_post(post_id):
@@ -98,7 +89,8 @@ def edit_post(post_id):
         if not post:
             raise NotFoundError("Post not found")
         try:
-            child_belongs_to_parent(User.query.get(current_user.id), post, 'user_id')
+            child_belongs_to_parent(User.query.get(
+                current_user.id), post, 'user_id')
         except ForbiddenError as e:
             return {"error": e.message}, e.status_code
 
@@ -142,7 +134,7 @@ def get_comments(post_id):
     post = Post.query.get(post_id)
     if not post:
         raise NotFoundError("Post not found")
-    #if not post, return err
+    # if not post, return err
     comments = Comment.query.filter(Comment.post_id == post_id).all()
     if not comments:
         return {"Comments": []}
@@ -150,13 +142,12 @@ def get_comments(post_id):
     return {"Comments": [comment.to_dict_with_user() for comment in comments]}
 
 
-#Create a Comment
+# Create a Comment
 @post_routes.route("/<int:post_id>/comments", methods=["POST"])
 @login_required
 def create_comment(post_id):
     form = CommentForm()
     form['csrf_token'].data = request.cookies['csrf_token']
-    print("----------", form.data["content"])
     if form.validate_on_submit():
         new_comment = Comment(
             user=get_user_model(current_user, User),

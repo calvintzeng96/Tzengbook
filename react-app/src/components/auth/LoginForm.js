@@ -19,7 +19,6 @@ const LoginForm = () => {
 
   const onLogin = async (e) => {
     e.preventDefault();
-    console.log("lllllllllllll")
     await dispatch(login(email, password))
       .then((res) => {
         if (res !== null) {

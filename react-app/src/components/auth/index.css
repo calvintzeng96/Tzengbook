@@ -6,9 +6,7 @@
 }
 
 #signup-form {
-    /* border: 1px solid black; */
     width: 400px;
-    /* height: 512px; */
     padding: 16px 2px;
     border-radius: 8px;
     box-shadow: 0 8px 16px rgb(0 0 0 / 10%);
@@ -31,7 +29,6 @@
     height: 32px;
     border-bottom: 1px solid lightgrey;
     width: 432px;
-    /* width: 432px; */
     margin-top: 6px;
     padding-left: 24px;
     font-size: 15px;
@@ -51,7 +48,6 @@
     padding-left: 10px;
     width: 45%;
     height: 100%;
-    /* border: transparent; */
     border: 1px solid lightgrey;
     background-color: #f5f6f7;
     border-radius: 4px;

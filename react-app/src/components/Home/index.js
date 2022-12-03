@@ -3,9 +3,6 @@ import LoginForm from "../auth/LoginForm"
 import NavBar from "../NavBar/NavBar"
 import GetAllPosts from "../Posts"
 import "./index.css"
-import fbBottom from "../../assets/fb-bottom.png"
-import linkedInIcon from "../../assets/linkedin-logo.png"
-import githubIcon from "../../assets/github-logo.svg"
 import LoggedOutFooter from "../LoggedOutFooter"
 
 
@@ -27,10 +24,8 @@ const Home = () => {
                     <LoginForm />
                 </div>
                 <div id="home-logged-out-lower">
-                    {/* <img src={fbBottom} /> */}
                     <LoggedOutFooter />
                 </div>
-                {/* <div id="home-logged-out-lower">BOTTOM FOOTER AT HOME-LOGGED OUT</div> */}
             </div>
         )
     }
