@@ -47,13 +47,17 @@ def single_post(postId):
         return post.to_dict()
 
 # -----------------------------------
+
+
 @post_routes.route('/checkImage', methods=['POST'])
 def upload_image():
     if request.data.decode('UTF-8') == "remove existing image":
         url = "remove existing image"
         return url
     image = request.files["image"]
+    print("-----------------------1")
     if not image:
+        print("-----------------------2")
         return None
     if not allowed_file(image.filename):
         return jsonify("file type not permitted"), 400

@@ -48,12 +48,6 @@ const MidSection = () => {
 
     const deleteSinglePost = (postId) => {
         dispatch(deletePost(postId))
-            .then(() => {
-                alert("successfully deleted")
-            })
-            .catch(() => {
-                alert("delete failed.......")
-            })
     }
     if (isLoaded && currentUser) {
         return (

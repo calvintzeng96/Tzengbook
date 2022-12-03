@@ -35,6 +35,7 @@ const GetAllPosts = () => {
     const postsArray = Object.values(posts)
 
     useEffect(() => {
+        console.log("----------2")
         dispatch(getAllPosts())
             .then(() => {
                 setIsLoaded(true)

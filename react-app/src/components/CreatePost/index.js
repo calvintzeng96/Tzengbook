@@ -52,7 +52,6 @@ const CreatePost = () => {
                 dispatch(createPost(wallId, data))
                     .then(() => {
                         setModalType(false)
-                        alert("success")
                     })
                     .catch(() => {
                         alert("failed")
