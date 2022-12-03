@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { createComment, deleteComment, getAllPosts, updateComment, getUsersPosts } from "../../store/post";
 import ProfileSub from "../ProfileSub";
 import { getUser } from "../../store/user";
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import icon from "../../assets/default-profile-icon.png"
 import "./index.css"
 const PostComments = ({ ele }) => {
@@ -13,6 +13,7 @@ const PostComments = ({ ele }) => {
     const [newComment, setNewComment] = useState("")
     const [currentComment, setCurrentComment] = useState("")
     const [editComment, setEditComment] = useState("")
+    const { userId } = useParams()
 
 
     const commentSubmit = (e, postId) => {
@@ -21,10 +22,14 @@ const PostComments = ({ ele }) => {
 
         dispatch(createComment(postId, data))
             .then(() => {
-                dispatch(getUsersPosts(ele.id))
+                setNewComment("")
             })
             .then(() => {
-                setNewComment("")
+                if (userId) {
+                    dispatch(getUsersPosts(userId))
+                } else {
+                    dispatch(getAllPosts())
+                }
             })
         return
     }
@@ -37,7 +42,11 @@ const PostComments = ({ ele }) => {
                 setCurrentComment("")
             })
             .then(() => {
-                dispatch(getUsersPosts(ele.id))
+                if (userId) {
+                    dispatch(getUsersPosts(userId))
+                } else {
+                    dispatch(getAllPosts())
+                }
             })
         return
     }
