@@ -37,18 +37,16 @@ Live site: [Tzengbook](https://tzengbook.onrender.com)
 ### **Feature Highlights**
 
 #### Home Page
-![image](https://user-images.githubusercontent.com/107524318/205462507-742530fa-fe99-48d9-a4e6-ae5b73abeaae.png)
 <img width="650" alt="" src="https://user-images.githubusercontent.com/107524318/205462507-742530fa-fe99-48d9-a4e6-ae5b73abeaae.png">
-
-<img width="650" alt="" src="https://user-images.githubusercontent.com/92122927/202573752-d407d9b0-5473-43e5-b190-c238bf09a6b2.png">
 
 #### Home Page Demo User:
 You will be able to test the features without signing up by clicking on the "Demo User" button.
-![image](https://user-images.githubusercontent.com/107524318/205462831-fa8ee78f-d04d-45ad-94ad-ff14b9ccff80.png)
+<img width="650" alt="" src="https://user-images.githubusercontent.com/107524318/205462831-fa8ee78f-d04d-45ad-94ad-ff14b9ccff80.png">
 
 #### Profile Page:
 You can see all posts by a specific user.
-![image](https://user-images.githubusercontent.com/107524318/205462869-5ecbd2b8-bd9f-4e89-9d11-b3a614c4e3e9.png)
+<img width="650" alt="" src="https://user-images.githubusercontent.com/107524318/205462869-5ecbd2b8-bd9f-4e89-9d11-b3a614c4e3e9.png">
+
 
 ### **Coming Soon**:
 * Edit user information and profile photos
