@@ -2,7 +2,7 @@
 
 Tzengbook is a full-stack application clone of Facebook. It is an online platform where users can post content and images as Posts, and be able to comment and interact with other users posts with Likes and Comments. Tzengbook incorporates React and Redux on the frontend with Flask, Python and SQLAlchemy on the backend.
 
-Live site: [Tzengbook](https://tzengbook.onrender.com)
+Live site: **[Tzengbook](https://tzengbook.onrender.com)**
 
 ### Please find below links for our project Wiki:
 
