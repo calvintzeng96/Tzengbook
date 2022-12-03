@@ -4,6 +4,8 @@ import NavBar from "../NavBar/NavBar"
 import GetAllPosts from "../Posts"
 import "./index.css"
 import fbBottom from "../../assets/fb-bottom.png"
+import linkedInIcon from "../../assets/linkedin-logo.png"
+import githubIcon from "../../assets/github-logo.svg"
 import LoggedOutFooter from "../LoggedOutFooter"
 
 

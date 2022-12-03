@@ -1,20 +1,7 @@
 import "./index.css"
+import { linkedInLink, githubLink, airzzzLink, medianLink } from "../../assets/helper"
 
 const LoggedOutFooter = () => {
-
-    const linkedInLink = () => {
-        window.open("https://www.linkedin.com/in/calvintzengviolins/", "_blank")
-    }
-    const githubLink = () => {
-        window.open("https://github.com/calvintzeng96", "_blank")
-    }
-    const airzzzLink = () => {
-        window.open("https://airzzz.herokuapp.com/", "_blank")
-    }
-    const medianLink = () => {
-        window.open("https://median.onrender.com/", "_blank")
-    }
-
 
 
     return (

@@ -4,9 +4,14 @@ import { useHistory } from "react-router-dom";
 import { createComment, deletePost, getAllPosts, getSinglePost } from "../../store/post";
 import ProfileSub from "../ProfileSub";
 import { ModalContext } from "../../context/Modal";
+import { linkedInLink, githubLink, airzzzLink, medianLink } from "../../assets/helper";
+//image icons
 import icon from "../../assets/default-profile-icon.png"
 import homeIcon from "../../assets/home-icon.png"
-
+import linkedInIcon from "../../assets/linkedin-logo.png"
+import githubIcon from "../../assets/github-logo.svg"
+import airzzzIcon from "../../assets/airzzz-icon.png"
+import medianIcon from "../../assets/median-icon.png"
 
 import "./index.css"
 import { getUser } from "../../store/user";
@@ -57,7 +62,24 @@ const GetAllPosts = () => {
                         <img src={user.profilePicture ? user.profilePicture : icon} />
                         <div>{user.firstName} {user.lastName}</div>
                     </div>
+                    <div onClick={linkedInLink} className="all-post-left-contents cursor">
+                        <img src={linkedInIcon} />
+                        <div>LinkedIn</div>
+                    </div>
+                    <div onClick={githubLink} className="all-post-left-contents cursor">
+                        <img src={githubIcon} />
+                        <div>Github</div>
+                    </div>
+                    <div onClick={airzzzLink} className="all-post-left-contents cursor">
+                        <img src={airzzzIcon} />
+                        <div>AirZzz</div>
+                    </div>
+                    <div onClick={medianLink} className="all-post-left-contents cursor">
+                        <img src={medianIcon} />
+                        <div>Median</div>
+                    </div>
                 </div>
+
                 <MidSection />
 
                 <div id="all-post-right"></div>

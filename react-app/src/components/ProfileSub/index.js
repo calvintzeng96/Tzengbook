@@ -49,7 +49,7 @@ const ProfileSub = ({ ele, createdAt, comment }) => {
                     <div id="comment-content-1">{comment}</div>
                 )}
                 {timeAgo && !modalType && (
-                    <div className="grey">{timeAgo}</div>
+                    <div className="small-text grey ">{timeAgo}</div>
                 )}
             </div>
         </div>

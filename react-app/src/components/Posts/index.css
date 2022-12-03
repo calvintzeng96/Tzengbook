@@ -10,6 +10,7 @@
 
 #all-post-left {
     width: 300px;
+    max-width: 300px;
     padding: 8px;
 }
 

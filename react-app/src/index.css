@@ -28,9 +28,9 @@ body {
 }
 
 .links:hover {
-  text-decoration: underline #1877f2;
+  text-decoration: underline black;
   box-shadow: 0 8px 16px rgb(0 0 0 / 10%);
-  color: #1877f2
+  color: black
 }
 
 .not-allowed {

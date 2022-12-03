@@ -16,11 +16,15 @@
     align-items: center;
 }
 
-.test {
+.profile-left-icons {
     width: 40px;
     height: 40px;
     border-radius: 50%;
     margin-top: 20px;
+}
+
+.profile-left-icons:hover {
+    box-shadow: 0 8px 16px rgb(0 0 0 / 30%);
 }
 
 #profile-left>div {

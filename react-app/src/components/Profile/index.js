@@ -11,6 +11,11 @@ import GetAllPosts from "../Posts"
 import { getUser } from "../../store/user"
 import { useHistory, useParams } from "react-router-dom"
 import MidSection from "../MidSection"
+import { linkedInLink, githubLink, airzzzLink, medianLink } from "../../assets/helper";
+import linkedInIcon from "../../assets/linkedin-logo.png"
+import githubIcon from "../../assets/github-logo.svg"
+import airzzzIcon from "../../assets/airzzz-icon.png"
+import medianIcon from "../../assets/median-icon.png"
 
 
 
@@ -51,8 +56,12 @@ const Profile = () => {
             <NavBar />
             <div id="profile-container" className="">
                 <div id="profile-left" className="">
-                    <img className="test cursor" onClick={() => history.push("/")} src={homeIcon} />
-                    <img className="test cursor" onClick={goToProfile} src={currentUser?.profilePicture ? currentUser?.profilePicture : icon} />
+                    <img className="profile-left-icons cursor" onClick={() => history.push("/")} src={homeIcon} />
+                    <img className="profile-left-icons cursor" onClick={goToProfile} src={currentUser?.profilePicture ? currentUser?.profilePicture : icon} />
+                    <img className="profile-left-icons cursor" onClick={linkedInLink} src={linkedInIcon}/>
+                    <img className="profile-left-icons cursor" onClick={githubLink} src={githubIcon}/>
+                    <img className="profile-left-icons cursor" onClick={medianLink} src={medianIcon}/>
+                    <img className="profile-left-icons cursor" onClick={airzzzLink} src={airzzzIcon}/>
                 </div>
                 <div id="profile-right" className="">
                     <div id="profile-header-container">
