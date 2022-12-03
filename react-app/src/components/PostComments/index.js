@@ -92,7 +92,6 @@ const PostComments = ({ ele }) => {
                                 </div>
                             )
                         } else {
-                            let testing = 123
                             return (
                                 <div>
 
@@ -108,7 +107,6 @@ const PostComments = ({ ele }) => {
                                                 required
                                             />
                                         </form>
-
                                         <button id="edit-cancel-button" onClick={() => setCurrentComment("")}>cancel</button>
                                     </div>
                                 </div>

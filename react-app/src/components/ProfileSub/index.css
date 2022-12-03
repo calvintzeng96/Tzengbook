@@ -1,7 +1,10 @@
 .profile-in-post {
     display: flex;
     justify-content: left;
-    width: calc(100% - 8px)
+    width: 100%;
+    max-width: calc(100% - 44px);
+    /* background-color: lightgreen; */
+
 }
 
 .profile-sub-icon {
@@ -19,5 +22,9 @@
     background-color: #F0F2F5;
     border-radius: 8px;
     padding: 4px;
-    width: 100%
+}
+
+#comment-content-1 {
+    overflow-wrap: anywhere;
+    /* background-color: pink; */
 }

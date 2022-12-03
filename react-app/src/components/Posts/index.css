@@ -94,8 +94,9 @@
     padding: 10px;
 }
 
-.single-post-content {
-    padding: 10px
+#single-post-content {
+    padding: 10px;
+    overflow-wrap: anywhere;
 }
 
 

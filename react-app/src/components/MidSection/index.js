@@ -8,7 +8,6 @@ import icon from "../../assets/default-profile-icon.png"
 
 import PostComments from "../PostComments";
 
-
 const MidSection = () => {
     const dispatch = useDispatch();
     const { setModalType } = useContext(ModalContext)
@@ -73,7 +72,7 @@ const MidSection = () => {
                                     </div>
                                 )}
                             </div>
-                            <div className="single-post-content">{ele.content}</div>
+                            <div id="single-post-content">{ele.content}</div>
                             {ele.image && <img className="post-image" src={ele.image} />}
                             <PostComments ele={ele} />
                         </div>
