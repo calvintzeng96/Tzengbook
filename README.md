@@ -38,6 +38,7 @@ Live site: [Tzengbook](https://tzengbook.onrender.com)
 
 #### Home Page
 ![image](https://user-images.githubusercontent.com/107524318/205462507-742530fa-fe99-48d9-a4e6-ae5b73abeaae.png)
+<img width="650" alt="" src="https://user-images.githubusercontent.com/107524318/205462507-742530fa-fe99-48d9-a4e6-ae5b73abeaae.png">
 
 <img width="650" alt="" src="https://user-images.githubusercontent.com/92122927/202573752-d407d9b0-5473-43e5-b190-c238bf09a6b2.png">
 
