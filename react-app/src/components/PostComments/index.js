@@ -1,13 +1,11 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { createComment, deleteComment, getAllPosts, updateComment } from "../../store/post";
+import { createComment, deleteComment, getAllPosts, updateComment, getUsersPosts } from "../../store/post";
 import ProfileSub from "../ProfileSub";
 import { getUser } from "../../store/user";
 import { useHistory } from "react-router-dom";
 import icon from "../../assets/default-profile-icon.png"
 import "./index.css"
-import { getUsersPosts } from "../../store/post";
-
 const PostComments = ({ ele }) => {
     const dispatch = useDispatch()
     const history = useHistory()
@@ -23,7 +21,7 @@ const PostComments = ({ ele }) => {
 
         dispatch(createComment(postId, data))
             .then(() => {
-                dispatch(getAllPosts())
+                dispatch(getUsersPosts(ele.id))
             })
             .then(() => {
                 setNewComment("")
@@ -39,7 +37,7 @@ const PostComments = ({ ele }) => {
                 setCurrentComment("")
             })
             .then(() => {
-                dispatch(getAllPosts())
+                dispatch(getUsersPosts(ele.id))
             })
         return
     }
