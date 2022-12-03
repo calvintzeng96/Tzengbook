@@ -38,7 +38,7 @@ Live site: [Tzengbook](https://tzengbook.onrender.com)
 
 #### Home Page
 
-<img" alt="" src="https://user-images.githubusercontent.com/107524318/205462507-742530fa-fe99-48d9-a4e6-ae5b73abeaae.png">
+<img alt="" src="https://user-images.githubusercontent.com/107524318/205462507-742530fa-fe99-48d9-a4e6-ae5b73abeaae.png">
 
 #### Home Page Demo User:
 You will be able to test the features without signing up by clicking on the "Demo User" button.
