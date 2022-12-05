@@ -54,7 +54,7 @@ const CreatePost = () => {
                         setModalType(false)
                     })
                     .catch(() => {
-                        alert("failed")
+                        setErrors(["content can not be all space bars, nice try"])
                     })
             })
     };

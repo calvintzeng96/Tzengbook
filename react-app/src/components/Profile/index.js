@@ -32,8 +32,9 @@ const Profile = () => {
         dispatch(getUser(userId))
             .then(() => {
                 dispatch(getUsersPosts(userId))
+                window.scrollTo(0,0)
             })
-    }, [])
+    }, [userId])
 
     const goToProfile = () => {
         dispatch(getUser(currentUser.id))

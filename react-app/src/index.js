@@ -6,6 +6,7 @@ import App from './App';
 import configureStore from './store';
 import { BrowserRouter } from 'react-router-dom';
 import { ModalProvider, SelectedModals } from './context/Modal';
+import ScrollTop from './components/ScrollTop';
 
 const store = configureStore();
 
@@ -15,6 +16,7 @@ function Root() {
       <ModalProvider>
         <BrowserRouter>
         <SelectedModals />
+          <ScrollTop />
           <App />
         </BrowserRouter>
       </ModalProvider>
