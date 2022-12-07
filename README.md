@@ -6,15 +6,15 @@ Live site: **[Tzengbook](https://tzengbook.onrender.com)**
 
 ### Please find below links for our project Wiki:
 
-[Database Schema](https://github.com/calvintzeng96/Mod-7-Capstone/wiki/Database-Schema)
+[Database Schema](https://github.com/calvintzeng96/Tzengbook/wiki/Database-Schema)
 
-[Feature List](https://github.com/calvintzeng96/Mod-7-Capstone/wiki/Feature-List)
+[Feature List](https://github.com/calvintzeng96/Tzengbook/wiki/Feature-List)
 
-[API Documentation](https://github.com/calvintzeng96/Mod-7-Capstone/wiki/API-Documentation)
+[API Documentation](https://github.com/calvintzeng96/Tzengbook/wiki/API-Documentation)
 
-[Wireframe](https://github.com/calvintzeng96/Mod-7-Capstone/wiki/Wireframe)
+[Wireframe](https://github.com/calvintzeng96/Tzengbook/wiki/Wireframe)
 
-[User Stories](https://github.com/calvintzeng96/Mod-7-Capstone/wiki/User-Stories)
+[User Stories](https://github.com/calvintzeng96/Tzengbook/wiki/User-Stories)
 
 
 
