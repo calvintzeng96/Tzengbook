@@ -1,5 +1,5 @@
 export const linkedInLink = () => {
-    window.open("https://www.linkedin.com/in/calvintzengviolins/", "_blank")
+    window.open("https://www.linkedin.com/in/calvintzeng/", "_blank")
 }
 export const githubLink = () => {
     window.open("https://github.com/calvintzeng96", "_blank")
