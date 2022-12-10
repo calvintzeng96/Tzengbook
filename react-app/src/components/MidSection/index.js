@@ -5,8 +5,9 @@ import { deletePost, getAllPosts, getSinglePost, getUsersPosts } from "../../sto
 import ProfileSub from "../ProfileSub";
 import { ModalContext } from "../../context/Modal";
 import icon from "../../assets/default-profile-icon.png"
-
+import "./index.css"
 import PostComments from "../PostComments";
+import Likes from "../Likes";
 
 const MidSection = () => {
     const dispatch = useDispatch();
@@ -74,6 +75,9 @@ const MidSection = () => {
                             </div>
                             <div id="single-post-content">{ele.content}</div>
                             {ele.image && <img className="post-image" src={ele.image} />}
+
+                            <Likes post={ele} />
+
                             <PostComments ele={ele} />
                         </div>
                     )

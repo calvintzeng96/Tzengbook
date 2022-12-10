@@ -42,7 +42,7 @@ class User(db.Model, UserMixin):
     posts_author = db.relationship(
         "Post", back_populates="user_author", foreign_keys=[Post.user_id])
     comments = db.relationship("Comment", back_populates="user")
-    # likes = db.relationship("Like", back_populates="user")
+    likes = db.relationship("Like", back_populates="user")
     # request_inviter = db.relationship("Request", back_populates="user_inviter", foreign_keys=[Request.inviter])
     # request_invitee = db.relationship("Request", back_populates="user_invitee", foreign_keys=[Request.invitee])
 

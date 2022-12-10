@@ -1,0 +1,35 @@
+
+
+#likes-container {
+    display: flex;
+    flex-direction: column;
+}
+
+#like-comment-count-container {
+    width: 96%;
+    background-color: pink;
+    align-self: center;
+    display: flex;
+    justify-content: space-between;
+}
+
+
+#post-comment-divider {
+    width: 96%;
+    border-top: 1px solid lightgrey;
+    border-bottom: 1px solid lightgrey;
+    align-self: center;
+    text-align: center;
+    height: 36px;
+    line-height: 36px;
+    background-color: lightgreen;
+}
+
+#post-comment-divider:hover {
+    background-color: lightgrey;
+}
+
+.user-liked {
+    color: blue;
+    background-color: orange;
+}
