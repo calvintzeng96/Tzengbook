@@ -10,6 +10,9 @@ const DESTROY_POST = "/posts/DESTROY_POST";
 const NEW_COMMENT = "/comments/NEW_COMMENT"
 const DESTROY_COMMENT = "/posts/DESTROY_COMMENT";
 
+const LIKE_POST = "/posts/LIKE_POSTS"
+const UNLIKE_POST = "/posts/UNLIKE_POSTS"
+
 const allPosts = (posts) => {
     return {
         type: LOAD_ALL_POSTS,
@@ -61,6 +64,19 @@ const destroyComment = (commentId, postId) => {
     return {
         type: DESTROY_COMMENT,
         payload: { "commentId": commentId, "postId": postId }
+    }
+}
+
+const likePostAction = (postId) => {
+    return {
+        type: LIKE_POST,
+        postId
+    }
+}
+const unlikePostAction = (postId) => {
+    return {
+        type: UNLIKE_POST,
+        postId
     }
 }
 
@@ -176,6 +192,41 @@ export const deleteComment = (commentId) => async (dispatch) => {
     }
 }
 
+// Get List of Likes on Post
+export const getLikeList = (postId) => async (dispatch) => {
+    const res = await csrfFetch(`/api/posts/${postId}/likes`)
+
+    if (res.ok) {
+        const list = await res.json();
+        return list
+    }
+}
+
+// Like Post
+export const likePost = (postId, userId) => async (dispatch) => {
+    const res = await csrfFetch(`/api/posts/${postId}/likes/users/${userId}`, {
+        method: "POST",
+    });
+
+    if (res.ok) {
+        const list = await res.json();
+        dispatch(likePostAction(postId))
+        return list
+    }
+}
+// Unlike Post
+export const unlikePost = (postId, userId) => async (dispatch) => {
+    const res = await csrfFetch(`/api/posts/${postId}/likes/users/${userId}`, {
+        method: "DELETE",
+    });
+
+    if (res.ok) {
+        const list = await res.json();
+        dispatch(unlikePostAction(postId))
+        return list
+    }
+}
+
 
 // REDUCER
 let initialState = {
@@ -229,6 +280,14 @@ export const postReducer = (state = initialState, action) => {
             }
             deleteComment.allPosts[test2.postId].Comments = newCommentsArray
             return { ...deleteComment }
+        case LIKE_POST:
+            let like = {...state, allPosts: {...state.allPosts}}
+            like.allPosts[action.postId].Like_Count += 1
+            return like
+        case UNLIKE_POST:
+            let unlike = {...state, allPosts: {...state.allPosts}}
+            unlike.allPosts[action.postId].Like_Count -= 1
+            return unlike
         default:
             return state;
     }

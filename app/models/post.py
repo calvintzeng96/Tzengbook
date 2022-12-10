@@ -22,7 +22,7 @@ class Post(db.Model):
     user_destination = db.relationship("User", back_populates="posts_destination", foreign_keys=[wall_id])
     user_author = db.relationship("User", back_populates="posts_author", foreign_keys=[user_id])
     comments = db.relationship("Comment", back_populates="post", cascade="all, delete")
-    # likes = db.relationship("Like", back_populates="post")
+    likes = db.relationship("Like", back_populates="post")
 
 
     def to_dict(self):
@@ -46,5 +46,6 @@ class Post(db.Model):
             "image": self.image,
             "createdAt": self.created_at,
             "User": self.user_author.to_dict(),
-            "Comments": test
+            "Comments": test,
+            "Comments_Count": len(test)
         }

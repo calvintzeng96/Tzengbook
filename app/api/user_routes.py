@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_required, current_user
-from app.models import User, Post
+from app.models import User, Post, Like, Comment
 from ..models.db import db
 from .helpers import get_user_model
 from app.errors import NotFoundError, ForbiddenError, TestError
@@ -66,11 +66,27 @@ def user(id):
 @login_required
 def all_users_posts(userId):
     user = User.query.get(userId)
+    # like_count = Like.query.filter(Like.post_id == postId).count()
+    # print("-----------------------")
+    # print(like_count)
     if not user:
         raise NotFoundError("User not found")
     posts =Post.query.filter(Post.user_id == userId).order_by(Post.created_at.desc()).all()
+        # like_count = Like.query.filter(Like.post_id == post.id)
+        # count = len(like_count)
+        # post.to_dict_with_comments()["Likes"] = count
+    new_list = []
+    for ele in posts:
+        like_count = Like.query.filter(Like.post_id == ele.id).count()
+        print("-----------------------")
+        print(type(like_count))
+        post = ele.to_dict_with_comments()
+        # post["Count"] = like_count
+        post["Like_Count"] = like_count
+        new_list.append(post)
+    # return {"Posts": [post.to_dict_with_comments() for post in posts]}
+    return {"Posts": new_list}
 
-    return {"Posts": [post.to_dict_with_comments() for post in posts]}
 
 
 #--------------------------------------

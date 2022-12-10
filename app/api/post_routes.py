@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_required, current_user
-from ..models import User, Post, Comment
+from ..models import User, Post, Comment, Like
 from ..models.db import db
 from ..errors import NotFoundError, ForbiddenError
 from ..forms import PostForm
@@ -162,3 +162,53 @@ def create_comment(post_id):
         db.session.commit()
         return new_comment.to_dict_with_user(), 201
     return {"errors": validation_errors_to_error_messages(form.errors)}, 401
+
+
+# Get all Likes by PostId
+@post_routes.route("/<int:post_id>/likes", methods=["GET"])
+def get_post_likes(post_id):
+    post = Post.query.get(post_id)
+    if not post:
+        raise NotFoundError("Post not found")
+    likes = Like.query.filter(Like.post_id == post_id).all()
+    return {"Likes": [like.to_dict() for like in likes]}
+
+# Like a Post by PostId
+@post_routes.route("/<int:post_id>/likes/users/<int:user_id>", methods=["POST"])
+def create_post_like(post_id, user_id):
+    post = Post.query.get(post_id)
+    user = get_user_model(current_user, User)
+    if not post:
+        raise NotFoundError("Post not found")
+    if user.id != user_id:
+        raise ForbiddenError("user_id & user.id does not match")
+    check_like = Like.query.filter(Like.post_id == post_id, Like.user_id == user_id).first()
+    if not check_like:
+        new_like = Like(
+            post_id=post_id,
+            user_id=user.id,
+        )
+        db.session.add(new_like)
+        db.session.commit()
+        return new_like.to_dict(), 201
+    else:
+        raise ForbiddenError("already liked")
+
+# Unlike a Post by PostId
+@post_routes.route("/<int:post_id>/likes/users/<int:user_id>", methods=["DELETE"])
+def delete_post_like(post_id, user_id):
+    post = Post.query.get(post_id)
+    user = get_user_model(current_user, User)
+    if user.id != user_id:
+        raise ForbiddenError("user_id & user.id does not match")
+    if not post:
+        raise NotFoundError("Post not found")
+    check_like = Like.query.filter(Like.post_id == post_id, Like.user_id == user_id).first()
+    if check_like:
+        db.session.delete(check_like)
+        db.session.commit()
+        return {"message": "Like successfully deleted.",
+                "statusCode": 200
+                }
+    else:
+        raise ForbiddenError("not liked yet")

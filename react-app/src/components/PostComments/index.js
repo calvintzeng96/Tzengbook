@@ -74,7 +74,6 @@ const PostComments = ({ ele }) => {
     return (
         <div>
             <div className="comment-container">
-                <div id="post-comment-divider">Space saved for "Likes" feature</div>
                 {
                     ele.Comments.map((comment) => {
 
