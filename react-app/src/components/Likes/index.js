@@ -42,9 +42,9 @@ const Likes = ({ post }) => {
                 <div onClick={() => clickLike(post.id)} id="post-comment-divider" className={liked ? "user-liked cursor" : "user-not-liked cursor"}>
                     {liked
                         ?
-                        <i class="fa-solid fa-thumbs-up"></i>
+                        <i className="fa-solid fa-thumbs-up"></i>
                         :
-                        <i class="fa-regular fa-thumbs-up"></i>
+                        <i className="fa-regular fa-thumbs-up"></i>
                     }
 
                     <div>

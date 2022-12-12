@@ -4,7 +4,7 @@ from flask_login import UserMixin
 from datetime import datetime
 from sqlalchemy.orm import validates
 from .post import Post
-# from .request import requests
+from .request import requests
 
 
 class User(db.Model, UserMixin):
@@ -23,14 +23,14 @@ class User(db.Model, UserMixin):
     bio = db.Column(db.String(1000))
     created_at = db.Column(db.DateTime, nullable=False, default=datetime.now())
 
-    # friend_requests = db.relationship(
-    #     "User",
-    #     secondary=requests,
-    #     primaryjoin=(requests.c.invitee == id),
-    #     secondaryjoin=(requests.c.inviter == id),
-    #     backref=db.backref("outgoing_request", lazy="dynamic"),
-    #     lazy="dynamic"
-    # )
+    friend_requests = db.relationship(
+        "User",
+        secondary=requests,
+        primaryjoin=(requests.c.invitee == id),
+        secondaryjoin=(requests.c.inviter == id),
+        backref=db.backref("outgoing_request", lazy="dynamic"),
+        lazy="dynamic"
+    )
 
     # friends = db.relationship(
     #     "User"
@@ -43,8 +43,8 @@ class User(db.Model, UserMixin):
         "Post", back_populates="user_author", foreign_keys=[Post.user_id])
     comments = db.relationship("Comment", back_populates="user")
     likes = db.relationship("Like", back_populates="user")
-    # request_inviter = db.relationship("Request", back_populates="user_inviter", foreign_keys=[Request.inviter])
-    # request_invitee = db.relationship("Request", back_populates="user_invitee", foreign_keys=[Request.invitee])
+    # request_inviter = db.relationship("Request", back_populates="user_inviter", foreign_keys=[requests.inviter])
+    # request_invitee = db.relationship("Request", back_populates="user_invitee", foreign_keys=[requests.invitee])
 
     @property
     def password(self):
