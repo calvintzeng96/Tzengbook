@@ -28,7 +28,7 @@ class User(db.Model, UserMixin):
         secondary=requests,
         primaryjoin=(requests.c.invitee == id),
         secondaryjoin=(requests.c.inviter == id),
-        backref=db.backref("outgoing_request", lazy="dynamic"),
+        backref=db.backref("outgoing", lazy="dynamic"),
         lazy="dynamic"
     )
 
@@ -57,25 +57,25 @@ class User(db.Model, UserMixin):
     def check_password(self, password):
         return check_password_hash(self.password, password)
 
-    @validates("friend_requests")
+    @validates("outgoing")
     def validates_friend_requests(self, key, value):
         if value == self.id:
             raise ValueError("You can not friend request yourself")
 
-    # #Check/Create/Delete friend requests
-    # def already_requested(self, userId):
-    #     return self.outgoing_request.filter(requests.c.invitee == userId).count() > 0
+    #Check/Create/Delete friend requests
+    def already_requested(self, userId):
+        return self.outgoing.filter(requests.c.invitee == userId).count() > 0
 
-    # def create_request(self, user):
-    #     if not self.already_requested(user.id):
-    #         self.outgoing_request.append(user)
-    #         return self
+    def create_request(self, user):
+        if not self.already_requested(user.id):
+            self.outgoing.append(user)
+            return self
 
-    # def delete_request(self, user):
-    #     if self.already_requested(user.id):
-    #         self.outgoing_request.remove(user)
-    #         return self
-    # #------------------------------------
+    def delete_request(self, user):
+        if self.already_requested(user.id):
+            self.outgoing.remove(user)
+            return self
+    #------------------------------------
 
     def to_dict(self):
         return {
@@ -84,7 +84,9 @@ class User(db.Model, UserMixin):
             "lastName": self.last_name,
             "bio": self.bio,
             "profilePicture": self.profile_picture,
-            "created": self.created_at
+            "created": self.created_at,
+            # "requests_out": self.friend_requests.items,
+            # "requests_in": self.outgoing.items,
         }
 
     # def to_dict_basic_info(self):
