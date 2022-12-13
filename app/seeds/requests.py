@@ -1,8 +1,6 @@
 from app.models import db, environment, SCHEMA
 
 def seed_requests(users):
-    print("--------------------------------")
-    print(users)
     user1 = users[0]
     user2 = users[1]
     user3 = users[2]
@@ -16,7 +14,7 @@ def seed_requests(users):
     user11 = users[10]
     user12 = users[11]
 
-    user2.outgoing.append(user1)
+    # user2.outgoing.append(user1)
     user3.outgoing.append(user1)
     user4.outgoing.append(user1)
     user5.outgoing.append(user1)

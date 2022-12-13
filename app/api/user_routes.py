@@ -144,22 +144,3 @@ def create_post(userId):
         db.session.commit()
         return new_post.to_dict(), 201
     return {"errors": validation_errors_to_error_messages(form.errors)}, 401
-
-
-
-#Get all incoming friend request
-@user_routes.route("/<int:user_id>/incoming_requests")
-def incoming_requests(user_id):
-    user = User.query.get(user_id)
-    friend_requests = user.friend_requests.all()
-
-    return jsonify({"incoming_requests": [ele.to_dict() for ele in friend_requests] })
-
-
-#Get all outgoing friend request of current user
-@user_routes.route("/<int:user_id>/outgoing_requests")
-def outgoing_requests(user_id):
-    user = User.query.get(user_id)
-    outgoing = user.outgoing.all()
-
-    return jsonify({"outgoing_requests": [ele.to_dict() for ele in outgoing] })

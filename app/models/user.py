@@ -70,6 +70,8 @@ class User(db.Model, UserMixin):
         if not self.already_requested(user.id):
             self.outgoing.append(user)
             return self
+        else:
+            raise ValueError("already have a request")
 
     def delete_request(self, user):
         if self.already_requested(user.id):
