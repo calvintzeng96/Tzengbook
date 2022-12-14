@@ -28,12 +28,22 @@ def create_friendship(user1_id, user2_id):
     friend2 = User.query.get(user2_id)
     friend1 = User.query.get(user1_id)
     #NEED TO ADD IF THERE IS REQUEST, THEN YOU CAN CREATE THE FRIENDSHIP
-    # print("---------------------------")
+
+    requests = friend1.friend_requests.all()
+    print("---------------------------")
+    print(requests)
+    # print(friend1)
+    # print(friend2)
+    if friend2 not in requests:
+        raise ForbiddenError(f"user{friend2.id} did not send you a request")
+
     # print(friend)
     res1 = friend1.create_connection(friend2)
     friend1.friends_list2 = res1.friends_list2
     res2 = friend2.create_connection(friend1)
     friend2.friends_list2 = res2.friends_list2
+    res3 = friend2.delete_request(friend1)
+    friend2.outgoing = res3.outgoing
 
     db.session.commit()
     return {"message": f"Successfully connected user{user1_id} & user{user2_id}", "statusCode": 201}
@@ -44,6 +54,9 @@ def create_friendship(user1_id, user2_id):
 def delete_friendship(user1_id, user2_id):
     friend2 = User.query.get(user2_id)
     friend1 = User.query.get(user1_id)
+
+
+
     if not (current_user.id == user2_id or current_user.id == user1_id):
         raise ForbiddenError("You are none of those user, nice try")
     if friend1 not in friend2.friends_list1:
