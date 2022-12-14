@@ -15,7 +15,10 @@ request_routes = Blueprint('requests', __name__)
 #Get all incoming friend request
 @request_routes.route("/<int:user_id>/incoming_requests")
 def incoming_requests(user_id):
+
     user = User.query.get(user_id)
+    if current_user.id != user.id:
+        raise ForbiddenError("User not authorized")
     friend_requests = user.friend_requests.all()
 
     return jsonify({"incoming_requests": [ele.to_dict() for ele in friend_requests] })
@@ -25,6 +28,8 @@ def incoming_requests(user_id):
 @request_routes.route("/<int:user_id>/outgoing_requests")
 def outgoing_requests(user_id):
     user = User.query.get(user_id)
+    if current_user.id != user.id:
+        raise ForbiddenError("User not authorized")
     outgoing = user.outgoing.all()
 
     return jsonify({"outgoing_requests": [ele.to_dict() for ele in outgoing] })
@@ -35,8 +40,6 @@ def outgoing_requests(user_id):
 def create_request(invitee_id):
     invitee = User.query.get(invitee_id)
     inviter = get_user_model(current_user, User)
-    print("11111111111111111111")
-    print(invitee)
     if not invitee:
         raise NotFoundError("User not found.")
     res = inviter.create_request(invitee)
@@ -58,7 +61,7 @@ def delete_request(invitee_id, inviter_id):
     if not inviter:
         raise NotFoundError(f'User {inviter} does not exist.')
     if inviter not in invitee.friend_requests:
-        return {"message": f"There is not request from user{inviter} to user{invitee}"}
+        return {"message": f"There is not a request from user{inviter.id} to user{invitee.id}"}
 
     res = inviter.delete_request(invitee)
     inviter.outgoing = res.outgoing
