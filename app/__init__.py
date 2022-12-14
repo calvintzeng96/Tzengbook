@@ -9,6 +9,8 @@ from .api.user_routes import user_routes
 from .api.auth_routes import auth_routes
 from .api.post_routes import post_routes
 from .api.comment_routes import comment_routes
+from .api.request_routes import request_routes
+from .api.friend_routes import friend_routes
 from .seeds import seed_commands
 from .config import Config
 from .errors import NotFoundError
@@ -33,6 +35,8 @@ app.register_blueprint(user_routes, url_prefix='/api/users')
 app.register_blueprint(auth_routes, url_prefix='/api/auth')
 app.register_blueprint(post_routes, url_prefix='/api/posts')
 app.register_blueprint(comment_routes, url_prefix='/api/comments')
+app.register_blueprint(request_routes, url_prefix='/api/requests')
+app.register_blueprint(friend_routes, url_prefix='/api/friends')
 db.init_app(app)
 Migrate(app, db)
 
