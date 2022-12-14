@@ -5,6 +5,7 @@ from datetime import datetime
 from sqlalchemy.orm import validates
 from .post import Post
 from .request import requests
+from .friend import friends
 
 
 class User(db.Model, UserMixin):
@@ -23,6 +24,7 @@ class User(db.Model, UserMixin):
     bio = db.Column(db.String(1000))
     created_at = db.Column(db.DateTime, nullable=False, default=datetime.now())
 
+    # Joint relationships
     friend_requests = db.relationship(
         "User",
         secondary=requests,
@@ -31,20 +33,22 @@ class User(db.Model, UserMixin):
         backref=db.backref("outgoing", lazy="dynamic"),
         lazy="dynamic"
     )
+    friends_list1 = db.relationship(
+        "User",
+        secondary=friends,
+        primaryjoin=(friends.c.friend1 == id),
+        secondaryjoin=(friends.c.friend2 == id),
+        backref=db.backref("friends_list2", lazy="dynamic"),
+        lazy="dynamic"
+    )
 
-    # friends = db.relationship(
-    #     "User"
-    # )
-
-    # Relationships
+    # Standard relationships
     posts_destination = db.relationship(
         "Post", back_populates="user_destination", foreign_keys=[Post.wall_id])
     posts_author = db.relationship(
         "Post", back_populates="user_author", foreign_keys=[Post.user_id])
     comments = db.relationship("Comment", back_populates="user")
     likes = db.relationship("Like", back_populates="user")
-    # request_inviter = db.relationship("Request", back_populates="user_inviter", foreign_keys=[requests.inviter])
-    # request_invitee = db.relationship("Request", back_populates="user_invitee", foreign_keys=[requests.invitee])
 
     @property
     def password(self):
@@ -57,6 +61,10 @@ class User(db.Model, UserMixin):
     def check_password(self, password):
         return check_password_hash(self.password, password)
 
+    #------------------------------------
+
+    #REQUESTS TABLE
+    #Can't request yourself
     @validates("outgoing")
     def validates_friend_requests(self, key, value):
         if value == self.id:
@@ -77,7 +85,42 @@ class User(db.Model, UserMixin):
         if self.already_requested(user.id):
             self.outgoing.remove(user)
             return self
+        else:
+            raise ValueError("error: delete_request")
     #------------------------------------
+
+    #FRIENDS TABLE
+    #Can't be friends with yourself
+    @validates("friends_list")
+    def validates_friends_list(self, key, value):
+        if value == self.id:
+            raise ValueError("You can not be friends with yourself")
+
+    #Check/Create/Delete friend connections
+    def check_connection(self, userId):
+        return self.friends_list2.filter(friends.c.friend1 == userId).count() > 0
+
+    def create_connection(self, user):
+        if not self.check_connection(user.id):
+            self.friends_list2.append(user)
+            return self
+        else:
+            raise ValueError("already friends")
+
+    def delete_connection(self, user):
+        if self.check_connection(user.id):
+            self.friends_list2.remove(user)
+            return self
+        else:
+            raise ValueError("error: delete_connection")
+
+
+
+
+
+
+    #------------------------------------
+
 
     def to_dict(self):
         return {
@@ -91,10 +134,10 @@ class User(db.Model, UserMixin):
             # "requests_in": self.outgoing.items,
         }
 
-    # def to_dict_basic_info(self):
-    #     return {
-    #         'id': self.id,
-    #         "firstName": self.first_name,
-    #         "lastName": self.last_name,
-    #         "profilePicture": self.profile_picture,
-    #     }
+    def to_dict_basic_info(self):
+        return {
+            'id': self.id,
+            "firstName": self.first_name,
+            "lastName": self.last_name,
+            "profilePicture": self.profile_picture,
+        }

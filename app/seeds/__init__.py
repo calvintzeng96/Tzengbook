@@ -4,6 +4,7 @@ from .posts import seed_posts, undo_posts
 from .comments import seed_comments, undo_comments
 from .likes import seed_likes, undo_likes
 from .requests import seed_requests, undo_requests
+from .friends import seed_friends, undo_friends
 
 from app.models.db import db, environment, SCHEMA
 
@@ -22,6 +23,7 @@ def seed():
         # Make sure to add all your other model's undo functions below
         undo_likes()
         undo_comments()
+        undo_friends()
         undo_requests()
         undo_posts()
         undo_users()
@@ -30,6 +32,7 @@ def seed():
     seed_comments()
     seed_likes()
     seed_requests(users)
+    seed_friends(users)
     # Add other seed functions here
 
 
@@ -41,4 +44,5 @@ def undo():
     undo_comments()
     undo_likes()
     undo_requests()
+    undo_friends()
     # Add other undo functions here

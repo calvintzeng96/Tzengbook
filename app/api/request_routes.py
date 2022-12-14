@@ -14,6 +14,7 @@ request_routes = Blueprint('requests', __name__)
 
 #Get all incoming friend request
 @request_routes.route("/<int:user_id>/incoming_requests")
+@login_required
 def incoming_requests(user_id):
 
     user = User.query.get(user_id)
@@ -26,6 +27,7 @@ def incoming_requests(user_id):
 
 #Get all outgoing friend request of current user
 @request_routes.route("/<int:user_id>/outgoing_requests")
+@login_required
 def outgoing_requests(user_id):
     user = User.query.get(user_id)
     if current_user.id != user.id:

@@ -15,8 +15,6 @@ def seed_requests(users):
     user12 = users[11]
 
     # user2.outgoing.append(user1)
-    user3.outgoing.append(user1)
-    user4.outgoing.append(user1)
     user5.outgoing.append(user1)
     user6.outgoing.append(user1)
     user7.outgoing.append(user1)
