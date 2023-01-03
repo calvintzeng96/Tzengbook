@@ -3,11 +3,13 @@ import thunk from 'redux-thunk';
 import { sessionReducer } from './session'
 import { postReducer } from './post';
 import { userReducer } from './user';
+import { friendReducer } from './friend';
 
 const rootReducer = combineReducers({
   session: sessionReducer,
   post: postReducer,
-  user: userReducer
+  user: userReducer,
+  friend: friendReducer
 });
 
 

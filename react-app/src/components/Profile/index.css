@@ -93,3 +93,58 @@
     min-width: 660px;
     width: 700px;
 }
+
+
+#profile-body-left {
+    /* border: 1px solid red; */
+    margin-top: 16px;
+    padding: 8px;
+    width: 484px;
+}
+
+.profile-body-left-content {
+    background-color: white;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    box-shadow: 0px 1px 2px lightgrey;
+    padding: 12px;
+}
+
+#intro-title {
+    font-size: 18px;
+    font-weight: bold;
+}
+.intro-content {
+    display: flex;
+    margin: 16px;
+}
+.intro-info-title {
+    font-size: 14px;
+    font-weight: bold ;
+    margin: 0 10px;
+}
+.intro-info-content {
+    font-size: 12px;
+}
+
+#profile-friend-sample-top {
+    display: flex;
+    justify-content: space-between;
+}
+
+#profile-friend-sample-top-title {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+#profile-friend-sample-count {
+    margin: 6px 0 10px 0;
+    color: grey;
+    font-size: 17px;
+
+}
+
+#see-all-friends {
+    color: #216FDB;
+    font-size: 17px;
+}

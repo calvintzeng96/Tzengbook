@@ -50,3 +50,14 @@ body {
 .larger-font {
   font-size: 32px;
 }
+
+.border {
+  border: 1px solid red;
+}
+
+.border-blue {
+    border: 1px solid blue;
+}
+.border-black {
+    border: 1px solid black;
+}

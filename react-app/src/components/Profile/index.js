@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux"
 import NavBar from "../NavBar/NavBar"
 import "./index.css"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import icon from "../../assets/default-profile-icon.png"
 import homeIcon from "../../assets/home-icon.png"
 import { getUsersPosts } from "../../store/post"
@@ -13,7 +13,8 @@ import linkedInIcon from "../../assets/linkedin-logo.png"
 import githubIcon from "../../assets/github-logo.svg"
 import airzzzIcon from "../../assets/airzzz-icon.png"
 import medianIcon from "../../assets/median-icon.png"
-
+import AllUsersFriends from "../AllUsersFriends"
+import SomeUsersFriends from "../SomeUsersFriends"
 
 
 
@@ -26,15 +27,25 @@ const Profile = () => {
     const user = useSelector(state => state.user.singleUser)
     const dispatch = useDispatch()
     const history = useHistory()
-
+    const [friendsPage, setFriendsPage] = useState(false)
 
     useEffect(() => {
-        dispatch(getUser(userId))
-            .then(() => {
-                dispatch(getUsersPosts(userId))
-                window.scrollTo(0,0)
-            })
-    }, [userId])
+        setFriendsPage(false)
+        if (window.location.pathname.endsWith("/friends")) {
+            setFriendsPage(true)
+            dispatch(getUser(userId))
+            console.log("***************123")
+            return
+        } else {
+            dispatch(getUser(userId))
+                .then(() => {
+                    console.log("***************321")
+                    dispatch(getUsersPosts(userId))
+                    window.scrollTo(0, 0)
+                })
+
+        }
+    }, [userId, friendsPage, history.location.pathname])
 
     const goToProfile = () => {
         dispatch(getUser(currentUser.id))
@@ -42,6 +53,11 @@ const Profile = () => {
                 dispatch(getUsersPosts(currentUser.id))
             })
         history.push(`/users/${currentUser.id}`)
+    }
+
+    const goToFriends = (userId) => {
+        // setFriendsPage(true)
+        history.push(`/users/${userId}/friends`)
     }
 
     return (
@@ -52,10 +68,10 @@ const Profile = () => {
                     <img className="profile-left-icons cursor" onClick={() => history.push("/")} src={homeIcon} />
                     <img className="profile-left-icons cursor" onClick={goToProfile} src={currentUser?.profilePicture ? currentUser?.profilePicture : icon} />
                     <div id="profile-left-spacer"></div>
-                    <img className="profile-left-icons cursor" onClick={linkedInLink} src={linkedInIcon}/>
-                    <img className="profile-left-icons cursor" onClick={githubLink} src={githubIcon}/>
-                    <img className="profile-left-icons cursor" onClick={medianLink} src={medianIcon}/>
-                    <img className="profile-left-icons cursor" onClick={airzzzLink} src={airzzzIcon}/>
+                    <img className="profile-left-icons cursor" onClick={linkedInLink} src={linkedInIcon} />
+                    <img className="profile-left-icons cursor" onClick={githubLink} src={githubIcon} />
+                    <img className="profile-left-icons cursor" onClick={medianLink} src={medianIcon} />
+                    <img className="profile-left-icons cursor" onClick={airzzzLink} src={airzzzIcon} />
                 </div>
                 <div id="profile-right" className="">
                     <div id="profile-header-container">
@@ -64,11 +80,40 @@ const Profile = () => {
                             <div id="profile-name">{user.firstName} {user.lastName}</div>
                         </div>
                     </div>
-                    <div id="profile-body" className="">
-                        {/* <div id="profile-body-left" className="">info/friends-etc</div> */}
-                        <div id="profile-body-right" className="">
-                            <MidSection />
-                        </div>
+                    <div id="profile-body">
+                        {friendsPage && (
+                            <div>
+                                <AllUsersFriends />
+                            </div>
+                        )}
+                        {!friendsPage && (
+                            <>
+                                <div id="profile-body-left">
+
+                                    <div id="intro" className="profile-body-left-content">
+                                        <div id="intro-title">Intro</div>
+                                        <div className="intro-content">
+
+                                            <div className="intro-info-title">Bio: </div>
+                                            <div className="intro-info-content">{user.bio}</div>
+                                        </div>
+                                    </div>
+
+                                    <div className="profile-body-left-content">
+                                        <div id="profile-friend-sample-top">
+                                            <div id="profile-friend-sample-top-title">Friends</div>
+                                            <div id="see-all-friends" className="cursor" onClick={() => goToFriends(user.id)}>See all friends</div>
+                                        </div>
+                                        <div id="profile-friend-sample-count">??? friends</div>
+                                        <SomeUsersFriends />
+                                    </div>
+
+                                </div>
+                                <div id="profile-body-right">
+                                    <MidSection />
+                                </div>
+                            </>
+                        )}
                     </div>
 
                 </div>

@@ -1,0 +1,41 @@
+#all-friends-outer-container {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 1px 2px lightgrey;
+}
+
+#all-friends-title {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+#all-friends-container {
+    max-width: 1200px;
+    min-width: 1080px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+#all-friends-card {
+    border: 1px solid lightgrey;
+    border-radius: 8px;
+    display: flex;
+    margin: 4px 8px;
+    align-items: center;
+}
+
+#all-friends-card>img {
+    width: 80px;
+    height: 80px;
+    border-radius: 8px;
+}
+
+#all-friends-name {
+    height: 20px;
+    line-height: 100%;
+    margin-left: 12px;
+    font-weight: bold;
+    /* text-align: center; */
+    /* vertical-align: center; */
+}

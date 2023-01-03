@@ -20,7 +20,7 @@ def seed_users():
         first_name="Li",
         last_name="Sam",
         profile_picture="https://tzengbook.s3.us-east-2.amazonaws.com/sample+profile+photos/pexels-merve-13199813.jpg",
-        bio="Leica, GR3, Sony, Minolta & Film user, Street Photographer based in Hong Kon"
+        bio="Leica, GR3, Sony, Minolta & Film user, Street Photographer based in Hong Kong"
     )
     instance3 = User(
         username='username3',
