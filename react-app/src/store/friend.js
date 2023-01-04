@@ -28,8 +28,8 @@ let initialState = {
 export const friendReducer = (state = initialState, action) => {
     switch (action.type) {
         case LOAD_USERS_FRIENDS:
-            const usersFriends = {...state}
-            console.log("1111111111111111", action.friends)
+            const usersFriends = {...state, allFriends: {}}
+            // usersFriends.allFriends = {}
             action.friends.friends.forEach(ele => {
                 usersFriends.allFriends[ele.id] = ele
             })

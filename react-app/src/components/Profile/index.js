@@ -6,6 +6,8 @@ import icon from "../../assets/default-profile-icon.png"
 import homeIcon from "../../assets/home-icon.png"
 import { getUsersPosts } from "../../store/post"
 import { getUser } from "../../store/user"
+import { getUsersFriends } from "../../store/friend";
+
 import { useHistory, useParams } from "react-router-dom"
 import MidSection from "../MidSection"
 import { linkedInLink, githubLink, airzzzLink, medianLink } from "../../assets/helper";
@@ -28,18 +30,23 @@ const Profile = () => {
     const dispatch = useDispatch()
     const history = useHistory()
     const [friendsPage, setFriendsPage] = useState(false)
+    const friends = useSelector(state => state.friend.allFriends)
+    const [friendsArray, setFriendsArray] = useState([])
 
     useEffect(() => {
         setFriendsPage(false)
         if (window.location.pathname.endsWith("/friends")) {
             setFriendsPage(true)
             dispatch(getUser(userId))
-            console.log("***************123")
-            return
+                .then(() => {
+                    dispatch(getUsersFriends(userId))
+                        .then((res) => {
+                            setFriendsArray(res.friends)
+                        })
+                })
         } else {
             dispatch(getUser(userId))
                 .then(() => {
-                    console.log("***************321")
                     dispatch(getUsersPosts(userId))
                     window.scrollTo(0, 0)
                 })
@@ -60,6 +67,10 @@ const Profile = () => {
         history.push(`/users/${userId}/friends`)
     }
 
+    const goToProfileUserId = (userId) => {
+        history.push(`/users/${userId}`)
+    }
+
     return (
         <div>
             <NavBar />
@@ -76,14 +87,14 @@ const Profile = () => {
                 <div id="profile-right" className="">
                     <div id="profile-header-container">
                         <div id="profile-header" className="">
-                            <img id="profile-pic" src={user.profilePicture ? user.profilePicture : icon} />
-                            <div id="profile-name">{user.firstName} {user.lastName}</div>
+                            <img onClick={() => goToProfileUserId(user.id)} className="cursor" id="profile-pic" src={user.profilePicture ? user.profilePicture : icon} />
+                            <div onClick={() => goToProfileUserId(user.id)} className="cursor" id="profile-name">{user.firstName} {user.lastName}</div>
                         </div>
                     </div>
                     <div id="profile-body">
                         {friendsPage && (
                             <div>
-                                <AllUsersFriends />
+                                <AllUsersFriends friendsArray={friendsArray} />
                             </div>
                         )}
                         {!friendsPage && (

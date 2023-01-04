@@ -18,7 +18,8 @@
 }
 
 #all-friends-card {
-    border: 1px solid lightgrey;
+    border: 1px solid #EEEEEE;
+    padding: 16px;
     border-radius: 8px;
     display: flex;
     margin: 4px 8px;

@@ -58,7 +58,6 @@ const EditPost = () => {
             .then(async (res) => {
                 let imgurl = await res.text()
                 if (image && imgurl.includes("not permitted")) {
-                    console.log("---------")
                     setErrors(["Only png/jpg/jpeg/gif allowed"])
                     return
                 }
