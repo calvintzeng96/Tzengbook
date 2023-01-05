@@ -17,6 +17,7 @@ import airzzzIcon from "../../assets/airzzz-icon.png"
 import medianIcon from "../../assets/median-icon.png"
 import AllUsersFriends from "../AllUsersFriends"
 import SomeUsersFriends from "../SomeUsersFriends"
+import FriendshipOption from "../FriendshipOption"
 
 
 
@@ -32,33 +33,44 @@ const Profile = () => {
     const [friendsPage, setFriendsPage] = useState(false)
     const friends = useSelector(state => state.friend.allFriends)
     const [friendsArray, setFriendsArray] = useState([])
+    const [status, setStatus] = useState("default")
+
+
 
     useEffect(() => {
         setFriendsPage(false)
         if (window.location.pathname.endsWith("/friends")) {
             setFriendsPage(true)
-            dispatch(getUser(userId))
-                .then(() => {
-                    dispatch(getUsersFriends(userId))
-                        .then((res) => {
-                            setFriendsArray(res.friends)
-                        })
-                })
-        } else {
-            dispatch(getUser(userId))
-                .then(() => {
-                    dispatch(getUsersPosts(userId))
-                        .then(() => {
-                            dispatch(getUsersFriends(userId))
-                                .then((res) => {
-                                    setFriendsArray(res.friends)
-                                })
-                        })
-                    window.scrollTo(0, 0)
-                })
-
         }
+        dispatch(getUser(userId))
+            .then(() => {
+                dispatch(getUsersPosts(userId))
+                // .then(() => {
+                dispatch(getUsersFriends(userId))
+                    .then((res) => {
+                        setFriendsArray(res.friends)
+                        console.log("=========003", currentUser)
+                        console.log("=========004", userId)
+                        console.log("=========005", res.friends)
+                        let temp = "not friends"
+                        if (currentUser.id == userId) {
+                            temp = "myself"
+                        } else {
+                            for (let i = 0; i < res.friends.length; i++) {
+                                if (res.friends[i].id == currentUser.id) {
+                                    temp = "friends"
+                                    break
+                                }
+                            }
+                        }
+                        // if res.requests(incoming) includes "me", temp = "pending friend request"
+
+                        setStatus(temp)
+                    })
+                window.scrollTo(0, 0)
+            })
     }, [userId, friendsPage, history.location.pathname])
+
 
     const goToProfile = () => {
         dispatch(getUser(currentUser.id))
@@ -95,6 +107,10 @@ const Profile = () => {
                         <div id="profile-header" className="">
                             <img onClick={() => goToProfileUserId(user.id)} className="cursor" id="profile-pic" src={user.profilePicture ? user.profilePicture : icon} />
                             <div onClick={() => goToProfileUserId(user.id)} className="cursor" id="profile-name">{user.firstName} {user.lastName}</div>
+                            <FriendshipOption status={status} userId={99}/>
+                            {/* <div>{status}</div> */}
+
+
                         </div>
                     </div>
                     <div id="profile-body">

@@ -15,6 +15,7 @@ const AllUsersFriends = ({ friendsArray }) => {
             <div id="all-friends-container">
 
                 {friendsArray.length > 0 && friendsArray.map(ele => {
+                    //function/check/algorithms put here
                     return (
                         <div id="all-friends-card" key={ele.id}>
                             <img className="cursor" onClick={() => history.push(`/users/${ele.id}`)} src={ele.profilePicture} />
