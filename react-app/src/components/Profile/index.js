@@ -122,7 +122,7 @@ const Profile = () => {
                                             <div id="see-all-friends" className="cursor" onClick={() => goToFriends(user.id)}>See all friends</div>
                                         </div>
                                         <div id="profile-friend-sample-count">{friendsArray.length} {friendsArray.length > 2 ? "friends" : "friend"}</div>
-                                        <SomeUsersFriends friendsArray={friendsArray.slice(0,6)} />
+                                        <SomeUsersFriends friendsArray={friendsArray.slice(0, 6)} />
                                     </div>
 
                                 </div>
@@ -138,5 +138,22 @@ const Profile = () => {
         </div>
     )
 }
+
+// //sample syntax/format
+// {
+//     (true && 1 + 1 == 2) ?
+//     <>
+//         <div>
+//             a
+//         </div>
+//         <div>
+//             a2
+//         </div>
+//     </>
+//     :
+//     <div>
+//         b
+//     </div>
+// }
 
 export default Profile
