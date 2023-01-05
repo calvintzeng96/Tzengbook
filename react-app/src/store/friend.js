@@ -11,6 +11,13 @@ const usersFriends = (friends) => {
     }
 }
 
+const newFriend = (friend) => {
+    return {
+        type: NEW_FRIENDS,
+        friend
+    }
+}
+
 export const getUsersFriends = (userId) => async (dispatch) => {
     const res = await csrfFetch(`/api/friends/user/${userId}`);
 
@@ -18,6 +25,18 @@ export const getUsersFriends = (userId) => async (dispatch) => {
         const friends = await res.json();
         dispatch(usersFriends(friends));
         return friends
+    }
+}
+
+export const createFriend = (myId, userId) => async (dispatch) => {
+    const res = await csrfFetch(`/api/friends/user/${myId}/${userId}`, {
+        method: "POST"
+    })
+
+    if (res.ok) {
+        const friend = await res.json()
+        dispatch(newFriend(friend))
+        return friend
     }
 }
 

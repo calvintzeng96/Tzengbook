@@ -17,6 +17,7 @@ const LoginForm = () => {
   const user = useSelector(state => state.session.user);
   const dispatch = useDispatch();
 
+
   const onLogin = async (e) => {
     e.preventDefault();
     await dispatch(login(email, password))
@@ -26,9 +27,12 @@ const LoginForm = () => {
         }
       })
   };
+
   useEffect(() => {
     setErrors([])
   }, [email, password])
+
+
 
   const updateEmail = (e) => {
     setEmail(e.target.value);
@@ -41,7 +45,7 @@ const LoginForm = () => {
   const demoLogin = () => {
     setEmail("email1@gmail.com");
     setPassword("password1");
-    return dispatch(login(email, password));
+    dispatch(login(email, password));
   };
 
   if (user) {
@@ -58,26 +62,26 @@ const LoginForm = () => {
           ))}
         </div>
         {/* <div className="login-form-input"> */}
-          <input
-            name='email'
-            type='text'
-            placeholder='Email'
-            value={email}
-            onChange={updateEmail}
-            required
-            className="login-form-input"
-            />
+        <input
+          name='email'
+          type='text'
+          placeholder='Email'
+          value={email}
+          onChange={updateEmail}
+          required
+          className="login-form-input"
+        />
         {/* </div> */}
         {/* <div className="login-form-input"> */}
-          <input
-            name='password'
-            type='password'
-            placeholder='Password'
-            value={password}
-            onChange={updatePassword}
-            required
-            className="login-form-input"
-          />
+        <input
+          name='password'
+          type='password'
+          placeholder='Password'
+          value={password}
+          onChange={updatePassword}
+          required
+          className="login-form-input"
+        />
         {/* </div> */}
         <button className="cursor" type='submit'>Log In</button>
         <button className="cursor" onClick={() => demoLogin()}>Demo Login</button>

@@ -31,9 +31,9 @@ const Profile = () => {
     const dispatch = useDispatch()
     const history = useHistory()
     const [friendsPage, setFriendsPage] = useState(false)
-    const friends = useSelector(state => state.friend.allFriends)
     const [friendsArray, setFriendsArray] = useState([])
     const [status, setStatus] = useState("default")
+    const requests = useSelector(state => state.request)
 
 
 
@@ -60,13 +60,27 @@ const Profile = () => {
                                 }
                             }
                         }
+                        let incomingKeys = Object.keys(requests.incoming)
+                        let outgoingKeys = Object.keys(requests.outgoing)
+                        for (let i = 0; i < incomingKeys.length; i++) {
+                            if (incomingKeys[i] == userId) {
+                                temp = "incomingRequest"
+                                break
+                            }
+                        }
+                        for (let i = 0; i < outgoingKeys.length; i++) {
+                            if (outgoingKeys[i] == userId) {
+                                temp = "outgoingRequest"
+                                break
+                            }
+                        }
                         // if res.requests(incoming) includes "me", temp = "pending friend request"
 
                         setStatus(temp)
                     })
                 window.scrollTo(0, 0)
             })
-    }, [userId, friendsPage, history.location.pathname])
+    }, [userId, friendsPage, history.location.pathname, requests])
 
 
     const goToProfile = () => {

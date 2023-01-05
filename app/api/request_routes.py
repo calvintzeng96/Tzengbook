@@ -63,7 +63,7 @@ def delete_request(invitee_id, inviter_id):
     if not inviter:
         raise NotFoundError(f'User {inviter} does not exist.')
     if inviter not in invitee.friend_requests:
-        return {"message": f"There is not a request from user{inviter.id} to user{invitee.id}"}
+        return {"message": f"There is not a request from user{inviter} to user{invitee}"}
 
     res = inviter.delete_request(invitee)
     inviter.outgoing = res.outgoing

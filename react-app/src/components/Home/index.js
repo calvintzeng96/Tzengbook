@@ -1,16 +1,28 @@
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import LoginForm from "../auth/LoginForm"
 import NavBar from "../NavBar/NavBar"
 import GetAllPosts from "../Posts"
 import "./index.css"
 import LoggedOutFooter from "../LoggedOutFooter"
+import { getIncomingRequests, getOutgoingRequests } from '../../store/request';
+import { useEffect } from "react"
 
 
 
 
 const Home = () => {
-
+    const dispatch = useDispatch()
     const user = useSelector(state => state.session.user)
+    const incoming = useSelector(state => state.request.incoming)
+    const outgoing = useSelector(state => state.request.outgoing)
+    useEffect(() => {
+      console.log("----------------2")
+      if (user) {
+        dispatch(getIncomingRequests(user.id))
+        dispatch(getOutgoingRequests(user.id))
+      }
+      console.log("----------------3")
+    }, [user])
 
 
     if (!user) {

@@ -24,10 +24,10 @@ const newRequest = (request) => {
         request
     }
 }
-const destroyRequest = (request) => {
+const destroyRequest = (res) => {
     return {
         type: DESTROY_REQUESTS,
-        request
+        res
     }
 }
 
@@ -63,15 +63,18 @@ export const createRequest = (userId) => async (dispatch) => {
         return request
     }
 }
-// // Delete a Request
-// export const deleteRequest = () => async (dispatch) => {
-//     const res = await csrfFetch(`/api/requests/`, {
-//         method: "DELETE",
-//     });
-//     if (res.ok) {
-//         dispatch(destroyRequest())
-//     }
-// }
+// Delete a Request
+export const deleteRequest = (myId, userId) => async (dispatch) => {
+    const res = await csrfFetch(`/api/requests/${myId}/inviter/${userId}`, {
+        method: "DELETE",
+    });
+    if (res.ok) {
+        const request = await res.json()
+        console.log("==========1", request)
+        dispatch(destroyRequest(request))
+        return request
+    }
+}
 
 let initialState = {
     incoming: {},
@@ -81,13 +84,37 @@ let initialState = {
 export const requestReducer = (state = initialState, action) => {
     switch (action.type) {
         case LOAD_INCOMING_REQUESTS:
-            return
+            const incomingRequests = {...state, incoming: {}}
+            action.requests.incoming_requests.forEach(ele => {
+                incomingRequests.incoming[ele.id] = ele
+            })
+            return incomingRequests
         case LOAD_OUTGOING_REQUESTS:
-            return
+            const outgoingRequests = {...state}
+            action.requests.outgoing_requests.forEach(ele => {
+                outgoingRequests.outgoing[ele.id] = ele
+            })
+            return outgoingRequests
         case NEW_REQUESTS:
             return
         case DESTROY_REQUESTS:
-            return
+            const deleteRequest = {...state, incoming: {...state.incoming}, outgoing: {...state.outgoing}}
+            let test = action.res.message.split("User ")
+            let requester = Number(test[1].split(">")[0])
+            let requestee = Number(test[2].split(">")[0])
+            if (deleteRequest.incoming[requester]) {
+                delete deleteRequest.incoming[requester]
+            }
+            if (deleteRequest.incoming[requestee]) {
+                delete deleteRequest.incoming[requestee]
+            }
+            if (deleteRequest.outgoing[requester]) {
+                delete deleteRequest.outgoing[requester]
+            }
+            if (deleteRequest.outgoing[requestee]) {
+                delete deleteRequest.outgoing[requestee]
+            }
+            return deleteRequest
         default:
             return state;
     }
