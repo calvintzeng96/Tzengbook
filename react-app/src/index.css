@@ -1,5 +1,5 @@
 .border {
-    border: 1px solid black
+  border: 1px solid black
 }
 
 html,
@@ -56,8 +56,13 @@ body {
 }
 
 .border-blue {
-    border: 1px solid blue;
+  border: 1px solid blue;
 }
+
 .border-black {
-    border: 1px solid black;
+  border: 1px solid black;
+}
+
+img {
+  object-fit: cover;
 }

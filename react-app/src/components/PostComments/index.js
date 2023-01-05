@@ -123,6 +123,7 @@ const PostComments = ({ ele }) => {
                         onChange={(e) => setNewComment(e.target.value)}
                         placeholder="Write a comment..."
                         required
+                        id={"PostId"+ele.id}
                     />
                     {newComment.length > 2000 && <div className="error-handling">Characters Exceeded- Current Characters: {newComment.length}/2000</div>}
                 </form>

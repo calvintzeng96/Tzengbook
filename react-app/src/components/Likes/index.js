@@ -29,6 +29,20 @@ const Likes = ({ post }) => {
         }
     }
 
+    const selectCommentDom = (postId) => {
+        const commentInput = document.getElementById(("PostId" + postId))
+        commentInput.select()
+        commentInput.scrollIntoView({
+            behavior: "smooth",
+            block: "center"
+        })
+    }
+
+    const sharePost = (postId) => {
+        navigator.clipboard.writeText('tzengbook.onrender.com')
+        alert("Copied Link to Clipboard")
+    }
+
     return (
         <div id="likes-container">
             <div id="like-comment-count-container">
@@ -36,10 +50,10 @@ const Likes = ({ post }) => {
                     <i id="like-count-icon" class="fa-solid fa-thumbs-up"></i>
                     <div id="like-count-number">{post.Like_Count}</div>
                 </div>
-                    <div id="comment-count">{post.Comments_Count} comments</div>
+                <div id="comment-count">{post.Comments_Count} comments</div>
             </div>
             <div id="post-buttons-container">
-                <div onClick={() => clickLike(post.id)} id="post-comment-divider" className={liked ? "user-liked cursor" : "user-not-liked cursor"}>
+                <div onClick={() => clickLike(post.id)} className={liked ? "user-liked cursor post-comment-divider" : "user-not-liked cursor post-comment-divider"}>
                     {liked
                         ?
                         <i className="fa-solid fa-thumbs-up"></i>
@@ -47,10 +61,17 @@ const Likes = ({ post }) => {
                         <i className="fa-regular fa-thumbs-up"></i>
                     }
 
-                    <div>
-                        Like
-                    </div>
+                    <div>Like</div>
                 </div>
+                <div className="post-comment-divider cursor" onClick={() => selectCommentDom(post.id)}>
+                    <i class="fa-regular fa-message"></i>
+                    <div>Comment</div>
+                </div>
+                <div className="post-comment-divider cursor" onClick={() => sharePost(post.id)}>
+                <i class="fa-solid fa-share"></i>
+                    <div>Share</div>
+                </div>
+                {/* <div className="post-comment-divider">test2</div> */}
             </div>
         </div>
     )

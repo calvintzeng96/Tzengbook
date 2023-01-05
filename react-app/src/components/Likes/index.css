@@ -48,8 +48,8 @@
     border-bottom: 1px solid lightgrey;
 }
 
-#post-comment-divider {
-    width: 25%;
+.post-comment-divider {
+    width: 50%;
     height: 90%;
     align-self: center;
     text-align: center;
@@ -59,18 +59,20 @@
     font-size: 16px;
     display: flex;
     justify-content: center;
+    color: #65676B;
+
 }
 
-#post-comment-divider>i {
+.post-comment-divider>i {
     align-self: center;
     margin-right: 8px;
 }
 
-#post-comment-divider:hover {
+.post-comment-divider:hover {
     background-color: #EBEDF0;
 }
 
-#post-comment-divider:active {
+.post-comment-divider:active {
     background-color: #CCD0D5;
 }
 
