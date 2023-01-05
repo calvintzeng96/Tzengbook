@@ -49,9 +49,6 @@ const Profile = () => {
                 dispatch(getUsersFriends(userId))
                     .then((res) => {
                         setFriendsArray(res.friends)
-                        console.log("=========003", currentUser)
-                        console.log("=========004", userId)
-                        console.log("=========005", res.friends)
                         let temp = "not friends"
                         if (currentUser.id == userId) {
                             temp = "myself"
@@ -107,8 +104,7 @@ const Profile = () => {
                         <div id="profile-header" className="">
                             <img onClick={() => goToProfileUserId(user.id)} className="cursor" id="profile-pic" src={user.profilePicture ? user.profilePicture : icon} />
                             <div onClick={() => goToProfileUserId(user.id)} className="cursor" id="profile-name">{user.firstName} {user.lastName}</div>
-                            <FriendshipOption status={status} userId={99}/>
-                            {/* <div>{status}</div> */}
+                            <FriendshipOption status={status} userId={userId}/>
 
 
                         </div>

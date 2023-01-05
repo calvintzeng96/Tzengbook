@@ -1,6 +1,7 @@
-const FriendshipOption = ({status}) => {
+const FriendshipOption = ({status, userId}) => {
+    //5 possible status passed down=> "not friends"|"friends"|"myself"|"outgoingrequest"|"incomingrequest"
     return (
-        <button>{status}</button>
+        <button>{status} {userId}</button>
     )
 }
 export default FriendshipOption
