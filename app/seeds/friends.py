@@ -22,6 +22,14 @@ def seed_friends(users):
     user3.friends_list2.append(user1)
     user4.friends_list1.append(user1)
     user4.friends_list2.append(user1)
+    user5.friends_list1.append(user1)
+    user5.friends_list2.append(user1)
+    user6.friends_list1.append(user1)
+    user6.friends_list2.append(user1)
+    user7.friends_list1.append(user1)
+    user7.friends_list2.append(user1)
+    user8.friends_list1.append(user1)
+    user8.friends_list2.append(user1)
 
 
     db.session.commit()

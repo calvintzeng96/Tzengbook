@@ -1,4 +1,26 @@
 #some-friends-container {
-    border: 1px solid pink;
+    /* border: 1px solid pink; */
     margin: 6px 0;
+    width: 460px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    column-gap: 8px;
+}
+
+#some-friends-card {
+    width: 148px;
+    height: 200px
+}
+
+#some-friends-card > img {
+    width: 100%;
+    height: 150px;
+    border-radius: 8px;
+}
+
+#some-friends-name {
+    font-size: .8125rem;
+    font-weight: bold;
+    margin-top: 2px;
 }

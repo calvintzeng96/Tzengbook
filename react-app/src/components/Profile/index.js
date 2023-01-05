@@ -48,6 +48,12 @@ const Profile = () => {
             dispatch(getUser(userId))
                 .then(() => {
                     dispatch(getUsersPosts(userId))
+                        .then(() => {
+                            dispatch(getUsersFriends(userId))
+                                .then((res) => {
+                                    setFriendsArray(res.friends)
+                                })
+                        })
                     window.scrollTo(0, 0)
                 })
 
@@ -115,8 +121,8 @@ const Profile = () => {
                                             <div id="profile-friend-sample-top-title">Friends</div>
                                             <div id="see-all-friends" className="cursor" onClick={() => goToFriends(user.id)}>See all friends</div>
                                         </div>
-                                        <div id="profile-friend-sample-count">??? friends</div>
-                                        <SomeUsersFriends />
+                                        <div id="profile-friend-sample-count">{friendsArray.length} {friendsArray.length > 2 ? "friends" : "friend"}</div>
+                                        <SomeUsersFriends friendsArray={friendsArray.slice(0,6)} />
                                     </div>
 
                                 </div>

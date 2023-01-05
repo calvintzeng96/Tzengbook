@@ -1,19 +1,27 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux"
 import { useHistory } from "react-router-dom";
 import { getUsersFriends } from "../../store/friend";
 import "./index.css"
 
 
-const SomeUsersFriends = () => {
-    const user = useSelector(state => state.session.user);
-    const dispatch = useDispatch();
-    const friendsList = useSelector(state => state.friend.allFriends)
-    const friendsListArray = Object.values(friendsList)
+const SomeUsersFriends = ({ friendsArray }) => {
     const history = useHistory()
+
+    //test this logic out later with user that has 6+ friends
     return (
         <div id="some-friends-container">
-            test
+            {friendsArray.length > 0 && friendsArray.map(ele => {
+                return (
+                    <div id="some-friends-card" key={ele.id}>
+                        <img className="cursor" onClick={() => history.push(`/users/${ele.id}`)} src={ele.profilePicture} />
+                        <div id="some-friends-name" className="cursor" onClick={() => history.push(`/users/${ele.id}`)} >{ele.firstName} {ele.lastName}</div>
+                    </div>
+                )
+            })}
+            {friendsArray.length == 0 && (
+                <div>CURRENTLY HAVE NO FRIENDS</div>
+            )}
         </div>
     )
 }
