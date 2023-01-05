@@ -32,7 +32,7 @@ const Profile = () => {
     const history = useHistory()
     const [friendsPage, setFriendsPage] = useState(false)
     const [friendsArray, setFriendsArray] = useState([])
-    const [status, setStatus] = useState("default")
+    const [status, setStatus] = useState("")
     const requests = useSelector(state => state.request)
 
 
@@ -60,22 +60,15 @@ const Profile = () => {
                                 }
                             }
                         }
-                        let incomingKeys = Object.keys(requests.incoming)
-                        let outgoingKeys = Object.keys(requests.outgoing)
-                        for (let i = 0; i < incomingKeys.length; i++) {
-                            if (incomingKeys[i] == userId) {
+                        if (temp == "not friends") {
+                            let incomingKeys = Object.keys(requests.incoming)
+                            let outgoingKeys = Object.keys(requests.outgoing)
+                            if (incomingKeys.includes(userId)) {
                                 temp = "incomingRequest"
-                                break
-                            }
-                        }
-                        for (let i = 0; i < outgoingKeys.length; i++) {
-                            if (outgoingKeys[i] == userId) {
+                            } else if (outgoingKeys.includes(userId)) {
                                 temp = "outgoingRequest"
-                                break
                             }
                         }
-                        // if res.requests(incoming) includes "me", temp = "pending friend request"
-
                         setStatus(temp)
                     })
                 window.scrollTo(0, 0)
@@ -118,7 +111,7 @@ const Profile = () => {
                         <div id="profile-header" className="">
                             <img onClick={() => goToProfileUserId(user.id)} className="cursor" id="profile-pic" src={user.profilePicture ? user.profilePicture : icon} />
                             <div onClick={() => goToProfileUserId(user.id)} className="cursor" id="profile-name">{user.firstName} {user.lastName}</div>
-                            <FriendshipOption status={status} userId={userId}/>
+                            <FriendshipOption status={status} userId={userId} />
 
 
                         </div>
