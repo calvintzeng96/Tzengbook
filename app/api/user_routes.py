@@ -87,6 +87,39 @@ def all_users_posts(userId):
     # return {"Posts": [post.to_dict_with_comments() for post in posts]}
     return {"Posts": new_list}
 
+@user_routes.route("/<int:userId>/posts2")
+@login_required
+def all_users_posts2(userId):
+    user = User.query.get(userId)
+    # like_count = Like.query.filter(Like.post_id == postId).count()
+    # print("-----------------------")
+    # print(like_count)
+    if not user:
+        raise NotFoundError("User not found")
+    posts = Post.query.filter(Post.user_id == userId).order_by(Post.created_at.desc()).all()
+    posts2 = Post.query.filter(Post.wall_id == userId).order_by(Post.created_at.desc()).all()
+        # like_count = Like.query.filter(Like.post_id == post.id)
+        # count = len(like_count)
+        # post.to_dict_with_comments()["Likes"] = count
+    new_list = []
+    for ele in posts:
+        like_count = Like.query.filter(Like.post_id == ele.id).count()
+        print("-----------------------")
+        print(type(like_count))
+        post = ele.to_dict_with_comments()
+        # post["Count"] = like_count
+        post["Like_Count"] = like_count
+        new_list.append(post)
+    for ele in posts2:
+        like_count = Like.query.filter(Like.post_id == ele.id).count()
+        print("-----------------------")
+        print(type(like_count))
+        post = ele.to_dict_with_comments()
+        # post["Count"] = like_count
+        post["Like_Count"] = like_count
+        new_list.append(post)
+    # return {"Posts": [post.to_dict_with_comments() for post in posts]}
+    return {"Posts": new_list}
 
 
 #--------------------------------------

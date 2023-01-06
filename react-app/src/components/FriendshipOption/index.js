@@ -3,7 +3,7 @@ import "./index.css"
 import { createRequest, deleteRequest, getIncomingRequests, getOutgoingRequests } from "../../store/request"
 import { useParams } from "react-router-dom"
 import { useEffect, useState } from "react"
-import { deleteFriend } from "../../store/friend"
+import { deleteFriend, createFriend } from "../../store/friend"
 
 const FriendshipOption = ({ status, userId }) => {
     //5 possible status passed down=> "not friends"|"friends"|"myself"|"outgoingrequest"|"incomingrequest"
@@ -61,16 +61,22 @@ const FriendshipOption = ({ status, userId }) => {
     const option5Button = () => {
         respondButton ? setRespondButton(false) : setRespondButton(true)
     }
-    const respond = (userId) => {
-        setUnfriendButton(false)
-        dispatch(deleteFriend(currentUser.id, userId))
-        .then(() => {
-            alert("Successfully Unfriended")
-        })
-        .catch(() => {
-            alert("failed3")
-        })
-    }
+    const acceptRequest = (myId, userId) => {
+        //delete request instance
+        //create friendship route
+        dispatch(createFriend(myId, userId))
+          .then(() => {
+            dispatch(deleteRequest(myId, userId))
+          })
+          // .catch(() => {
+          //   alert("something went wrong...")
+          // })
+      }
+      const declineRequest = (myId, userId) => {
+        //delete request instance
+        dispatch(deleteRequest(myId, userId))
+        //do nothing
+      }
 
     return (
         <div id="friendship-option-container">
@@ -109,8 +115,8 @@ const FriendshipOption = ({ status, userId }) => {
                     <button onClick={() => option5Button()} id="friendship-option-5-1" className="cursor">Respond</button>
                     {respondButton && (
                         <div id="friendship-option-5-dropdown">
-                            <div onClick={() => respond(userId)} className="cursor friendship-option-5-dropdown-options">Accept</div>
-                            <div onClick={() => respond(userId)} className="cursor friendship-option-5-dropdown-options">Decline</div>
+                            <div onClick={() => acceptRequest(currentUser.id, userId)} className="cursor friendship-option-5-dropdown-options">Accept</div>
+                            <div onClick={() => declineRequest(currentUser.id, userId)} className="cursor friendship-option-5-dropdown-options">Decline</div>
                         </div>
                     )}
                 </div>
