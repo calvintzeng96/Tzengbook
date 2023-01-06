@@ -76,7 +76,7 @@ const GetAllPosts = () => {
                     </div>
                 </div>
 
-                <MidSection />
+                {/* <MidSection /> */}
 
                 <div id="all-post-right"></div>
             </div >

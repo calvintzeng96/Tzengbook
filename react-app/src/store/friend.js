@@ -18,6 +18,13 @@ const newFriend = (friend) => {
     }
 }
 
+const destroyFriend = (res) => {
+    return {
+        type: DESTROY_FRIENDS,
+        res
+    }
+}
+
 export const getUsersFriends = (userId) => async (dispatch) => {
     const res = await csrfFetch(`/api/friends/user/${userId}`);
 
@@ -40,6 +47,18 @@ export const createFriend = (myId, userId) => async (dispatch) => {
     }
 }
 
+export const deleteFriend = (myId, userId) => async (dispatch) => {
+    const res = await csrfFetch(`/api/friends/user/${myId}/${userId}`, {
+        method: "DELETE"
+    })
+
+    if (res.ok) {
+        const friend = await res.json()
+        dispatch(destroyFriend(friend))
+        return friend
+    }
+}
+
 let initialState = {
     allFriends: {}
 }
@@ -47,12 +66,24 @@ let initialState = {
 export const friendReducer = (state = initialState, action) => {
     switch (action.type) {
         case LOAD_USERS_FRIENDS:
-            const usersFriends = {...state, allFriends: {}}
+            const usersFriends = { ...state, allFriends: {} }
             // usersFriends.allFriends = {}
             action.friends.friends.forEach(ele => {
                 usersFriends.allFriends[ele.id] = ele
             })
             return usersFriends
+        case DESTROY_FRIENDS:
+            const deleteFriend = {...state, allFriends: {...state.allFriends}}
+                let destroyResponse = action.res.message.split("User ")
+                let user1 = Number(destroyResponse[1].split(">")[0])
+                let user2 = Number(destroyResponse[2].split(">")[0])
+                if (deleteFriend.allFriends[user1]) {
+                    delete deleteFriend.allFriends[user1]
+                }
+                if (deleteFriend.allFriends[user2]) {
+                    delete deleteFriend.allFriends[user2]
+                }
+            return deleteFriend
         default:
             return state;
     }

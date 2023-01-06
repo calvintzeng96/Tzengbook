@@ -60,7 +60,7 @@ def delete_friendship(user1_id, user2_id):
     if not (current_user.id == user2_id or current_user.id == user1_id):
         raise ForbiddenError("You are none of those user, nice try")
     if friend1 not in friend2.friends_list1:
-            return {"message": f"user{friend1.id} is not friends with user{friend2.id}"}
+            return {"message": f"{friend1.id} is not friends with {friend2.id}"}
 
     res1 = friend1.delete_connection(friend2)
     friend1.friends_list2 = res1.friends_list2
@@ -68,4 +68,4 @@ def delete_friendship(user1_id, user2_id):
     friend2.friends_list2 = res2.friends_list2
 
     db.session.commit()
-    return {"message": f"Successfully removed connection between user{friend1.id} & user{friend2.id}"}
+    return {"message": f"Successfully removed connection between {friend1} & {friend2}"}

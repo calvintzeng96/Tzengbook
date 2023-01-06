@@ -29,9 +29,6 @@ const ProfileSub = ({ ele, createdAt, comment }) => {
             return
         }
         dispatch(getUser(ele.id))
-            .then(() => {
-                dispatch(getUsersPosts(ele.id))
-            })
         history.push(`/users/${ele.id}`)
     }
 

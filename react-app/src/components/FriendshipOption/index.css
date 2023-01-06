@@ -1,0 +1,95 @@
+#friendship-option-container {
+    /* background-color: pink; */
+    width: 400px;
+    display: flex;
+    justify-content: right;
+    height: 50%;
+    padding: 20px;
+}
+
+.friendship-option-all {
+    display: flex;
+    justify-content: right;
+    height: 100%;
+    align-items: flex-end;
+}
+
+.friendship-option-all>button {
+    border: none;
+    border-radius: 8px;
+    margin-left: 12px;
+    height: 36px;
+}
+
+#friendship-option-1 {}
+#friendship-option-1-1 {
+    background-color: #1B74E4;
+    color: white;
+    font-weight: bold;
+    font-size: 15;
+    padding: 10px;
+}
+#friendship-option-1-1:hover {
+    background-color: #0A63D3;
+
+}
+
+#friendship-option-2 {}
+
+#friendship-option-3 {
+    position: relative
+
+}
+#friendship-option-3-dropdown {
+    position: absolute;
+    top: 120px;
+    width: 200px;
+    height: 36px;
+    padding: 8px;
+    text-align: left;
+    font-weight: bold;
+    line-height: 36px;
+    /* vertical-align: middle; */
+    background-color: white;
+    box-shadow: 0 0px 4px rgb(0 0 0 / 60%);
+    border-radius: 0 0 8px 8px;
+}
+#friendship-option-3-dropdown:hover {
+    background-color: #f5f6f7;
+}
+
+#friendship-option-3-1 {
+    font-size: 15;
+    font-weight: bold;
+    background-color: #e8e4ec;
+    padding: 10px;
+}
+
+#friendship-option-3-1:hover {
+    background-color: lightgrey;
+}
+
+#friendship-option-4 {}
+#friendship-option-4-1 {
+    background-color: #1B74E4;
+    color: white;
+    font-weight: bold;
+    font-size: 15;
+    padding: 10px;
+}
+#friendship-option-4-1:hover {
+    background-color: #0A63D3;
+
+}
+#friendship-option-5 {}
+#friendship-option-5-1 {
+    background-color: #1B74E4;
+    color: white;
+    font-weight: bold;
+    font-size: 15;
+    padding: 10px;
+}
+#friendship-option-5-1:hover {
+    background-color: #0A63D3;
+
+}

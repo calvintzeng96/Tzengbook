@@ -54,10 +54,12 @@
     border-bottom: 1px solid lightgrey;
     display: flex;
     justify-content: center;
+    height: 240px;
 
 }
 
 #profile-header {
+    border-bottom: 1px solid lightgrey;
     height: 200px;
     width: 1200px;
     min-width: 1080px;
@@ -73,10 +75,11 @@
 }
 
 #profile-name {
-    width: calc(100% - 160px);
+    width: calc(100% - 560px);
     padding: 20px;
     font-size: 36px;
     font-weight: bold;
+    /* background-color: lightgreen; */
 }
 
 #profile-body {
@@ -84,7 +87,7 @@
     height: 100%;
     display: flex;
     justify-content: center;
-    padding-top: 100px;
+    padding-top: 60px;
     background-color: #F0F2F5;
 }
 

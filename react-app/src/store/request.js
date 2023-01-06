@@ -58,19 +58,18 @@ export const createRequest = (userId) => async (dispatch) => {
     });
 
     if (res.ok) {
-        const request = res.json();
+        const request = await res.json();
         dispatch(newRequest(request));
         return request
     }
 }
 // Delete a Request
 export const deleteRequest = (myId, userId) => async (dispatch) => {
-    const res = await csrfFetch(`/api/requests/${myId}/inviter/${userId}`, {
+    const res = await csrfFetch(`/api/requests/${userId}/inviter/${myId}`, {
         method: "DELETE",
     });
     if (res.ok) {
         const request = await res.json()
-        console.log("==========1", request)
         dispatch(destroyRequest(request))
         return request
     }
@@ -96,7 +95,10 @@ export const requestReducer = (state = initialState, action) => {
             })
             return outgoingRequests
         case NEW_REQUESTS:
-            return
+            const newRequest = {...state, outgoing: {...state.outgoing}}
+                let newId = action.request.message.split("Request ")[1]
+                newRequest[newId] = {"key": "value"}
+            return newRequest
         case DESTROY_REQUESTS:
             const deleteRequest = {...state, incoming: {...state.incoming}, outgoing: {...state.outgoing}}
             let test = action.res.message.split("User ")

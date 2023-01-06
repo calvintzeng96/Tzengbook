@@ -20,6 +20,7 @@ const NavBar = () => {
   const [dropdown, setDropdown] = useState(false)
   const incomingArr = Object.values(useSelector(state => state.request.incoming))
   // const [incomingArr, setIncomingArr] = useState([])
+  const incoming = useSelector(state => state.request.incoming)
   const outgoing = useSelector(state => state.request.outgoing)
   const user = useSelector(state => state.user.singleUser)
 
@@ -45,17 +46,11 @@ const NavBar = () => {
 
   const goToProfile = () => {
     dispatch(getUser(currentUser.id))
-      .then(() => {
-        dispatch(getUsersPosts(currentUser.id))
-      })
     history.push(`/users/${currentUser.id}`)
   }
 
   const goToProfileUserId = (userId) => {
     dispatch(getUser(userId))
-      .then(() => {
-        dispatch(getUsersPosts(userId))
-      })
     history.push(`/users/${userId}`)
   }
 
@@ -92,7 +87,6 @@ const NavBar = () => {
               <div>you have no requets</div>
             )}
             {incomingArr.map(ele => {
-              console.log("=============999", incomingArr)
               return (
                 <div className="notification-card dd">
                   <div className="notification-card-top dd">

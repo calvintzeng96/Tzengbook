@@ -48,7 +48,7 @@ def create_request(invitee_id):
     inviter.outgoing = res.outgoing
 
     db.session.commit()
-    return {"message": "Successfully Friend Requested", "statusCode": 201}
+    return {"message": f"Successfully Friend Requested {invitee_id}", "statusCode": 201}
 
 #Delete request
 @request_routes.route("/<int:invitee_id>/inviter/<int:inviter_id>", methods=["DELETE"])

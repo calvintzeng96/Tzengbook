@@ -18,6 +18,7 @@ import medianIcon from "../../assets/median-icon.png"
 import AllUsersFriends from "../AllUsersFriends"
 import SomeUsersFriends from "../SomeUsersFriends"
 import FriendshipOption from "../FriendshipOption"
+import { getIncomingRequests, getOutgoingRequests } from "../../store/request"
 
 
 
@@ -34,14 +35,17 @@ const Profile = () => {
     const [friendsArray, setFriendsArray] = useState([])
     const [status, setStatus] = useState("")
     const requests = useSelector(state => state.request)
-
-
+    const incoming = useSelector(state => state.request.incoming)
+    const outgoing = useSelector(state => state.request.outgoing)
+    const friendsList = useSelector(state => Object.keys(state.friend.allFriends).length)
 
     useEffect(() => {
         setFriendsPage(false)
         if (window.location.pathname.endsWith("/friends")) {
             setFriendsPage(true)
         }
+        // dispatch(getIncomingRequests(currentUser.id))
+        dispatch(getOutgoingRequests(currentUser.id))
         dispatch(getUser(userId))
             .then(() => {
                 dispatch(getUsersPosts(userId))
@@ -73,14 +77,51 @@ const Profile = () => {
                     })
                 window.scrollTo(0, 0)
             })
-    }, [userId, friendsPage, history.location.pathname, requests])
+    }, [userId, friendsPage, history.location.pathname, outgoing, friendsList])
+
+    // useEffect(() => {
+    //     setFriendsPage(false)
+    //     if (window.location.pathname.endsWith("/friends")) {
+    //         setFriendsPage(true)
+    //     }
+    //     // dispatch(getIncomingRequests(currentUser.id))
+    //     dispatch(getOutgoingRequests(currentUser.id))
+    //     dispatch(getUser(userId))
+    //         .then(() => {
+    //             dispatch(getUsersPosts(userId))
+    //             // .then(() => {
+    //             dispatch(getUsersFriends(userId))
+    //                 .then((res) => {
+    //                     setFriendsArray(res.friends)
+    //                     let temp = "not friends"
+    //                     if (currentUser.id == userId) {
+    //                         temp = "myself"
+    //                     } else {
+    //                         for (let i = 0; i < res.friends.length; i++) {
+    //                             if (res.friends[i].id == currentUser.id) {
+    //                                 temp = "friends"
+    //                                 break
+    //                             }
+    //                         }
+    //                     }
+    //                     if (temp == "not friends") {
+    //                         let incomingKeys = Object.keys(requests.incoming)
+    //                         let outgoingKeys = Object.keys(requests.outgoing)
+    //                         if (incomingKeys.includes(userId)) {
+    //                             temp = "incomingRequest"
+    //                         } else if (outgoingKeys.includes(userId)) {
+    //                             temp = "outgoingRequest"
+    //                         }
+    //                     }
+    //                     setStatus(temp)
+    //                 })
+    //             window.scrollTo(0, 0)
+    //         })
+    // }, [userId, friendsPage, history.location.pathname, outgoing, friendsList])
 
 
     const goToProfile = () => {
         dispatch(getUser(currentUser.id))
-            .then(() => {
-                dispatch(getUsersPosts(currentUser.id))
-            })
         history.push(`/users/${currentUser.id}`)
     }
 
@@ -119,7 +160,7 @@ const Profile = () => {
                     <div id="profile-body">
                         {friendsPage && (
                             <div>
-                                <AllUsersFriends friendsArray={friendsArray} />
+                                <AllUsersFriends friendsArray={friendsArray} status={status} />
                             </div>
                         )}
                         {!friendsPage && (

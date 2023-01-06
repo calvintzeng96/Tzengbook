@@ -24,6 +24,7 @@
     display: flex;
     margin: 4px 8px;
     align-items: center;
+    max-width: 550px;
 }
 
 #all-friends-card>img {
@@ -37,6 +38,7 @@
     line-height: 100%;
     margin-left: 12px;
     font-weight: bold;
+    white-space: nowrap;
     /* text-align: center; */
     /* vertical-align: center; */
 }

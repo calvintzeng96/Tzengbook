@@ -58,9 +58,6 @@ const PostComments = ({ ele }) => {
 
     const goToProfile = () => {
         dispatch(getUser(ele.id))
-            .then(() => {
-                dispatch(getUsersPosts(ele.id))
-            })
         history.push(`/users/${currentUser.id}`)
     }
 
