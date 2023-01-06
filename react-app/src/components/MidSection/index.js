@@ -52,11 +52,11 @@ const MidSection = () => {
     if (isLoaded && currentUser) {
         return (
             <div id="all-post-middle">
-                {window.location.pathname == "" || currentUser.id == user.id && (
+                {(window.location.pathname == "/" || currentUser.id == user.id) && (
 
                     <div>
                         <div className="create-comment-div">
-                            <img className="cursor" src={user.profilePicture ? user.profilePicture : icon} onClick={() => history.push(`/users/${user.id}`)} />
+                            <img className="cursor" src={currentUser.profilePicture ? currentUser.profilePicture : icon} onClick={() => history.push(`/users/${user.id}`)} />
                             <button className="cursor" onClick={() => setModalType("CreatePost")}>{`What's on your mind, ${currentUser?.firstName}?`}</button>
                         </div>
                     </div>

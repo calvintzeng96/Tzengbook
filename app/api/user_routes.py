@@ -67,20 +67,15 @@ def user(id):
 @login_required
 def all_users_posts(userId):
     user = User.query.get(userId)
-    # like_count = Like.query.filter(Like.post_id == postId).count()
-    # print("-----------------------")
-    # print(like_count)
+
     if not user:
         raise NotFoundError("User not found")
     posts = Post.query.filter(Post.user_id == userId).order_by(
         Post.created_at.desc()).all()
-    # like_count = Like.query.filter(Like.post_id == post.id)
-    # count = len(like_count)
-    # post.to_dict_with_comments()["Likes"] = count
+
     new_list = []
     for ele in posts:
         like_count = Like.query.filter(Like.post_id == ele.id).count()
-        print("-----------------------")
         print(type(like_count))
         post = ele.to_dict_with_comments()
         # post["Count"] = like_count
@@ -128,24 +123,17 @@ def feed(userId):
     user = get_user_model(current_user, User)
     if not user:
         raise NotFoundError("User not found")
-    print("===================1", user.friends_list1.all())
     friends_list = user.friends_list1.all()
     # makes f_list = [array of friend's id(integer)]
     f_list_id = [ele.to_dict()["id"] for ele in friends_list]
     f_list_id.append(user.id)
-    print("===================2", f_list_id)
     feed_posts_list = []
     for ele in f_list_id:
         posts = Post.query.filter(Post.user_id == ele).all()
-        print("0000000000000000000000000000", posts)
         posts2 = Post.query.filter(Post.wall_id == ele).all()
-        print("0000000000000000000000000001", posts2)
         temp = [*posts, *posts2]
-        print("0000000000000000000000000002", temp)
         feed_posts_list.extend(temp)
     feed_posts_list = list(set(feed_posts_list))
-    print("===================3", feed_posts_list)
-    print("===================4", len(feed_posts_list))
 
 
     new_list = []
