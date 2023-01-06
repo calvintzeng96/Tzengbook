@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux"
 import { useHistory } from "react-router-dom";
-import { createComment, deletePost, getAllPosts, getSinglePost } from "../../store/post";
+import { createComment, deletePost, getAllPosts, getSinglePost, getUsersPosts } from "../../store/post";
 import ProfileSub from "../ProfileSub";
 import { ModalContext } from "../../context/Modal";
 import { linkedInLink, githubLink, airzzzLink, medianLink } from "../../assets/helper";
@@ -35,6 +35,7 @@ const GetAllPosts = () => {
     const postsArray = Object.values(posts)
 
     useEffect(() => {
+        // dispatch(getUsersPosts(currentUser.id))
         dispatch(getAllPosts())
             .then(() => {
                 setIsLoaded(true)
@@ -54,9 +55,9 @@ const GetAllPosts = () => {
                         <img src={homeIcon} />
                         <div onClick={() => history.push("/")}>Home</div>
                     </div>
-                    <div onClick={() => history.push(`/users/${user.id}`)} className="all-post-left-contents cursor">
-                        <img src={user.profilePicture ? user.profilePicture : icon} />
-                        <div>{user.firstName} {user.lastName}</div>
+                    <div onClick={() => history.push(`/users/${currentUser.id}`)} className="all-post-left-contents cursor">
+                        <img src={currentUser.profilePicture ? currentUser.profilePicture : icon} />
+                        <div>{currentUser.firstName} {currentUser.lastName}</div>
                     </div>
                     <div className="spacer"></div>
                     <div onClick={linkedInLink} className="all-post-left-contents cursor">

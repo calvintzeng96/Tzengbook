@@ -2,6 +2,8 @@ import { csrfFetch } from "./csrf"
 
 const LOAD_ALL_POSTS = "/posts/LOAD_ALL_POSTS";
 const LOAD_USERS_POSTS = "/posts/LOAD_USERS_POSTS";
+const LOAD_USERS_POSTS2 = "/posts/LOAD_USERS_POSTS2";
+const LOAD_FEED = "/posts/LOAD_FEED";
 const LOAD_SINGLE_POSTS = "/posts/LOAD_SINGLE_POSTS";
 const NEW_POST = "/posts/NEW_POST";
 const EDIT_POST = "/posts/EDIT_POST";
@@ -23,6 +25,18 @@ const allPosts = (posts) => {
 const usersPosts = (posts) => {
     return {
         type: LOAD_USERS_POSTS,
+        posts
+    }
+}
+const usersPosts2 = (posts) => {
+    return {
+        type: LOAD_USERS_POSTS2,
+        posts
+    }
+}
+const usersFeed = (posts) => {
+    return {
+        type: LOAD_FEED,
         posts
     }
 }
@@ -99,6 +113,26 @@ export const getUsersPosts = (userId) => async (dispatch) => {
     if (res.ok) {
         const posts = await res.json();
         dispatch(usersPosts(posts));
+        return posts
+    }
+}
+// Get all Posts by a UserId2
+export const getUsersPosts2 = (userId) => async (dispatch) => {
+    const res = await csrfFetch(`/api/users/${userId}/posts2`);
+
+    if (res.ok) {
+        const posts = await res.json();
+        dispatch(usersPosts2(posts));
+        return posts
+    }
+}
+// Get Current User Feed
+export const getFeed = (userId) => async (dispatch) => {
+    const res = await csrfFetch(`/api/users/${userId}/feed`);
+
+    if (res.ok) {
+        const posts = await res.json();
+        dispatch(usersFeed(posts));
         return posts
     }
 }
@@ -248,6 +282,18 @@ export const postReducer = (state = initialState, action) => {
                 usersPosts.allPosts[ele.id] = ele
             })
             return usersPosts
+        case LOAD_USERS_POSTS2:
+            const usersPosts2 = { ...state, allPosts: {} }
+            action.posts.Posts.forEach(ele => {
+                usersPosts2.allPosts[ele.id] = ele
+            })
+            return usersPosts2
+        case LOAD_FEED:
+            const usersFeed = { ...state, allPosts: {} }
+            action.posts.Posts.forEach(ele => {
+                usersFeed.allPosts[ele.id] = ele
+            })
+            return usersFeed
         case LOAD_SINGLE_POSTS:
             const singlePost = { ...state, singlePost: action.post }
             return { ...singlePost }

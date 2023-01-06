@@ -39,7 +39,6 @@ const AllUsersFriends = ({ friendsArray }) => {
     }
 
     useEffect(() => {
-        console.log("============1")
         dispatch(getUsersFriends(currentUser.id))
             .then((res) => {
                 setMyFriends(res.friends)
@@ -57,7 +56,7 @@ const AllUsersFriends = ({ friendsArray }) => {
                     return (
                         <div id="all-friends-card" key={ele.id}>
                             <img className="cursor" onClick={() => history.push(`/users/${ele.id}`)} src={ele.profilePicture} />
-                            <div className="cursor" onClick={() => history.push(`/users/${ele.id}`)} id="all-friends-name">{ele.firstName} {ele.lastName}</div>
+                            <div className="cursor underline-hover" onClick={() => history.push(`/users/${ele.id}`)} id="all-friends-name">{ele.firstName} {ele.lastName}</div>
                             <FriendshipOption status={status} userId={ele.id} />
                             {/* <div> test </div> */}
                         </div>

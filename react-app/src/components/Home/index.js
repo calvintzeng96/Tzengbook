@@ -6,6 +6,7 @@ import "./index.css"
 import LoggedOutFooter from "../LoggedOutFooter"
 import { getIncomingRequests, getOutgoingRequests } from '../../store/request';
 import { useEffect } from "react"
+import MidSection from "../MidSection"
 
 
 
@@ -34,6 +35,7 @@ const Home = () => {
     return (
         <div>
             <NavBar />
+            {/* <MidSection /> */}
             <GetAllPosts />
         </div>
     )

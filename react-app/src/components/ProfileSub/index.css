@@ -29,3 +29,23 @@
     overflow-wrap: anywhere;
     /* background-color: pink; */
 }
+
+
+
+.target-post-display {
+    display: flex;
+    /* justify-content: ; */
+}
+.target-post-display-1 {
+    /* background-color: pink; */
+    /* width: fit-content; */
+    display: flex;
+    font-size: 14px;
+}
+.target-post-display-1-1 {
+    margin: 0 8px;
+}
+
+.underline-hover:hover {
+    text-decoration: underline;
+}

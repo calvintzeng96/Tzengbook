@@ -4,7 +4,7 @@ import "./index.css"
 import { useEffect, useState } from "react"
 import icon from "../../assets/default-profile-icon.png"
 import homeIcon from "../../assets/home-icon.png"
-import { getUsersPosts } from "../../store/post"
+import { getUsersPosts, getUsersPosts2 } from "../../store/post"
 import { getUser } from "../../store/user"
 import { getUsersFriends } from "../../store/friend";
 
@@ -47,15 +47,10 @@ const Profile = () => {
         setFriendsPage(false)
         if (window.location.pathname.endsWith("/friends")) {
             setFriendsPage(true)
-        } else {
-            dispatch(getUsersPosts(userId))
         }
         dispatch(getOutgoingRequests(currentUser.id))
         dispatch(getUser(userId))
             .then(() => {
-                // .then(() => {
-                console.log("============2")
-
                 dispatch(getUsersFriends(userId))
                     .then((res) => {
                         setFriendsArray(res.friends)
@@ -157,7 +152,7 @@ const Profile = () => {
                     <div id="profile-header-container">
                         <div id="profile-header" className="">
                             <img onClick={() => goToProfileUserId(user.id)} className="cursor" id="profile-pic" src={user.profilePicture ? user.profilePicture : icon} />
-                            <div onClick={() => goToProfileUserId(user.id)} className="cursor" id="profile-name">{user.firstName} {user.lastName}</div>
+                            <div onClick={() => goToProfileUserId(user.id)} className="cursor underline-hover" id="profile-name">{user.firstName} {user.lastName}</div>
                             <FriendshipOption status={status} userId={userId} />
 
 

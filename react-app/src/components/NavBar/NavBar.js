@@ -78,6 +78,7 @@ const NavBar = () => {
   return (
     <div id="nav-bar">
       <img onClick={goHome} id="tzengbook-icon-logged-in" className="cursor" src={tzengbookIcon} />
+      <div>SEARCH BAR PLACEHOLDER</div>
       <div id="nav-bar-right">
         <button onClick={notificationButton} id="notification-icon" className="cursor dd">{incomingArr.length ? incomingArr.length : ""}</button>
         {dropdown && (

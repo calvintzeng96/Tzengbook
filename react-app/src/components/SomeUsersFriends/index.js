@@ -15,7 +15,7 @@ const SomeUsersFriends = ({ friendsArray }) => {
                 return (
                     <div id="some-friends-card" key={ele.id}>
                         <img className="cursor" onClick={() => history.push(`/users/${ele.id}`)} src={ele.profilePicture} />
-                        <div id="some-friends-name" className="cursor" onClick={() => history.push(`/users/${ele.id}`)} >{ele.firstName} {ele.lastName}</div>
+                        <div id="some-friends-name" className="cursor underline-hover" onClick={() => history.push(`/users/${ele.id}`)} >{ele.firstName} {ele.lastName}</div>
                     </div>
                 )
             })}

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { createComment, deleteComment, getAllPosts, updateComment, getUsersPosts } from "../../store/post";
+import { createComment, deleteComment, getAllPosts, updateComment, getUsersPosts, getUsersPosts2 } from "../../store/post";
 import ProfileSub from "../ProfileSub";
 import { getUser } from "../../store/user";
 import { useHistory, useParams } from "react-router-dom";
@@ -26,7 +26,7 @@ const PostComments = ({ ele }) => {
             })
             .then(() => {
                 if (userId) {
-                    dispatch(getUsersPosts(userId))
+                    dispatch(getUsersPosts2(userId))
                 } else {
                     dispatch(getAllPosts())
                 }
@@ -43,7 +43,7 @@ const PostComments = ({ ele }) => {
             })
             .then(() => {
                 if (userId) {
-                    dispatch(getUsersPosts(userId))
+                    dispatch(getUsersPosts2(userId))
                 } else {
                     dispatch(getAllPosts())
                 }
@@ -77,7 +77,7 @@ const PostComments = ({ ele }) => {
                         if (currentComment !== comment.id) {
                             return (
                                 <div className="individual-comment">
-                                    <ProfileSub ele={comment.user} comment={comment.content} />
+                                    <ProfileSub target={0} ele={comment.user} comment={comment.content} />
                                     {/* <div>{comment.content}</div> */}
                                     {comment.user_id == currentUser.id && (
                                         <div className="edit-delete">

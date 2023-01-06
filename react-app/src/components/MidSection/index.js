@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux"
 import { useHistory, useParams } from "react-router-dom";
-import { deletePost, getAllPosts, getSinglePost, getUsersPosts } from "../../store/post";
+import { deletePost, getAllPosts, getSinglePost, getUsersPosts, getUsersPosts2, getFeed } from "../../store/post";
 import ProfileSub from "../ProfileSub";
 import { ModalContext } from "../../context/Modal";
 import icon from "../../assets/default-profile-icon.png"
@@ -26,17 +26,17 @@ const MidSection = () => {
 
     useEffect(() => {
         if (userId) {
-            dispatch(getUsersPosts(userId))
+            dispatch(getUsersPosts2(userId))
                 .then(() => {
                     setIsLoaded(true)
                 })
         } else {
-            dispatch(getAllPosts())
+            dispatch(getFeed(currentUser.id))
                 .then(() => {
                     setIsLoaded(true)
                 })
         }
-    }, [post])
+    }, [post, user])
 
 
     const openEditModal = (postId) => {
@@ -62,10 +62,20 @@ const MidSection = () => {
                     </div>
                 )}
                 {posts && postsArray.reverse().map(ele => {
+                    let poster = ele.userId
+                    let postee = ele.wallId
+                    let target;
+                    if (poster != postee) {
+                        let name = ele.Target_Name
+                        target = `${postee}/${name}`
+                    } else {
+                        target = 0
+                    }
                     return (
                         <div key={ele.id} className="single-post">
                             <div className="single-post-top">
-                                <ProfileSub ele={ele.User} createdAt={ele.createdAt} />
+                                <ProfileSub target={target} ele={ele.User} createdAt={ele.createdAt} />
+                                {/* <div>test</div> */}
                                 {currentUser.id == ele.userId && (
                                     <div className="edit-delete">
                                         <button className="cursor" onClick={() => openEditModal(ele.id)}>Edit</button>
