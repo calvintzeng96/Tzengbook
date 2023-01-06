@@ -39,6 +39,7 @@ const AllUsersFriends = ({ friendsArray }) => {
     }
 
     useEffect(() => {
+        console.log("============1")
         dispatch(getUsersFriends(currentUser.id))
             .then((res) => {
                 setMyFriends(res.friends)

@@ -13,6 +13,7 @@ const FriendshipOption = ({ status, userId }) => {
     const outgoing = useSelector(state => state.request.outgoing)
     // const friendsList = useSelector(state => state.friend.allFriends)
     const [unfriendButton, setUnfriendButton] = useState(false)
+    const [respondButton, setRespondButton] = useState(false)
 
     // Option 1 DONE
     const addFriend = (userId) => {
@@ -57,7 +58,19 @@ const FriendshipOption = ({ status, userId }) => {
 
 
     // Option 5
-
+    const option5Button = () => {
+        respondButton ? setRespondButton(false) : setRespondButton(true)
+    }
+    const respond = (userId) => {
+        setUnfriendButton(false)
+        dispatch(deleteFriend(currentUser.id, userId))
+        .then(() => {
+            alert("Successfully Unfriended")
+        })
+        .catch(() => {
+            alert("failed3")
+        })
+    }
 
     return (
         <div id="friendship-option-container">
@@ -93,8 +106,15 @@ const FriendshipOption = ({ status, userId }) => {
             }
             {incoming[userId] && (
                 <div id="friendship-option-5" className="friendship-option-all">
-                    <button id="friendship-option-5-1" className="cursor">Respond</button>
+                    <button onClick={() => option5Button()} id="friendship-option-5-1" className="cursor">Respond</button>
+                    {respondButton && (
+                        <div id="friendship-option-5-dropdown">
+                            <div onClick={() => respond(userId)} className="cursor friendship-option-5-dropdown-options">Accept</div>
+                            <div onClick={() => respond(userId)} className="cursor friendship-option-5-dropdown-options">Decline</div>
+                        </div>
+                    )}
                 </div>
+
             )
             }
         </div>

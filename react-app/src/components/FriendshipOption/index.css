@@ -3,8 +3,9 @@
     width: 400px;
     display: flex;
     justify-content: right;
-    height: 50%;
+    height: 36px;
     padding: 20px;
+    /* position: static; */
 }
 
 .friendship-option-all {
@@ -42,7 +43,7 @@
 }
 #friendship-option-3-dropdown {
     position: absolute;
-    top: 120px;
+    top: 48px;
     width: 200px;
     height: 36px;
     padding: 8px;
@@ -81,7 +82,25 @@
     background-color: #0A63D3;
 
 }
-#friendship-option-5 {}
+#friendship-option-5 {
+    position: relative
+
+}
+#friendship-option-5-dropdown {
+    position: absolute;
+    top: 48px;
+    width: 200px;
+    height: 72px;
+    padding: 8px;
+    text-align: left;
+    font-weight: bold;
+    line-height: 36px;
+    /* vertical-align: middle; */
+    background-color: white;
+    box-shadow: 0 0px 4px rgb(0 0 0 / 60%);
+    border-radius: 0 0 8px 8px;
+    background-color: pink;
+}
 #friendship-option-5-1 {
     background-color: #1B74E4;
     color: white;
@@ -92,4 +111,8 @@
 #friendship-option-5-1:hover {
     background-color: #0A63D3;
 
+}
+
+.friendship-option-5-dropdown-options {
+    background-color: pink;
 }

@@ -38,7 +38,8 @@ const GetAllPosts = () => {
         dispatch(getAllPosts())
             .then(() => {
                 setIsLoaded(true)
-                dispatch(getUser(currentUser.id))
+                // maybe take out getUser dispatch
+                // dispatch(getUser(currentUser.id))
             })
     }, [post])
 
@@ -76,7 +77,7 @@ const GetAllPosts = () => {
                     </div>
                 </div>
 
-                {/* <MidSection /> */}
+                <MidSection />
 
                 <div id="all-post-right"></div>
             </div >

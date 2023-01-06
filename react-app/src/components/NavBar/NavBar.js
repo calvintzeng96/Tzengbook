@@ -45,12 +45,12 @@ const NavBar = () => {
   }
 
   const goToProfile = () => {
-    dispatch(getUser(currentUser.id))
+    // dispatch(getUser(currentUser.id))
     history.push(`/users/${currentUser.id}`)
   }
 
   const goToProfileUserId = (userId) => {
-    dispatch(getUser(userId))
+    // dispatch(getUser(userId))
     history.push(`/users/${userId}`)
   }
 

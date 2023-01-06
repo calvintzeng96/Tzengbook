@@ -39,17 +39,23 @@ const Profile = () => {
     const outgoing = useSelector(state => state.request.outgoing)
     const friendsList = useSelector(state => Object.keys(state.friend.allFriends).length)
 
+    // useEffect(() => {
+    //     dispatch(getUser(userId))
+    // }, [])
+
     useEffect(() => {
         setFriendsPage(false)
         if (window.location.pathname.endsWith("/friends")) {
             setFriendsPage(true)
+        } else {
+            dispatch(getUsersPosts(userId))
         }
-        // dispatch(getIncomingRequests(currentUser.id))
         dispatch(getOutgoingRequests(currentUser.id))
         dispatch(getUser(userId))
             .then(() => {
-                dispatch(getUsersPosts(userId))
                 // .then(() => {
+                console.log("============2")
+
                 dispatch(getUsersFriends(userId))
                     .then((res) => {
                         setFriendsArray(res.friends)
@@ -121,7 +127,7 @@ const Profile = () => {
 
 
     const goToProfile = () => {
-        dispatch(getUser(currentUser.id))
+        // dispatch(getUser(currentUser.id))
         history.push(`/users/${currentUser.id}`)
     }
 
