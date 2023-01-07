@@ -16,12 +16,17 @@ const CreatePost = () => {
     const [wallId, setWallId] = useState("")
     const [errors, setErrors] = useState([]);
     const { setModalType } = useContext(ModalContext)
-
+    const [target, setTarget] = useState(0)
 
     useEffect(() => {
         if (window.location.pathname == "/") {
+            setTarget(0)
             setWallId(currentUser.id)
         } else {
+            setTarget(0)
+            if (wall.id !== currentUser.id) {
+                setTarget(`${wall.id}/${wall.firstName} ${wall.lastName}`)
+            }
             setWallId(wall.id)
         }
     }, [wall])
@@ -71,7 +76,7 @@ const CreatePost = () => {
         <form id="create-post-form" className="form-container modal-content" onSubmit={submit}>
             <div id="create-post-title">Create Post</div>
             <div className="create-post-content">
-                <ProfileSub target={0} ele={currentUser} />
+                <ProfileSub target={target} ele={currentUser} />
             </div>
             <div className="error-handling">
                 {errors.length > 0 &&

@@ -29,7 +29,7 @@ const ProfileSub = ({ target, ele, createdAt, comment }) => {
             let name = target.split("/")[1]
             setTargetName(name)
         }
-    }, [])
+    }, [target])
 
 
 

@@ -17,6 +17,8 @@ const MidSection = () => {
     const currentUser = useSelector(state => state.session.user)
     const user = useSelector(state => state.user.singleUser)
     const { userId } = useParams()
+    const friendsList = useSelector(state => state.friend.allFriends)
+    const [friendship, setFriendship] = useState(false)
 
 
     const posts = useSelector(state => state.post.allPosts)
@@ -25,9 +27,13 @@ const MidSection = () => {
     const postsArray = Object.values(posts)
 
     useEffect(() => {
+        setFriendship(false)
         if (userId) {
             dispatch(getUsersPosts2(userId))
                 .then(() => {
+                    if (friendsList[currentUser.id]) {
+                        setFriendship(true)
+                    }
                     setIsLoaded(true)
                 })
         } else {
@@ -52,8 +58,7 @@ const MidSection = () => {
     if (isLoaded && currentUser) {
         return (
             <div id="all-post-middle">
-                {(window.location.pathname == "/" || currentUser.id == user.id) && (
-
+                {(window.location.pathname == "/" || currentUser.id == user.id || friendship) && (
                     <div>
                         <div className="create-comment-div">
                             <img className="cursor" src={currentUser.profilePicture ? currentUser.profilePicture : icon} onClick={() => history.push(`/users/${user.id}`)} />
