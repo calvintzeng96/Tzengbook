@@ -85,7 +85,7 @@ const EditPost = () => {
         <form id="edit-post-form" className="form-container modal-content" onSubmit={submit}>
             <div id="edit-post-title">Edit Post</div>
             <div className="edit-post-content">
-                <ProfileSub ele={currentUser} />
+                <ProfileSub target={0} ele={currentUser} />
             </div>
             <div className="error-handling">
                 {errors.length > 0 &&

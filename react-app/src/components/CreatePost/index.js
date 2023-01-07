@@ -71,7 +71,7 @@ const CreatePost = () => {
         <form id="create-post-form" className="form-container modal-content" onSubmit={submit}>
             <div id="create-post-title">Create Post</div>
             <div className="create-post-content">
-                <ProfileSub ele={currentUser} />
+                <ProfileSub target={0} ele={currentUser} />
             </div>
             <div className="error-handling">
                 {errors.length > 0 &&
