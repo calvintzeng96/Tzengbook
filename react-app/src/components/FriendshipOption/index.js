@@ -5,16 +5,13 @@ import { useState } from "react"
 import { deleteFriend, createFriend } from "../../store/friend"
 
 const FriendshipOption = ({ status, userId }) => {
-    //5 possible status passed down=> "not friends"|"friends"|"myself"|"outgoingrequest"|"incomingrequest"
     const currentUser = useSelector(state => state.session.user)
     const dispatch = useDispatch()
     const incoming = useSelector(state => state.request.incoming)
     const outgoing = useSelector(state => state.request.outgoing)
-    // const friendsList = useSelector(state => state.friend.allFriends)
     const [unfriendButton, setUnfriendButton] = useState(false)
     const [respondButton, setRespondButton] = useState(false)
 
-    // Option 1 DONE
     const addFriend = (userId) => {
         dispatch(createRequest(userId))
             .then(() => {
@@ -25,9 +22,6 @@ const FriendshipOption = ({ status, userId }) => {
             })
     }
 
-    // Option 2
-
-    // Option 3 DONE
     const option3Button = () => {
         unfriendButton ? setUnfriendButton(false) : setUnfriendButton(true)
     }
@@ -42,9 +36,7 @@ const FriendshipOption = ({ status, userId }) => {
         })
     }
 
-    // Option 4 DONE
     const cancelRequest = (userId) => {
-        // alert("here")
         dispatch(deleteRequest(currentUser.id, userId))
             .then(() => {
                 alert("Successfully Canceled Friend Request")
@@ -54,27 +46,18 @@ const FriendshipOption = ({ status, userId }) => {
             })
     }
 
-
-
-    // Option 5
     const option5Button = () => {
         respondButton ? setRespondButton(false) : setRespondButton(true)
     }
     const acceptRequest = (myId, userId) => {
-        //delete request instance
-        //create friendship route
+
         dispatch(createFriend(myId, userId))
           .then(() => {
             dispatch(deleteRequest(myId, userId))
           })
-          // .catch(() => {
-          //   alert("something went wrong...")
-          // })
       }
       const declineRequest = (myId, userId) => {
-        //delete request instance
         dispatch(deleteRequest(myId, userId))
-        //do nothing
       }
 
     return (

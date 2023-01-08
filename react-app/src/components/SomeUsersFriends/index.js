@@ -5,7 +5,6 @@ import "./index.css"
 const SomeUsersFriends = ({ friendsArray }) => {
     const history = useHistory()
 
-    //test this logic out later with user that has 6+ friends
     return (
         <div id="some-friends-container">
             {friendsArray.length > 0 && friendsArray.map(ele => {

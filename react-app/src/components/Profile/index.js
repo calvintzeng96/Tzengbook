@@ -33,10 +33,6 @@ const Profile = () => {
     const outgoing = useSelector(state => state.request.outgoing)
     const friendsList = useSelector(state => Object.keys(state.friend.allFriends).length)
 
-    // useEffect(() => {
-    //     dispatch(getUser(userId))
-    // }, [])
-
     useEffect(() => {
         setFriendsPage(false)
         if (window.location.pathname.endsWith("/friends")) {
@@ -74,54 +70,12 @@ const Profile = () => {
             })
     }, [userId, friendsPage, history.location.pathname, outgoing, friendsList])
 
-    // useEffect(() => {
-    //     setFriendsPage(false)
-    //     if (window.location.pathname.endsWith("/friends")) {
-    //         setFriendsPage(true)
-    //     }
-    //     // dispatch(getIncomingRequests(currentUser.id))
-    //     dispatch(getOutgoingRequests(currentUser.id))
-    //     dispatch(getUser(userId))
-    //         .then(() => {
-    //             dispatch(getUsersPosts(userId))
-    //             // .then(() => {
-    //             dispatch(getUsersFriends(userId))
-    //                 .then((res) => {
-    //                     setFriendsArray(res.friends)
-    //                     let temp = "not friends"
-    //                     if (currentUser.id == userId) {
-    //                         temp = "myself"
-    //                     } else {
-    //                         for (let i = 0; i < res.friends.length; i++) {
-    //                             if (res.friends[i].id == currentUser.id) {
-    //                                 temp = "friends"
-    //                                 break
-    //                             }
-    //                         }
-    //                     }
-    //                     if (temp == "not friends") {
-    //                         let incomingKeys = Object.keys(requests.incoming)
-    //                         let outgoingKeys = Object.keys(requests.outgoing)
-    //                         if (incomingKeys.includes(userId)) {
-    //                             temp = "incomingRequest"
-    //                         } else if (outgoingKeys.includes(userId)) {
-    //                             temp = "outgoingRequest"
-    //                         }
-    //                     }
-    //                     setStatus(temp)
-    //                 })
-    //             window.scrollTo(0, 0)
-    //         })
-    // }, [userId, friendsPage, history.location.pathname, outgoing, friendsList])
-
 
     const goToProfile = () => {
-        // dispatch(getUser(currentUser.id))
         history.push(`/users/${currentUser.id}`)
     }
 
     const goToFriends = (userId) => {
-        // setFriendsPage(true)
         history.push(`/users/${userId}/friends`)
     }
 
@@ -193,22 +147,5 @@ const Profile = () => {
         </div>
     )
 }
-
-// //sample syntax/format
-// {
-//     (true && 1 + 1 == 2) ?
-//     <>
-//         <div>
-//             a
-//         </div>
-//         <div>
-//             a2
-//         </div>
-//     </>
-//     :
-//     <div>
-//         b
-//     </div>
-// }
 
 export default Profile

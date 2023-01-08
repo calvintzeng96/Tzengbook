@@ -262,7 +262,6 @@ export const unlikePost = (postId, userId) => async (dispatch) => {
 }
 
 
-// REDUCER
 let initialState = {
     allPosts: {},
     singlePost: {}

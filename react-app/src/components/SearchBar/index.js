@@ -28,23 +28,16 @@ const SearchBar = () => {
             debounceTest.cancel();
         }
     }, [debounceTest]);
-    //getting results from search
     useEffect(() => {
         let data = content.replaceAll(" ", "")
         if (data) {
             debounceTest(data)
-            // searchFetch(data)
         } else {
             setRes([])
         }
     }, [content, debounceTest])
 
-    //checks to see if search bar active => show/unshow results
-    // useEffect(() => {
-
-    // })
     const goToProfile = (userId) => {
-        console.log("=================0")
         history.push(`/users/${userId}`)
         let input = document.getElementById("search-bar-input")
         setActive(false)
@@ -71,8 +64,6 @@ const SearchBar = () => {
             {active && (
                 <div id="search-dropdown-container">
                     {res.length ?
-                        // <div>test</div>
-
                         <div
                             className="search-results-container cursor"
                             onMouseDown={(e) => {

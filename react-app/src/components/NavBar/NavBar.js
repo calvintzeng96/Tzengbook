@@ -39,12 +39,10 @@ const NavBar = () => {
   }
 
   const goToProfile = () => {
-    // dispatch(getUser(currentUser.id))
     history.push(`/users/${currentUser.id}`)
   }
 
   const goToProfileUserId = (userId) => {
-    // dispatch(getUser(userId))
     history.push(`/users/${userId}`)
   }
 
@@ -53,20 +51,14 @@ const NavBar = () => {
   }
 
   const acceptRequest = (myId, userId) => {
-    //delete request instance
-    //create friendship route
+
     dispatch(createFriend(myId, userId))
       .then(() => {
         dispatch(deleteRequest(myId, userId))
       })
-    // .catch(() => {
-    //   alert("something went wrong...")
-    // })
   }
   const declineRequest = (myId, userId) => {
-    //delete request instance
     dispatch(deleteRequest(myId, userId))
-    //do nothing
   }
 
   return (

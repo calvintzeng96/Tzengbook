@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux"
 import { useHistory } from "react-router-dom";
 import { getAllPosts } from "../../store/post";
 import { linkedInLink, githubLink, airzzzLink, medianLink } from "../../assets/helper";
-//image icons
 import icon from "../../assets/default-profile-icon.png"
 import homeIcon from "../../assets/home-icon.png"
 import linkedInIcon from "../../assets/linkedin-logo.png"

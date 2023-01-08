@@ -1,7 +1,6 @@
 import { csrfFetch } from "./csrf";
 
 
-// Search Matches
 export const search = (data) => async (dispatch) => {
     const res = await csrfFetch(`/api/users/search/${data}`);
 
