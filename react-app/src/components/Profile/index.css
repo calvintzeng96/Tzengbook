@@ -79,7 +79,6 @@
     padding: 20px;
     font-size: 36px;
     font-weight: bold;
-    /* background-color: lightgreen; */
 }
 
 #profile-body {
@@ -99,7 +98,6 @@
 
 
 #profile-body-left {
-    /* border: 1px solid red; */
     margin-top: 16px;
     padding: 8px;
     width: 484px;

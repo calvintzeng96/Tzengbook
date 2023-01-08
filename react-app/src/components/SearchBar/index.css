@@ -2,8 +2,6 @@
     max-width: 620px;
     position: relative;
     right: 10px;
-    /* display: flex;
-    justify-content: center; */
 }
 
 #search-icon {
@@ -46,7 +44,6 @@
 }
 
 .search-results-container {
-    /* background-color: pink; */
     border-radius: 8px;
     height: fit-content;
 

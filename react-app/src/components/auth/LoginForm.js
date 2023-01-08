@@ -61,7 +61,6 @@ const LoginForm = () => {
             <div className="error-handling" key={ind}>{error}</div>
           ))}
         </div>
-        {/* <div className="login-form-input"> */}
         <input
           name='email'
           type='text'
@@ -72,8 +71,6 @@ const LoginForm = () => {
           className="login-form-input"
           autoComplete="off"
         />
-        {/* </div> */}
-        {/* <div className="login-form-input"> */}
         <input
           name='password'
           type='password'
@@ -84,7 +81,6 @@ const LoginForm = () => {
           className="login-form-input"
           autoComplete="off"
         />
-        {/* </div> */}
         <button className="cursor" type='submit'>Log In</button>
         <button className="cursor" onClick={() => demoLogin()}>Demo Login</button>
       </form>

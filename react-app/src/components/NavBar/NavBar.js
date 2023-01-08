@@ -71,7 +71,7 @@ const NavBar = () => {
           <div id="notification-dropdown" className="dd">
             <div id="notification-title" className="dd">FRIEND REQUESTS</div>
             {incomingArr.length === 0 && (
-              <div>you have no requets</div>
+              <div id="no-requests" className="notification-card dd">No Requests</div>
             )}
             {incomingArr.map(ele => {
               return (

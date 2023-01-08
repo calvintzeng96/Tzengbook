@@ -1,11 +1,9 @@
 #friendship-option-container {
-    /* background-color: pink; */
     width: 400px;
     display: flex;
     justify-content: right;
     height: 36px;
     padding: 20px;
-    /* position: static; */
 }
 
 .friendship-option-all {
@@ -52,7 +50,6 @@
     text-align: left;
     font-weight: bold;
     line-height: 36px;
-    /* vertical-align: middle; */
     background-color: white;
     box-shadow: 0 0px 4px rgb(0 0 0 / 60%);
     border-radius: 0 0 8px 8px;
@@ -97,11 +94,9 @@
     top: 48px;
     width: 200px;
     height: 104px;
-    /* padding: 8px; */
     text-align: left;
     font-weight: bold;
     line-height: 36px;
-    /* vertical-align: middle; */
     background-color: white;
     box-shadow: 0 0px 4px rgb(0 0 0 / 60%);
     border-radius: 0 0 8px 8px;
@@ -121,7 +116,6 @@
 }
 
 .friendship-option-5-dropdown-options {
-    /* background-color: pink; */
     padding: 8px;
     height: 36px;
 

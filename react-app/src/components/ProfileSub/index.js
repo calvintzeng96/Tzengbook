@@ -35,10 +35,7 @@ const ProfileSub = ({ target, ele, createdAt, comment }) => {
     const goToProfile = () => {
         if (modalType) {
             setModalType(null)
-            history.push(`/users/${ele.id}`)
-            return
         }
-        dispatch(getUser(ele.id))
         history.push(`/users/${ele.id}`)
     }
 

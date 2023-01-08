@@ -29,20 +29,17 @@ const MidSection = () => {
     useEffect(() => {
         setFriendship(false)
         if (userId) {
-            dispatch(getUsersPosts2(userId))
-                .then(() => {
-                    if (friendsList[currentUser.id]) {
-                        setFriendship(true)
-                    }
-                    setIsLoaded(true)
-                })
+            if (friendsList[currentUser.id]) {
+                setFriendship(true)
+            }
+            setIsLoaded(true)
         } else {
             dispatch(getFeed(currentUser.id))
                 .then(() => {
                     setIsLoaded(true)
                 })
         }
-    }, [post, userId])
+    }, [friendsList])
 
 
     const openEditModal = (postId) => {
@@ -80,7 +77,6 @@ const MidSection = () => {
                         <div key={ele.id} className="single-post">
                             <div className="single-post-top">
                                 <ProfileSub target={target} ele={ele.User} createdAt={ele.createdAt} />
-                                {/* <div>test</div> */}
                                 {currentUser.id === ele.userId && (
                                     <div className="edit-delete">
                                         <button className="cursor" onClick={() => openEditModal(ele.id)}>Edit</button>

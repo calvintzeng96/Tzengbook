@@ -70,7 +70,6 @@ const Likes = ({ post }) => {
                 <i className="fa-solid fa-share"></i>
                     <div>Share</div>
                 </div>
-                {/* <div className="post-comment-divider">test2</div> */}
             </div>
         </div>
     )

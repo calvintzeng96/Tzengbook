@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux"
 import "./index.css"
-import { createRequest, deleteRequest } from "../../store/request"
+import { createRequest, deleteRequest, getOutgoingRequests } from "../../store/request"
 import { useState } from "react"
 import { deleteFriend, createFriend } from "../../store/friend"
 
@@ -15,6 +15,7 @@ const FriendshipOption = ({ status, userId }) => {
     const addFriend = (userId) => {
         dispatch(createRequest(userId))
             .then(() => {
+                dispatch(getOutgoingRequests(currentUser.id))
                 alert("Friendship Requested")
             })
             .catch(() => {
@@ -70,7 +71,6 @@ const FriendshipOption = ({ status, userId }) => {
             }
             {status === "myself" && (
                 <div id="friendship-option-2" className="friendship-option-all">
-                    {/* <button>Myself</button> */}
                 </div>
             )
             }

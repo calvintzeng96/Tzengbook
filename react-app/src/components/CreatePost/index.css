@@ -28,7 +28,6 @@
     font-size: 22px;
     margin: 24px 12px 20px 12px;
     min-height: 100px;
-    /* overflow: hidden */
 }
 
 #create-post-textarea::-webkit-scrollbar {

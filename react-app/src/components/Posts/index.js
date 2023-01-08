@@ -25,13 +25,17 @@ const GetAllPosts = () => {
 
     const post = useSelector(state => state.post.singlePost)
 
+    // useEffect(() => {
+    //     console.log("===========99999")
+    //     dispatch(getFeed(currentUser.id))
+    //         .then(() => {
+    //             setIsLoaded(true)
+    //         })
+    // }, [post])
+
     useEffect(() => {
-        console.log("===========99999")
-        dispatch(getFeed(currentUser.id))
-            .then(() => {
-                setIsLoaded(true)
-            })
-    }, [post])
+        setIsLoaded(true)
+    }, [])
 
 
 

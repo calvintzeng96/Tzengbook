@@ -82,7 +82,6 @@ const PostComments = ({ ele }) => {
                             return (
                                 <div key={comment.id} className="individual-comment">
                                     <ProfileSub target={0} ele={comment.user} comment={comment.content} />
-                                    {/* <div>{comment.content}</div> */}
                                     {comment.user_id === currentUser.id && (
                                         <div className="edit-delete">
                                             <button className="cursor" onClick={() => editCommentNumber(comment)}>edit</button>

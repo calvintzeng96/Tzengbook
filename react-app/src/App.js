@@ -31,9 +31,6 @@ return (
     <Route path="/users/:userId" >
       <Profile />
     </Route>
-    {/* <Route path="/users/:userId/friends" >
-      <
-    </Route> */}
   </Switch>
 );
 }

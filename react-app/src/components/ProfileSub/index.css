@@ -3,7 +3,6 @@
     justify-content: left;
     width: 100%;
     max-width: calc(100% - 44px);
-    /* background-color: lightgreen; */
 
 }
 
@@ -27,18 +26,14 @@
 
 #comment-content-1 {
     overflow-wrap: anywhere;
-    /* background-color: pink; */
 }
 
 
 
 .target-post-display {
     display: flex;
-    /* justify-content: ; */
 }
 .target-post-display-1 {
-    /* background-color: pink; */
-    /* width: fit-content; */
     display: flex;
     font-size: 14px;
 }

@@ -27,7 +27,7 @@ def load_user(id):
     return User.query.get(int(id))
 
 
-# Tell flask about our seed commands
+# Tell flask about seed commands
 app.cli.add_command(seed_commands)
 
 app.config.from_object(Config)

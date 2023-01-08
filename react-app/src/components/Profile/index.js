@@ -18,6 +18,7 @@ import AllUsersFriends from "../AllUsersFriends"
 import SomeUsersFriends from "../SomeUsersFriends"
 import FriendshipOption from "../FriendshipOption"
 import { getOutgoingRequests } from "../../store/request"
+import { getUsersPosts2 } from "../../store/post"
 
 
 const Profile = () => {
@@ -32,6 +33,38 @@ const Profile = () => {
     const requests = useSelector(state => state.request)
     const outgoing = useSelector(state => state.request.outgoing)
     const friendsList = useSelector(state => Object.keys(state.friend.allFriends).length)
+
+    useEffect(() => {
+        dispatch(getUsersPosts2(userId))
+    }, [userId])
+
+    useEffect(() => {
+        dispatch(getUsersFriends(userId))
+                    .then((res) => {
+                        setFriendsArray(res.friends)
+                        let temp = "not friends"
+                        if (currentUser.id == userId) {
+                            temp = "myself"
+                        } else {
+                            for (let i = 0; i < res.friends.length; i++) {
+                                if (res.friends[i].id === currentUser.id) {
+                                    temp = "friends"
+                                    break
+                                }
+                            }
+                        }
+                        if (temp === "not friends") {
+                            let incomingKeys = Object.keys(requests.incoming)
+                            let outgoingKeys = Object.keys(requests.outgoing)
+                            if (incomingKeys.includes(userId)) {
+                                temp = "incomingRequest"
+                            } else if (outgoingKeys.includes(userId)) {
+                                temp = "outgoingRequest"
+                            }
+                        }
+                        setStatus(temp)
+                    })
+    }, [friendsList])
 
     useEffect(() => {
         setFriendsPage(false)
@@ -67,7 +100,7 @@ const Profile = () => {
                     })
                 window.scrollTo(0, 0)
             })
-    }, [userId, friendsPage, history.location.pathname, outgoing, friendsList])
+    }, [outgoing, history.location.pathname])
 
 
     const goToProfile = () => {

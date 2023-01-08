@@ -47,6 +47,7 @@ export const getOutgoingRequests = (userId) => async (dispatch) => {
 
     if (res.ok) {
         const requests = await res.json();
+        console.log("=========123", requests)
         dispatch(outgoingRequests(requests));
         return requests
     }
@@ -65,7 +66,7 @@ export const createRequest = (userId) => async (dispatch) => {
 }
 // Delete a Request
 export const deleteRequest = (myId, userId) => async (dispatch) => {
-    const res = await csrfFetch(`/api/requests/${userId}/inviter/${myId}`, {
+    const res = await csrfFetch(`/api/requests/${myId}/inviter/${userId}`, {
         method: "DELETE",
     });
     if (res.ok) {
