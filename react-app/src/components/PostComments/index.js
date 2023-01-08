@@ -76,7 +76,7 @@ const PostComments = ({ ele }) => {
 
                         if (currentComment !== comment.id) {
                             return (
-                                <div className="individual-comment">
+                                <div key={comment.id} className="individual-comment">
                                     <ProfileSub target={0} ele={comment.user} comment={comment.content} />
                                     {/* <div>{comment.content}</div> */}
                                     {comment.user_id == currentUser.id && (

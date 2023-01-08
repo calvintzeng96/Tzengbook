@@ -11,6 +11,7 @@ import { getUsersPosts } from '../../store/post';
 import bellIcon from "../../assets/bell-icon.png"
 import { deleteRequest, getIncomingRequests, getOutgoingRequests } from "../../store/request"
 import { createFriend } from "../../store/friend"
+import SearchBar from '../SearchBar';
 
 const NavBar = () => {
   const currentUser = useSelector(state => state.session.user)
@@ -65,9 +66,9 @@ const NavBar = () => {
       .then(() => {
         dispatch(deleteRequest(myId, userId))
       })
-      // .catch(() => {
-      //   alert("something went wrong...")
-      // })
+    // .catch(() => {
+    //   alert("something went wrong...")
+    // })
   }
   const declineRequest = (myId, userId) => {
     //delete request instance
@@ -78,7 +79,7 @@ const NavBar = () => {
   return (
     <div id="nav-bar">
       <img onClick={goHome} id="tzengbook-icon-logged-in" className="cursor" src={tzengbookIcon} />
-      <div>SEARCH BAR PLACEHOLDER</div>
+      <SearchBar />
       <div id="nav-bar-right">
         <button onClick={notificationButton} id="notification-icon" className="cursor dd">{incomingArr.length ? incomingArr.length : ""}</button>
         {dropdown && (
@@ -89,7 +90,7 @@ const NavBar = () => {
             )}
             {incomingArr.map(ele => {
               return (
-                <div className="notification-card dd">
+                <div key={ele.id} className="notification-card dd">
                   <div className="notification-card-top dd">
                     <img onClick={() => goToProfileUserId(ele.id)} className="notification-image cursor dd" src={ele.profilePicture} />
                     <div onClick={() => goToProfileUserId(ele.id)} className="notification-name cursor dd">{ele.firstName} {ele.lastName} </div>

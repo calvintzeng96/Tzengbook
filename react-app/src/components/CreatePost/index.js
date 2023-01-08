@@ -80,7 +80,7 @@ const CreatePost = () => {
             </div>
             <div className="error-handling">
                 {errors.length > 0 &&
-                    errors.map((ele) => <div>{ele}</div>)}
+                    errors.map((ele, ind) => <div key={ind}>{ele}</div>)}
             </div>
 
             <textarea

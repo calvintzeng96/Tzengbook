@@ -34,6 +34,21 @@ def users():
     users = User.query.all()
     return {'users': [user.to_dict() for user in users]}
 
+@user_routes.route("/search/<name>")
+@login_required
+def search_bar(name):
+    #name == janesmith
+    user = User.query.filter(User.full_name.like(f"%{name}%")).all()
+    res = []
+    if user:
+        print("====================2", user)
+        for ele in user:
+            print("====================3", ele)
+            u = ele.to_dict_search()
+            # u["fullName"] = f"{ele.first_name} {ele.last_name}"
+            res.append(u)
+            print("====================3", res)
+    return {"results": res}
 
 # Get details of current User
 @user_routes.route("/profile")

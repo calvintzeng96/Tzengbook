@@ -2,7 +2,7 @@ from .db import db, environment, SCHEMA, add_prefix_for_prod
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 from datetime import datetime
-from sqlalchemy.orm import validates
+from sqlalchemy.orm import validates, column_property
 from .post import Post
 from .request import requests
 from .friend import friends
@@ -20,6 +20,7 @@ class User(db.Model, UserMixin):
     hashed_password = db.Column(db.String(255), nullable=False)
     first_name = db.Column(db.String(50), nullable=False)
     last_name = db.Column(db.String(50), nullable=False)
+    full_name = column_property(first_name + last_name)
     profile_picture = db.Column(db.String)
     bio = db.Column(db.String(1000))
     created_at = db.Column(db.DateTime, nullable=False, default=datetime.now())
@@ -140,4 +141,12 @@ class User(db.Model, UserMixin):
             "firstName": self.first_name,
             "lastName": self.last_name,
             "profilePicture": self.profile_picture,
+            "fullName": self.full_name
+        }
+    def to_dict_search(self):
+        return {
+            'id': self.id,
+            "profilePicture": self.profile_picture,
+            # "fullName": self.full_name
+            "fullName": self.first_name + " " + self.last_name
         }

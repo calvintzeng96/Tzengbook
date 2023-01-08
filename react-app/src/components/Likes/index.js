@@ -47,7 +47,7 @@ const Likes = ({ post }) => {
         <div id="likes-container">
             <div id="like-comment-count-container">
                 <div id="like-comment-count-1">
-                    <i id="like-count-icon" class="fa-solid fa-thumbs-up"></i>
+                    <i id="like-count-icon" className="fa-solid fa-thumbs-up"></i>
                     <div id="like-count-number">{post.Like_Count}</div>
                 </div>
                 <div id="comment-count">{post.Comments_Count} comments</div>
@@ -64,11 +64,11 @@ const Likes = ({ post }) => {
                     <div>Like</div>
                 </div>
                 <div className="post-comment-divider cursor" onClick={() => selectCommentDom(post.id)}>
-                    <i class="fa-regular fa-message"></i>
+                    <i className="fa-regular fa-message"></i>
                     <div>Comment</div>
                 </div>
                 <div className="post-comment-divider cursor" onClick={() => sharePost(post.id)}>
-                <i class="fa-solid fa-share"></i>
+                <i className="fa-solid fa-share"></i>
                     <div>Share</div>
                 </div>
                 {/* <div className="post-comment-divider">test2</div> */}
