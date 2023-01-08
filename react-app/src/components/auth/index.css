@@ -82,7 +82,7 @@
 }
 
 #signup-form > button {
-    : #00a400;
+    background-color: #00a400;
     height: 36px;
     border: transparent;
     color: white;

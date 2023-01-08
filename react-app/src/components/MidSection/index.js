@@ -94,7 +94,7 @@ const MidSection = () => {
                     )
                 })}
                 {Object.values(posts).length === 0 && (
-                    <div className="larger-font grey">Currently has no posts</div>
+                    <div id="currently-has-no-posts" className="larger-font grey">Currently has no posts</div>
                 )}
             </div>
         )
