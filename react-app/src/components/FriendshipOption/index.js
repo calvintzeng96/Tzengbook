@@ -70,8 +70,7 @@ const FriendshipOption = ({ status, userId }) => {
             }
             {status === "myself" && (
                 <div id="friendship-option-2" className="friendship-option-all">
-                    <button>Myself</button>
-                    <button>Placeholder</button>
+                    {/* <button>Myself</button> */}
                 </div>
             )
             }

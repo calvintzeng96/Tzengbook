@@ -15,9 +15,6 @@ const SomeUsersFriends = ({ friendsArray }) => {
                     </div>
                 )
             })}
-            {friendsArray.length === 0 && (
-                <div>CURRENTLY HAVE NO FRIENDS</div>
-            )}
         </div>
     )
 }

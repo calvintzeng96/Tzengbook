@@ -16,11 +16,11 @@ const AllUsersFriends = ({ friendsArray }) => {
 
     const helper = (userId) => {
         let temp = "not friends"
-        if (currentUser.id === userId) {
+        if (currentUser.id == userId) {
             temp = "myself"
         } else {
             for (let i = 0; i < myFriends.length; i++) {
-                if (myFriends[i].id === userId) {
+                if (myFriends[i].id == userId) {
                     temp = "friends"
                     break
                 }
@@ -57,13 +57,9 @@ const AllUsersFriends = ({ friendsArray }) => {
                             <img className="cursor" onClick={() => history.push(`/users/${ele.id}`)} src={ele.profilePicture} alt="profile icon" />
                             <div className="cursor underline-hover" onClick={() => history.push(`/users/${ele.id}`)} id="all-friends-name">{ele.firstName} {ele.lastName}</div>
                             <FriendshipOption status={status} userId={ele.id} />
-                            {/* <div> test </div> */}
                         </div>
                     )
                 })}
-                {friendsArray.length === 0 && (
-                    <div>CURRENTLY HAVE NO FRIENDS</div>
-                )}
             </div>
         </div>
     )

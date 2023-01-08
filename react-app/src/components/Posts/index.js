@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux"
 import { useHistory } from "react-router-dom";
-import { getAllPosts } from "../../store/post";
+import { getAllPosts, getFeed } from "../../store/post";
 import { linkedInLink, githubLink, airzzzLink, medianLink } from "../../assets/helper";
 import icon from "../../assets/default-profile-icon.png"
 import homeIcon from "../../assets/home-icon.png"
@@ -26,7 +26,8 @@ const GetAllPosts = () => {
     const post = useSelector(state => state.post.singlePost)
 
     useEffect(() => {
-        dispatch(getAllPosts())
+        console.log("===========99999")
+        dispatch(getFeed(currentUser.id))
             .then(() => {
                 setIsLoaded(true)
             })

@@ -45,7 +45,7 @@ const Profile = () => {
                     .then((res) => {
                         setFriendsArray(res.friends)
                         let temp = "not friends"
-                        if (currentUser.id === userId) {
+                        if (currentUser.id == userId) {
                             temp = "myself"
                         } else {
                             for (let i = 0; i < res.friends.length; i++) {

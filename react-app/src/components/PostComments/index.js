@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { createComment, deleteComment, getAllPosts, updateComment, getUsersPosts2 } from "../../store/post";
+import { createComment, deleteComment, getAllPosts, updateComment, getUsersPosts2, getFeed } from "../../store/post";
 import ProfileSub from "../ProfileSub";
 import { useHistory, useParams } from "react-router-dom";
 import icon from "../../assets/default-profile-icon.png"
@@ -27,7 +27,7 @@ const PostComments = ({ ele }) => {
                 if (userId) {
                     dispatch(getUsersPosts2(userId))
                 } else {
-                    dispatch(getAllPosts())
+                    dispatch(getFeed(currentUser.id))
                 }
             })
         return
@@ -44,7 +44,7 @@ const PostComments = ({ ele }) => {
                 if (userId) {
                     dispatch(getUsersPosts2(userId))
                 } else {
-                    dispatch(getAllPosts())
+                    dispatch(getFeed(currentUser.id))
                 }
             })
         return
@@ -64,6 +64,12 @@ const PostComments = ({ ele }) => {
         setCurrentComment(comment.id)
         setEditComment(comment.content)
     }
+    useEffect(() => {
+        if (currentComment) {
+            let comment = document.getElementsByClassName("comment-being-edited")[0]
+            comment.select()
+        }
+    }, [currentComment])
 
 
     return (
@@ -99,6 +105,7 @@ const PostComments = ({ ele }) => {
                                                 onChange={(e) => setEditComment(e.target.value)}
                                                 placeholder="Edit your comment..."
                                                 required
+                                                className="comment-being-edited"
                                             />
                                         </form>
                                         <button id="edit-cancel-button" onClick={() => setCurrentComment("")}>cancel</button>
