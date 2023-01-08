@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux"
 import { search } from "../../store/fetch"
 import { useHistory } from "react-router-dom"
 import debounce from "lodash.debounce"
-
+import defaultIcon from "../../assets/default-profile-icon.png"
 
 const SearchBar = () => {
     const dispatch = useDispatch()
@@ -71,9 +71,13 @@ const SearchBar = () => {
                             }}
                         >
                             {res.map(ele => {
+                                let icon = ele.profilePicture
+                                if (!ele.profilePicture) {
+                                    icon = defaultIcon
+                                }
                                 return (
                                     <div key={ele.id} className="search-individual-results" onClick={() => goToProfile(ele.id)}>
-                                        <img className="search-image" src={ele.profilePicture} alt="profile"/>
+                                        <img className="search-image" src={icon} alt="profile" />
                                         <div className="search-individual-results-name">{ele.fullName}</div>
                                     </div>
                                 )
