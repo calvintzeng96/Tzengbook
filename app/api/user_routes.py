@@ -38,7 +38,7 @@ def users():
 @login_required
 def search_bar(name):
     #name == janesmith
-    user = User.query.filter(User.full_name.like(f"%{name}%")).all()
+    user = User.query.filter(User.full_name.ilike(f"%{name}%")).all()
     res = []
     if user:
         for ele in user:
