@@ -34,7 +34,9 @@ const NavBar = () => {
   }, [])
 
   const goHome = () => {
-    if (window.location.pathname === "/") return
+    if (window.location.pathname === "/") {
+      window.location.reload(false)
+    }
     history.push("/")
   }
 
