@@ -1,9 +1,7 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux"
 import { useHistory } from "react-router-dom";
-import { createComment, deletePost, getAllPosts, getSinglePost, getUsersPosts } from "../../store/post";
-import ProfileSub from "../ProfileSub";
-import { ModalContext } from "../../context/Modal";
+import { getAllPosts } from "../../store/post";
 import { linkedInLink, githubLink, airzzzLink, medianLink } from "../../assets/helper";
 //image icons
 import icon from "../../assets/default-profile-icon.png"
@@ -14,33 +12,24 @@ import airzzzIcon from "../../assets/airzzz-icon.png"
 import medianIcon from "../../assets/median-icon.png"
 
 import "./index.css"
-import { getUser } from "../../store/user";
-import PostComments from "../PostComments";
+
 import MidSection from "../MidSection";
 
 
 
 const GetAllPosts = () => {
     const dispatch = useDispatch();
-    const { setModalType } = useContext(ModalContext)
     const history = useHistory()
     const [isLoaded, setIsLoaded] = useState(false)
     const currentUser = useSelector(state => state.session.user)
-    const user = useSelector(state => state.user.singleUser)
 
 
-    const posts = useSelector(state => state.post.allPosts)
     const post = useSelector(state => state.post.singlePost)
 
-    const postsArray = Object.values(posts)
-
     useEffect(() => {
-        // dispatch(getUsersPosts(currentUser.id))
         dispatch(getAllPosts())
             .then(() => {
                 setIsLoaded(true)
-                // maybe take out getUser dispatch
-                // dispatch(getUser(currentUser.id))
             })
     }, [post])
 
@@ -52,28 +41,28 @@ const GetAllPosts = () => {
             <div id="all-post-container">
                 <div id="all-post-left">
                     <div className="all-post-left-contents cursor">
-                        <img src={homeIcon} />
+                        <img src={homeIcon} alt="home icon" />
                         <div onClick={() => history.push("/")}>Home</div>
                     </div>
                     <div onClick={() => history.push(`/users/${currentUser.id}`)} className="all-post-left-contents cursor">
-                        <img src={currentUser.profilePicture ? currentUser.profilePicture : icon} />
+                        <img src={currentUser.profilePicture ? currentUser.profilePicture : icon} alt="profile icon" />
                         <div>{currentUser.firstName} {currentUser.lastName}</div>
                     </div>
                     <div className="spacer"></div>
                     <div onClick={linkedInLink} className="all-post-left-contents cursor">
-                        <img src={linkedInIcon} />
+                        <img src={linkedInIcon} alt="linkedin icon" />
                         <div>LinkedIn</div>
                     </div>
                     <div onClick={githubLink} className="all-post-left-contents cursor">
-                        <img src={githubIcon} />
+                        <img src={githubIcon} alt="github icon" />
                         <div>Github</div>
                     </div>
                     <div onClick={airzzzLink} className="all-post-left-contents cursor">
-                        <img src={airzzzIcon} />
+                        <img src={airzzzIcon} alt="airzzz icon" />
                         <div>AirZzz</div>
                     </div>
                     <div onClick={medianLink} className="all-post-left-contents cursor">
-                        <img src={medianIcon} />
+                        <img src={medianIcon} alt="median icon" />
                         <div>Median</div>
                     </div>
                 </div>

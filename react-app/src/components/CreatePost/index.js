@@ -19,7 +19,7 @@ const CreatePost = () => {
     const [target, setTarget] = useState(0)
 
     useEffect(() => {
-        if (window.location.pathname == "/") {
+        if (window.location.pathname === "/") {
             setTarget(0)
             setWallId(currentUser.id)
         } else {

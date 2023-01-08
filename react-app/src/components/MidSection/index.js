@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux"
 import { useHistory, useParams } from "react-router-dom";
-import { deletePost, getAllPosts, getSinglePost, getUsersPosts, getUsersPosts2, getFeed } from "../../store/post";
+import { deletePost, getSinglePost, getUsersPosts2, getFeed } from "../../store/post";
 import ProfileSub from "../ProfileSub";
 import { ModalContext } from "../../context/Modal";
 import icon from "../../assets/default-profile-icon.png"
@@ -58,10 +58,10 @@ const MidSection = () => {
     if (isLoaded && currentUser) {
         return (
             <div id="all-post-middle">
-                {(window.location.pathname == "/" || currentUser.id == user.id || friendship) && (
+                {(window.location.pathname === "/" || currentUser.id === user.id || friendship) && (
                     <div>
                         <div className="create-comment-div">
-                            <img className="cursor" src={currentUser.profilePicture ? currentUser.profilePicture : icon} onClick={() => history.push(`/users/${user.id}`)} />
+                            <img className="cursor" src={currentUser.profilePicture ? currentUser.profilePicture : icon} onClick={() => history.push(`/users/${user.id}`)} alt="profile icon" />
                             <button className="cursor" onClick={() => setModalType("CreatePost")}>{`What's on your mind, ${currentUser?.firstName}?`}</button>
                         </div>
                     </div>
@@ -70,7 +70,7 @@ const MidSection = () => {
                     let poster = ele.userId
                     let postee = ele.wallId
                     let target;
-                    if (poster != postee) {
+                    if (poster !== postee) {
                         let name = ele.Target_Name
                         target = `${postee}/${name}`
                     } else {
@@ -81,7 +81,7 @@ const MidSection = () => {
                             <div className="single-post-top">
                                 <ProfileSub target={target} ele={ele.User} createdAt={ele.createdAt} />
                                 {/* <div>test</div> */}
-                                {currentUser.id == ele.userId && (
+                                {currentUser.id === ele.userId && (
                                     <div className="edit-delete">
                                         <button className="cursor" onClick={() => openEditModal(ele.id)}>Edit</button>
                                         <button className="cursor" onClick={() => deleteSinglePost(ele.id)}>Delete</button>
@@ -89,7 +89,7 @@ const MidSection = () => {
                                 )}
                             </div>
                             <div id="single-post-content">{ele.content}</div>
-                            {ele.image && <img className="post-image" src={ele.image} />}
+                            {ele.image && <img className="post-image" src={ele.image} alt="post" />}
 
                             <Likes post={ele} />
 
@@ -97,7 +97,7 @@ const MidSection = () => {
                         </div>
                     )
                 })}
-                {Object.values(posts).length == 0 && (
+                {Object.values(posts).length === 0 && (
                     <div className="larger-font grey">{user.firstName} currently has no posts</div>
                 )}
             </div>

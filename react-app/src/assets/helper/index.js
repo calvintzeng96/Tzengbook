@@ -1,7 +1,3 @@
-import { useDispatch, useSelector } from "react-redux"
-
-
-
 export const linkedInLink = () => {
     window.open("https://www.linkedin.com/in/calvintzeng/", "_blank")
 }

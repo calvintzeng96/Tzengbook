@@ -16,17 +16,17 @@ const AllUsersFriends = ({ friendsArray }) => {
 
     const helper = (userId) => {
         let temp = "not friends"
-        if (currentUser.id == userId) {
+        if (currentUser.id === userId) {
             temp = "myself"
         } else {
             for (let i = 0; i < myFriends.length; i++) {
-                if (myFriends[i].id == userId) {
+                if (myFriends[i].id === userId) {
                     temp = "friends"
                     break
                 }
             }
         }
-        if (temp == "not friends") {
+        if (temp === "not friends") {
             let incomingKeys = Object.keys(incoming)
             let outgoingKeys = Object.keys(outgoing)
             if (incomingKeys.includes(userId)) {
@@ -43,7 +43,7 @@ const AllUsersFriends = ({ friendsArray }) => {
             .then((res) => {
                 setMyFriends(res.friends)
             })
-    }, [])
+    }, [currentUser.id, dispatch])
 
     return (
         <div id="all-friends-outer-container">
@@ -51,18 +51,17 @@ const AllUsersFriends = ({ friendsArray }) => {
             <div id="all-friends-container">
 
                 {friendsArray.length > 0 && friendsArray.map(ele => {
-                    //function/check/algorithms put here
                     let status = helper(ele.id)
                     return (
                         <div id="all-friends-card" key={ele.id}>
-                            <img className="cursor" onClick={() => history.push(`/users/${ele.id}`)} src={ele.profilePicture} />
+                            <img className="cursor" onClick={() => history.push(`/users/${ele.id}`)} src={ele.profilePicture} alt="profile icon" />
                             <div className="cursor underline-hover" onClick={() => history.push(`/users/${ele.id}`)} id="all-friends-name">{ele.firstName} {ele.lastName}</div>
                             <FriendshipOption status={status} userId={ele.id} />
                             {/* <div> test </div> */}
                         </div>
                     )
                 })}
-                {friendsArray.length == 0 && (
+                {friendsArray.length === 0 && (
                     <div>CURRENTLY HAVE NO FRIENDS</div>
                 )}
             </div>

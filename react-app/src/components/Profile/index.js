@@ -4,7 +4,6 @@ import "./index.css"
 import { useEffect, useState } from "react"
 import icon from "../../assets/default-profile-icon.png"
 import homeIcon from "../../assets/home-icon.png"
-import { getUsersPosts, getUsersPosts2 } from "../../store/post"
 import { getUser } from "../../store/user"
 import { getUsersFriends } from "../../store/friend";
 
@@ -18,11 +17,7 @@ import medianIcon from "../../assets/median-icon.png"
 import AllUsersFriends from "../AllUsersFriends"
 import SomeUsersFriends from "../SomeUsersFriends"
 import FriendshipOption from "../FriendshipOption"
-import { getIncomingRequests, getOutgoingRequests } from "../../store/request"
-
-
-
-
+import { getOutgoingRequests } from "../../store/request"
 
 
 const Profile = () => {
@@ -35,7 +30,6 @@ const Profile = () => {
     const [friendsArray, setFriendsArray] = useState([])
     const [status, setStatus] = useState("")
     const requests = useSelector(state => state.request)
-    const incoming = useSelector(state => state.request.incoming)
     const outgoing = useSelector(state => state.request.outgoing)
     const friendsList = useSelector(state => Object.keys(state.friend.allFriends).length)
 
@@ -55,17 +49,17 @@ const Profile = () => {
                     .then((res) => {
                         setFriendsArray(res.friends)
                         let temp = "not friends"
-                        if (currentUser.id == userId) {
+                        if (currentUser.id === userId) {
                             temp = "myself"
                         } else {
                             for (let i = 0; i < res.friends.length; i++) {
-                                if (res.friends[i].id == currentUser.id) {
+                                if (res.friends[i].id === currentUser.id) {
                                     temp = "friends"
                                     break
                                 }
                             }
                         }
-                        if (temp == "not friends") {
+                        if (temp === "not friends") {
                             let incomingKeys = Object.keys(requests.incoming)
                             let outgoingKeys = Object.keys(requests.outgoing)
                             if (incomingKeys.includes(userId)) {
@@ -140,18 +134,18 @@ const Profile = () => {
             <NavBar />
             <div id="profile-container" className="">
                 <div id="profile-left" className="">
-                    <img className="profile-left-icons cursor" onClick={() => history.push("/")} src={homeIcon} />
-                    <img className="profile-left-icons cursor" onClick={goToProfile} src={currentUser?.profilePicture ? currentUser?.profilePicture : icon} />
+                    <img className="profile-left-icons cursor" onClick={() => history.push("/")} src={homeIcon} alt="home icon" />
+                    <img className="profile-left-icons cursor" onClick={goToProfile} src={currentUser?.profilePicture ? currentUser?.profilePicture : icon} alt="profile icon" />
                     <div id="profile-left-spacer"></div>
-                    <img className="profile-left-icons cursor" onClick={linkedInLink} src={linkedInIcon} />
-                    <img className="profile-left-icons cursor" onClick={githubLink} src={githubIcon} />
-                    <img className="profile-left-icons cursor" onClick={medianLink} src={medianIcon} />
-                    <img className="profile-left-icons cursor" onClick={airzzzLink} src={airzzzIcon} />
+                    <img className="profile-left-icons cursor" onClick={linkedInLink} src={linkedInIcon} alt="linkedin icon" />
+                    <img className="profile-left-icons cursor" onClick={githubLink} src={githubIcon} alt="github icon" />
+                    <img className="profile-left-icons cursor" onClick={medianLink} src={medianIcon} alt="median icon" />
+                    <img className="profile-left-icons cursor" onClick={airzzzLink} src={airzzzIcon} alt="airzzz icon" />
                 </div>
                 <div id="profile-right" className="">
                     <div id="profile-header-container">
                         <div id="profile-header" className="">
-                            <img onClick={() => goToProfileUserId(user.id)} className="cursor" id="profile-pic" src={user.profilePicture ? user.profilePicture : icon} />
+                            <img onClick={() => goToProfileUserId(user.id)} className="cursor" id="profile-pic" src={user.profilePicture ? user.profilePicture : icon} alt="profile" />
                             <div onClick={() => goToProfileUserId(user.id)} className="cursor underline-hover" id="profile-name">{user.firstName} {user.lastName}</div>
                             <FriendshipOption status={status} userId={userId} />
 

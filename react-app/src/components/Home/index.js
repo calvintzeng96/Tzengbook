@@ -1,12 +1,9 @@
-import { useDispatch, useSelector } from "react-redux"
+import { useSelector } from "react-redux"
 import LoginForm from "../auth/LoginForm"
 import NavBar from "../NavBar/NavBar"
 import GetAllPosts from "../Posts"
 import "./index.css"
 import LoggedOutFooter from "../LoggedOutFooter"
-import { getIncomingRequests, getOutgoingRequests } from '../../store/request';
-import { useEffect } from "react"
-import MidSection from "../MidSection"
 
 
 

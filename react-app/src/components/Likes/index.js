@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import "./index.css"
-import { csrfFetch } from "../../store/csrf"
 import { getLikeList, unlikePost, likePost } from "../../store/post"
 
 
@@ -13,7 +12,7 @@ const Likes = ({ post }) => {
         dispatch(getLikeList(post.id))
             .then((res) => {
                 let likeList = res.Likes
-                let yes = likeList.filter(ele => ele.userId == currentUser.id)
+                let yes = likeList.filter(ele => ele.userId === currentUser.id)
                 if (yes.length) {
                     setLiked(true)
                 }

@@ -4,7 +4,6 @@ import { useHistory } from "react-router-dom"
 import { useDispatch } from "react-redux"
 import { getUser } from "../../store/user"
 import { useContext, useEffect } from "react"
-import { getUsersPosts } from "../../store/post"
 import { ModalContext } from "../../context/Modal"
 import { useState } from "react"
 
@@ -50,7 +49,7 @@ const ProfileSub = ({ target, ele, createdAt, comment }) => {
 
     return (
         <div className="profile-in-post">
-            <img onClick={() => goToProfile()} className="profile-sub-icon cursor" src={ele.profilePicture ? ele.profilePicture : icon} />
+            <img onClick={() => goToProfile()} className="profile-sub-icon cursor" src={ele.profilePicture ? ele.profilePicture : icon} alt="profile" />
 
             <div id={test ? "comment-content" : "comment-content-not"}>
                 <div className={test ? "small-text" : "target-post-display"}>

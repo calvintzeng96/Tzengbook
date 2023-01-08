@@ -1,8 +1,7 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { createComment, deleteComment, getAllPosts, updateComment, getUsersPosts, getUsersPosts2 } from "../../store/post";
+import { createComment, deleteComment, getAllPosts, updateComment, getUsersPosts2 } from "../../store/post";
 import ProfileSub from "../ProfileSub";
-import { getUser } from "../../store/user";
 import { useHistory, useParams } from "react-router-dom";
 import icon from "../../assets/default-profile-icon.png"
 import "./index.css"
@@ -79,7 +78,7 @@ const PostComments = ({ ele }) => {
                                 <div key={comment.id} className="individual-comment">
                                     <ProfileSub target={0} ele={comment.user} comment={comment.content} />
                                     {/* <div>{comment.content}</div> */}
-                                    {comment.user_id == currentUser.id && (
+                                    {comment.user_id === currentUser.id && (
                                         <div className="edit-delete">
                                             <button className="cursor" onClick={() => editCommentNumber(comment)}>edit</button>
                                             <button className="cursor" onClick={() => deleteCommentButton(comment.id)}>delete</button>
@@ -93,7 +92,7 @@ const PostComments = ({ ele }) => {
 
                                     {editComment.length > 2000 && <div id="edit-comment-error" className="error-handling">Characters Exceeded- Current Characters: {editComment.length}/2000</div>}
                                     <div id="edit-comment-container">
-                                        <img onClick={goToProfile} className="profile-sub-icon cursor" src={currentUser.profilePicture ? currentUser.profilePicture : icon} />
+                                        <img onClick={goToProfile} className="profile-sub-icon cursor" src={currentUser.profilePicture ? currentUser.profilePicture : icon} alt="profile" />
                                         <form id="edit-comment-form" onSubmit={(e) => editCommentSubmit(e, comment.id)}>
                                             <input
                                                 type="text"
@@ -112,7 +111,7 @@ const PostComments = ({ ele }) => {
                 }
             </div>
             <div className="create-comment-container">
-                <img onClick={goToProfile} className="profile-sub-icon cursor" src={currentUser.profilePicture ? currentUser.profilePicture : icon} />
+                <img onClick={goToProfile} className="profile-sub-icon cursor" src={currentUser.profilePicture ? currentUser.profilePicture : icon} alt="profile" />
                 <form className="create-comment-form" onSubmit={(e) => commentSubmit(e, ele.id)}>
                     <input
                         type="text"

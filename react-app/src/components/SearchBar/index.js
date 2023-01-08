@@ -1,5 +1,4 @@
 import "./index.css"
-import { csrfFetch } from "../../store/csrf"
 import { useCallback, useEffect, useState } from "react"
 import { useDispatch } from "react-redux"
 import { search } from "../../store/fetch"
@@ -14,24 +13,21 @@ const SearchBar = () => {
     const [active, setActive] = useState(false)
     const history = useHistory()
 
-    useEffect(() => {
-        return () => {
-            debounceTest.cancel();
-        }
-    }, []);
 
     const searchFetch = (data) => {
         dispatch(search(data))
             .then((res) => {
                 setRes(res.results)
-                console.log("===================12321")
             })
     }
 
-    const debounceTest = useCallback(
-        debounce((data) => searchFetch(data), 200)
-        , [])
+    const debounceTest = useCallback(debounce((data) => searchFetch(data), 300), [])
 
+    useEffect(() => {
+        return () => {
+            debounceTest.cancel();
+        }
+    }, [debounceTest]);
     //getting results from search
     useEffect(() => {
         let data = content.replaceAll(" ", "")
@@ -41,7 +37,7 @@ const SearchBar = () => {
         } else {
             setRes([])
         }
-    }, [content])
+    }, [content, debounceTest])
 
     //checks to see if search bar active => show/unshow results
     // useEffect(() => {
@@ -86,7 +82,7 @@ const SearchBar = () => {
                             {res.map(ele => {
                                 return (
                                     <div key={ele.id} className="search-individual-results">
-                                        <img className="search-image" src={ele.profilePicture} />
+                                        <img className="search-image" src={ele.profilePicture} alt="profile"/>
                                         <div className="search-individual-results-name" onClick={() => goToProfile(ele.id)}>{ele.fullName}</div>
                                     </div>
                                 )

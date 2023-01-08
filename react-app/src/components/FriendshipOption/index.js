@@ -1,8 +1,7 @@
 import { useDispatch, useSelector } from "react-redux"
 import "./index.css"
-import { createRequest, deleteRequest, getIncomingRequests, getOutgoingRequests } from "../../store/request"
-import { useParams } from "react-router-dom"
-import { useEffect, useState } from "react"
+import { createRequest, deleteRequest } from "../../store/request"
+import { useState } from "react"
 import { deleteFriend, createFriend } from "../../store/friend"
 
 const FriendshipOption = ({ status, userId }) => {
@@ -80,20 +79,20 @@ const FriendshipOption = ({ status, userId }) => {
 
     return (
         <div id="friendship-option-container">
-            {status == "not friends" && !(incoming[userId]) && !(outgoing[userId]) && (
+            {status === "not friends" && !(incoming[userId]) && !(outgoing[userId]) && (
                 <div id="friendship-option-1" className="friendship-option-all">
                     <button onClick={() => addFriend(userId)} id="friendship-option-1-1" className="cursor">Add Friend</button>
                 </div>
             )
             }
-            {status == "myself" && (
+            {status === "myself" && (
                 <div id="friendship-option-2" className="friendship-option-all">
                     <button>Myself</button>
                     <button>Placeholder</button>
                 </div>
             )
             }
-            {status == "friends" && (
+            {status === "friends" && (
                 <div id="friendship-option-3" className="friendship-option-all">
                     <button onClick={() => option3Button()} id="friendship-option-3-1" className="cursor">Friends</button>
                     {unfriendButton && (

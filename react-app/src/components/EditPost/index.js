@@ -32,7 +32,7 @@ const EditPost = () => {
     const submit = async (e) => {
         e.preventDefault();
         const formData = new FormData();
-        if (imageRemoval == "Existing image removed :)") {
+        if (imageRemoval === "Existing image removed :)") {
             setImage("remove existing image")
             await fetch('/api/posts/checkImage', {
                 method: "POST",
