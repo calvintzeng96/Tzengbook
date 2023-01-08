@@ -90,10 +90,8 @@ def all_users_posts(userId):
         like_count = Like.query.filter(Like.post_id == ele.id).count()
         print(type(like_count))
         post = ele.to_dict_with_comments()
-        # post["Count"] = like_count
         post["Like_Count"] = like_count
         new_list.append(post)
-    # return {"Posts": [post.to_dict_with_comments() for post in posts]}
     return {"Posts": new_list}
 
 
@@ -209,5 +207,8 @@ def create_post(userId):
                             created_at=datetime.now())
         db.session.add(new_post)
         db.session.commit()
-        return new_post.to_dict(), 201
+        target = User.query.get(userId)
+        res = new_post.to_dict_with_comments_likes()
+        res["Target_Name"] = f"{target.first_name} {target.last_name}"
+        return res, 201
     return {"errors": validation_errors_to_error_messages(form.errors)}, 401

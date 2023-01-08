@@ -49,6 +49,7 @@ const singlePost = (post) => {
 };
 
 const newPost = (post) => {
+    console.log("=============1")
     return {
         type: NEW_POST,
         post
@@ -157,7 +158,8 @@ export const createPost = (wallId, data) => async (dispatch) => {
     });
 
     if (res.ok) {
-        const post = res.json();
+        const post = await res.json();
+        console.log("================", post)
         dispatch(newPost(post));
         return post
     }
@@ -171,7 +173,7 @@ export const updatePost = (postId, data) => async (dispatch) => {
         body: JSON.stringify(data),
     });
     if (res.ok) {
-        const post = res.json();
+        const post = await res.json();
         dispatch(editPost(post));
         return post
     }
@@ -297,10 +299,14 @@ export const postReducer = (state = initialState, action) => {
             const singlePost = { ...state, singlePost: action.post }
             return { ...singlePost }
         case NEW_POST:
-            const newPost = { ...state, singlePost: action.post }
+            const newPost = { ...state, singlePost: action.post, allPosts: {...state.allPosts}}
+            let wComment = action.post
+            wComment["Like_Count"] = 0
+            newPost.allPosts[action.post.id] = wComment
             return { ...newPost }
         case EDIT_POST:
-            const editedPost = { ...state, singlePost: action.post }
+            const editedPost = { ...state, allPosts: {...state.allPosts} }
+            editedPost.allPosts[action.post.id] = action.post
             return { ...editedPost }
         case DESTROY_POST:
             const deletePost = {

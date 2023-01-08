@@ -109,7 +109,10 @@ def edit_post(post_id):
             post.content = update_data["content"]
             post.image = post.image
         db.session.commit()
-        return jsonify(post.to_dict())
+        target = User.query.get(post.wall_id)
+        res = post.to_dict_with_comments_likes()
+        res["Target_Name"] = f"{target.first_name} {target.last_name}"
+        return res, 201
     return {"errors": validation_errors_to_error_messages(form.errors)}, 401
 
 
