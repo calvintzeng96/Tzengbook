@@ -106,6 +106,7 @@ const PostComments = ({ ele }) => {
                                                 placeholder="Edit your comment..."
                                                 required
                                                 className="comment-being-edited"
+                                                autoComplete="off"
                                             />
                                         </form>
                                         <button id="edit-cancel-button" onClick={() => setCurrentComment("")}>cancel</button>
@@ -126,6 +127,7 @@ const PostComments = ({ ele }) => {
                         placeholder="Write a comment..."
                         required
                         id={"PostId"+ele.id}
+                        autoComplete="off"
                     />
                     {newComment.length > 2000 && <div className="error-handling">Characters Exceeded- Current Characters: {newComment.length}/2000</div>}
                 </form>

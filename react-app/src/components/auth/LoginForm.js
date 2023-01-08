@@ -70,6 +70,7 @@ const LoginForm = () => {
           onChange={updateEmail}
           required
           className="login-form-input"
+          autoComplete="off"
         />
         {/* </div> */}
         {/* <div className="login-form-input"> */}
@@ -81,6 +82,7 @@ const LoginForm = () => {
           onChange={updatePassword}
           required
           className="login-form-input"
+          autoComplete="off"
         />
         {/* </div> */}
         <button className="cursor" type='submit'>Log In</button>
