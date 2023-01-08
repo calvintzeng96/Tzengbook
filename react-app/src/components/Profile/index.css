@@ -87,7 +87,7 @@
     height: 100%;
     display: flex;
     justify-content: center;
-    padding-top: 60px;
+    padding-top: 20px;
     background-color: #F0F2F5;
 }
 
@@ -107,7 +107,7 @@
 
 .profile-body-left-content {
     background-color: white;
-    margin-bottom: 10px;
+    margin-bottom: 16px;
     border-radius: 8px;
     box-shadow: 0px 1px 2px lightgrey;
     padding: 12px;

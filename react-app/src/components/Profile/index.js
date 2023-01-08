@@ -38,7 +38,6 @@ const Profile = () => {
         if (window.location.pathname.endsWith("/friends")) {
             setFriendsPage(true)
         }
-        dispatch(getOutgoingRequests(currentUser.id))
         dispatch(getUser(userId))
             .then(() => {
                 dispatch(getUsersFriends(userId))

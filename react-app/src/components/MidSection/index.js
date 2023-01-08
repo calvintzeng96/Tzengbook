@@ -42,7 +42,7 @@ const MidSection = () => {
                     setIsLoaded(true)
                 })
         }
-    }, [post, user])
+    }, [post, userId])
 
 
     const openEditModal = (postId) => {

@@ -55,7 +55,7 @@
     background-color: white;
     border-radius: 8px;
     box-shadow: 0px 1px 2px lightgrey;
-    margin: 24px 0;
+    margin-top: 24px;
     display: flex;
     justify-content: space-evenly;
     align-items: center;
@@ -86,7 +86,7 @@
     background-color: white;
     border-radius: 8px;
     box-shadow: 0px 1px 2px lightgrey;
-    margin: 8px 0;
+    margin: 24px 0 8px;
 }
 
 .single-post-top {

@@ -72,16 +72,14 @@ const SearchBar = () => {
                         >
                             {res.map(ele => {
                                 return (
-                                    <div key={ele.id} className="search-individual-results">
+                                    <div key={ele.id} className="search-individual-results" onClick={() => goToProfile(ele.id)}>
                                         <img className="search-image" src={ele.profilePicture} alt="profile"/>
-                                        <div className="search-individual-results-name" onClick={() => goToProfile(ele.id)}>{ele.fullName}</div>
+                                        <div className="search-individual-results-name">{ele.fullName}</div>
                                     </div>
                                 )
                             })}
                         </div>
-
                         :
-
                         <div className="search-results-container"
                         >
                             <div className="search-individual-results">
